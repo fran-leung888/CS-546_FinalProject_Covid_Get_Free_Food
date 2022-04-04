@@ -1,11 +1,11 @@
-const userRoutes = require('./customer');
+const customerRoutes = require('./customer');
 const path = require('path');
 
 const constructorMethod = (app) => {
-  app.use('/customer', postRoutes);
+  app.use('/customer', customerRoutes);
   //app.use('/users', userRoutes);
-  app.get('/about', (req, res) => {
-    res.sendFile(path.resolve('static/about.html'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve('static/index.html'));
   });
 
   app.use('*', (req, res) => {
