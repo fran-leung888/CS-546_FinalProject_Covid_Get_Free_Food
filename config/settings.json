@@ -1,6 +1,6 @@
 {
   "mongoConfig": {
     "serverUrl": "mongodb://localhost:27017/",
-    "database": "Covid_Get_Free_Food_DB"
+    "database": "cs546_final"
   }
 }
