@@ -13,11 +13,11 @@ const constructorMethod = (app) => {
     res.render("posts/index");
   });
 
-  app.get('/foodList/:id', async(req, res) => {
-    const itemsArray = [await foodData.getFoodByName(req.params.id)];
-    res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray});
-
-  });
+  // app.get('/foodList/:id', async(req, res) => {
+  //   const itemsArray = [await foodData.getFoodByName(req.params.id)];
+  //   res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray});
+  //
+  // });
 
   app.get('/foodList', async (req, res) => {
     //res.render("posts/foodList");
