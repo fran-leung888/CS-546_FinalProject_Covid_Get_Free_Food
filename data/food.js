@@ -8,9 +8,11 @@ const exportedMethods = {
         return await foodCollection.find({}).toArray();
     },
 
-    async getFoodByName(key) {
+    async getFoodByFilter(filterObj) {
         const foodCollection = await food();
-        return await foodCollection.find({"name":key}).toArray();
+
+        //一二级 日期 餐厅 关键词 有库存
+        return await foodCollection.find(filterObj).toArray();
     }
 
 };
