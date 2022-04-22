@@ -1,4 +1,4 @@
-const customerRoutes = require('./customer');
+const customerRoutes = require('./users');
 const path = require('path');
 const data = require('../data');
 const customerData = data.customers;

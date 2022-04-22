@@ -1,4 +1,4 @@
 module.exports = {
-  customers: require('./customers'),
+  customers: require('./users'),
   food: require('./food')
 };

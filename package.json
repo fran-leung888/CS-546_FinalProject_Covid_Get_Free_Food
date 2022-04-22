@@ -1,5 +1,5 @@
 {
-  "name": "pro",
+  "name": "fianlproject",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "",
+  "author": "Mingfang Liang / Jia Sun / Xingjian Wu / Qinyun Wang",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
