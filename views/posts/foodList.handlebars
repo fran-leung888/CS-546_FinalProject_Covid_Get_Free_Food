@@ -6,44 +6,44 @@
 
 
 
-<div  style="position: relative; margin: 20px 15%;">
+<div  style="position: relative; display:inline;margin: 20px 15%;">
     <div class="pros subpage"  >
-        <h2>全部分类 </h2>
+        <h2 id="currentCategory">全部分类 </h2>
         <ul class="prosul clearfix" id="proinfo">
             <li class="food">
                 <i>&gt;</i>
-                <a class="ti" href="#">快餐</a>
+                <a class="ti" href="#">快餐1</a>
                 <div class="prosmore hide">
-                    <span><em><a href="#">汉堡</a></em></span>
-                    <span><em><a href="#">薯条</a></em></span>
-                    <span><em><a href="#">辣翅</a></em></span>
+                    <span><em><a href="#">汉堡1</a></em></span>
+                    <span><em><a href="#">薯条1</a></em></span>
+                    <span><em><a href="#">辣翅1</a></em></span>
                 </div>
             </li>
             <li class="food">
                 <i>&gt;</i>
-                <a class="ti" href="#">快餐</a>
+                <a class="ti" href="#">快餐2</a>
                 <div class="prosmore hide">
-                    <span><em><a href="#">汉堡</a></em></span>
-                    <span><em><a href="#">薯条</a></em></span>
-                    <span><em><a href="#">辣翅</a></em></span>
+                    <span><em><a href="#">汉堡2</a></em></span>
+                    <span><em><a href="#">薯条2</a></em></span>
+                    <span><em><a href="#">辣翅2</a></em></span>
                 </div>
             </li>
             <li class="food">
                 <i>&gt;</i>
-                <a class="ti" href="#">快餐</a>
+                <a class="ti" href="#">快餐3</a>
                 <div class="prosmore hide">
-                    <span><em><a href="#">汉堡</a></em></span>
-                    <span><em><a href="#">薯条</a></em></span>
-                    <span><em><a href="#">辣翅</a></em></span>
+                    <span><em><a href="#">汉堡3</a></em></span>
+                    <span><em><a href="#">薯条3</a></em></span>
+                    <span><em><a href="#">辣翅3</a></em></span>
                 </div>
             </li>
             <li class="food">
                 <i>&gt;</i>
-                <a class="ti" href="#">快餐</a>
+                <a class="ti" href="#">快餐4</a>
                 <div class="prosmore hide">
-                    <span><em><a href="#">汉堡</a></em></span>
-                    <span><em><a href="#">薯条</a></em></span>
-                    <span><em><a href="#">辣翅</a></em></span>
+                    <span><em><a href="#">汉堡4</a></em></span>
+                    <span><em><a href="#">薯条4</a></em></span>
+                    <span><em><a href="#">辣翅4</a></em></span>
                 </div>
             </li>
 
@@ -51,12 +51,32 @@
     </div>
 
     <label style="margin: 20px 20%;">in stock<input class="mui-switch mui-switch-animbg" type="checkbox"></label>
-    <div class="bootstrap-iso container marketing">
 
-        <div  class="input-group" style="width: 200px">
-            <input id="foodSearchInput" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <button id="foodSearchButton" type="button" class="btn btn-outline-primary">search</button>
-        </div>
+
+</div>
+
+<div  style="position: relative; display:inline;margin: 10px 15%;">
+    <input   type="text" class="input" placeholder="请输入商品">
+
+</div>
+<!--placeholder是文本框中的提示文字-->
+<input type="button" value="搜索" class="button">
+
+
+<div style="display: inline" >
+    111
+
+</div>
+<div style="display: inline" >
+    111
+
+</div>
+
+<div class="bootstrap-iso container marketing" style="display: inline" >
+
+    <div  class="input-group" style="width: 200px ">
+        <input id="foodSearchInput" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button id="foodSearchButton" type="button" class="btn btn-outline-primary">search</button>
     </div>
 </div>
 
@@ -143,6 +163,7 @@
             if(!inter){
                 $ul.show();
             }else{
+                console.log(146);
                 $ul.hide();
             }
             inter=!inter;
@@ -153,8 +174,20 @@
         });
 
         $(document).click(function(){
+            console.log("点击外面 隐藏ul");
             $ul.hide();
             inter=!inter;
+        });
+
+        $("em").click(function(){
+            //console.log("点击ul 隐藏ul");
+            //console.log($(this)[0].innerText);
+            console.log();
+            let $this=$(this)
+            console.log($this.parent().parent().prev()[0].innerText);
+            $ul.hide();
+            inter=!inter;
+            $("#currentCategory").html($this.parent().parent().prev()[0].innerText+"->"+$this[0].innerText)
         });
 
         $lis.hover(function(){
