@@ -44,5 +44,50 @@ app.listen(3000, () => {
 
 
 
+// const users = require("./data/users");
+// const albums = require("./data/albums")
 
+
+// async function main() {
+
+    //bands
+    // const pinkFloyd = await users.create("Chicken");
+    // console.log(pinkFloyd._id);
+    // const theBeatles = await users.create("Pizza");
+    // console.log(theBeatles);
+
+    // const a = await bands.get("62252dc3ad5a274b1620a39e");
+    // console.log(a);
+    
+    // const b = await bands.getAll();
+    // console.log(b);
+
+    // const c = await bands.remove("62252deb4b70fa888100f599");
+    // console.log(c);
+
+    // const theBeatles = await bands.update("6225536c7aad6bdc570228ec", "Tahe Beatles", ["Psychedelic rock", "Blue"], "http://www.theBeatles.com", "Apple Corps", ["John Lennon", "Paul McCartney", "George Harrison"], 1957);
+    // console.log(theBeatles);
+
+
+
+    // albums
+    // const theBeatlesAlbum = await albums.create("6225536c7aad6bdc570228ec", "A", "01/12/2023", ["Progressive Rock", "Psychedelic rock", "Classic Rock"], 6);
+    // console.log(theBeatlesAlbum);
+    // const theBeatlesAlbum2 = await albums.create("6225536c7aad6bdc570228ec", "B", "03/12/2020", ["Progressive Rock", "Psychedelic rock", "Classic Rock"], 4);
+    // console.log(theBeatlesAlbum2);
+
+    // const a = await albums.getAll("62252dc3ad5a274b1620a39e");
+    // console.log(a);
+
+    // const a = await albums.get("622530010682ed697c7165d3");
+    // console.log(a);
+
+    // const a = await albums.remove("622581c9c425f2d2aaa0d59e");
+    // console.log(a);
+
+// }
+
+// main().catch((err) => {
+//     console.log(err);
+// });
 
