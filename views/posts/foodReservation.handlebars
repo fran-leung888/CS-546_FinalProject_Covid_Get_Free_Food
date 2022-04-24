@@ -1,17 +1,13 @@
 <link rel="stylesheet" type="text/css" href="/public/css/style2.0.css">
 
 
-
-
 <div class="header-wrap">
     <div class="navwrap">
         <div id="nav">
             <div class="navbar clearfix">
                 <!-- <a class="navbt" href="#"><span>团购地图</span></a> -->
 
-
-
-
+                <input type="text" class="navbt2" placeholder="搜索">
 
                 <!-- <input type="button" name="" id="" class="navbt"> -->
                 <!-- <a class="current" href="#">首页</a>
@@ -21,19 +17,8 @@
                 <!-- <a href="#">in stock</a> -->
                 <a2 href="#">in stock</a2>
 
-                <label class="navbt" ><input class="mui-switch mui-switch-animbg"
+                <label class="navbt2" style="right: 80px;"><input class="mui-switch mui-switch-animbg"
                                                                   type="checkbox"></label>
-                <div class="navbt"  style="left: 80%">
-                        <input type="text" class="search" placeholder="搜索">
-                </div>
-
-                <div class="navbt" style="left: 100%">
-<!--                    <button type="button"  class="btn">search</button>-->
-
-                    <input type="button"  value="搜索"  name="" id="" class="btn">
-                </div>
-
-
 
 
             </div>
@@ -108,27 +93,14 @@
 
 
 
+    <p id="error" hidden>The input is invalid, try again!</p>
+    <img src="../../public/images/no_image.jpg" ></img>
 
-<hr class="bootstrap-iso featurette-divider">
+    <form id="reservation" >
+        {{!-- <label for="search_term">Search Term<input id="search_term" type="text"></label> --}}
+        <button type="submit">Check Out</button>
+    </form>
 
-
-<div class="bootstrap-iso">
-    <div>
-        {{#if itemsArray}}
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        {{#each itemsArray}}
-                            {{#each this }}
-                                {{> item_item }}
-                            {{/each}}
-                        {{/each}}
-                    </div>
-                </div>
-            </div>
-        {{/if}}
-    </div>
-</div>
 
 
 <script type="text/javascript">
@@ -238,6 +210,8 @@
         });
 
     })();
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='../../public/js/users.js'></script>
 
 
 </script>

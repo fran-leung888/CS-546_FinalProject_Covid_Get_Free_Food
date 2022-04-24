@@ -29,8 +29,7 @@ router.get('food/:id', async (req, res) => {
 });
 
 router.get('/food/:id', async (req, res) => {
-  const postList = await postData.getPostsByTag(req.params.tag);
-  res.render('posts/index', {posts: postList});
+  res.render('posts/foodReservation');
 });
 
 router.get('/', async (req, res) => {

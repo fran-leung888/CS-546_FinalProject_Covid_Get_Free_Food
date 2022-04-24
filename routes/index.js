@@ -1,4 +1,4 @@
-const customerRoutes = require('./users');
+const userRoutes = require('./users');
 const path = require('path');
 const data = require('../data');
 const customerData = data.customers;
@@ -8,7 +8,7 @@ const foodData = data.food;
 
 const constructorMethod = (app) => {
   //app.use('/customer', customerRoutes);
-  //app.use('/users', userRoutes);
+  app.use('/users', userRoutes);
   app.get('/', (req, res) => {
     res.render("posts/index");
   });
@@ -42,6 +42,45 @@ const constructorMethod = (app) => {
 
     //res.send("posts/foodList");
   });
+
+
+
+  app.get('/foodDetail/:id', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+      res.render("posts/foodDetail");
+
+
+
+
+
+  });
+  app.post('/foodEdit/:id', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+    console.log(req.body);
+    return;
+
+
+
+
+
+  });
+
+  app.get('/foodEdit/:id', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+    res.render("posts/foodEdit");
+
+
+
+
+
+  });
+
 
   // app.use('*', (req, res) => {
   //   res.redirect('/posts');
