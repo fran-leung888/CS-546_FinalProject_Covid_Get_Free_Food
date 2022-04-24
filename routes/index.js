@@ -43,6 +43,20 @@ const constructorMethod = (app) => {
     //res.send("posts/foodList");
   });
 
+
+
+  app.get('/foodDetail/:id', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+      res.render("posts/foodDetail");
+
+
+
+
+
+  });
+
   // app.use('*', (req, res) => {
   //   res.redirect('/posts');
   // });
