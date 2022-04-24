@@ -56,6 +56,31 @@ const constructorMethod = (app) => {
 
 
   });
+  app.post('/foodEdit/:id', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+    console.log(req.body);
+    return;
+
+
+
+
+
+  });
+
+  app.get('/foodEdit/:id', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+    res.render("posts/foodEdit");
+
+
+
+
+
+  });
+
 
   // app.use('*', (req, res) => {
   //   res.redirect('/posts');

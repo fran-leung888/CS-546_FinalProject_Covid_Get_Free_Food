@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/public/css/foodDetail.css">
 
 
-<link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">
+<!--<link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">-->
 
 
 
@@ -26,38 +26,26 @@
 
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <form class="col-lg-6 col-md-6" method="POST">
                     <div class="product__details__text">
-                        <h3>Vetgetable’s Package</h3>
+                        <h3 style="display: inline">Food name: </h3> <input type="text" name="" />
 
-                        <div class="product__details__price">$50.00</div>
-                        <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
-                            vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
-                            quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
-                        <div class="product__details__quantity">
-                            <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
-                                </div>
-                            </div>
-                        </div>
-                        <div href="#"  style="cursor: pointer;" class="primary-btn">ADD TO CARD</div>
-                        <a href="#" id="likeFlag" class="heart-icon"><span class="icon_heart"></span></a>
+
+                        <div class="product__details__price">$<input type="text" name="" /></div>
+                        <p><textarea cols="50" rows="10">在这里输入内容...</textarea>
+                            </p>
+
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
-                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                            <li><b>Weight</b> <span>0.5 kg</span></li>
-                            <li><b>Share on</b>
-                                <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
-                            </li>
+                            <li><b>Availability</b> <input type="text" name="Availability" /></li>
+                            <li><b>Shipping</b><input type="text" name="Shipping" /></li>
+                            <li><b>Weight</b> <input type="text" name="Weight" /></li>
+                            <li><b>Share on</b><input type="text" name="Share on" /> </li>
                         </ul>
+
+                        <button type="submit">test this num</button>
+
                     </div>
-                </div>
+                </form>
 
 
 
