@@ -60,7 +60,8 @@ s {
 #nav {
     height: 36px;
     width: 980px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+    margin: 0 auto 0 17%;
     position: relative;
     padding: 0;
     z-index: 99
@@ -135,13 +136,14 @@ s {
     color: #fff
 }
 
+
+
 .navbar .navbt {
-    width: 105px;
+    width: auto;
     height: 30px;
     position: absolute;
     top: 3px;
-    right: 110px;
-    background: url(../images/navbt.jpg) no-repeat;
+    left: 60%;
     border: 0 none;
     float: none;
     font-size: 14px;
@@ -149,18 +151,9 @@ s {
     padding: 0
 }
 
-.navbar .navbt2 {
-    width: 105px;
-    height: 30px;
-    position: absolute;
-    top: 3px;
-    right: 10px;
-    border: 0 none;
-    float: none;
-    font-size: 14px;
-    line-height: 30px;
-    padding: 0
-}
+
+
+
 
 a.navbt span {
     background: url(../images/iconmap.jpg) no-repeat 1px 3px;
@@ -424,19 +417,19 @@ li.goods {
     padding-right: 22px
 }
 
-.search .container {
-    height: 70px;
-    width: 800px;
-    margin: 100px auto 0 auto;
-}
+/*.search .container {*/
+/*    height: 70px;*/
+/*    width: 800px;*/
+/*    margin: 100px auto 0 auto;*/
+/*}*/
 
-.search .parent {
-    position: relative;
-}
+/*.search .parent {*/
+/*    position: relative;*/
+/*}*/
 
 .search {
-    width: 300px;
-    height: 40px;
+    width: 100px;
+    height: 30px;
     border-radius: 18px;
     outline: none;
     border: 1px solid #ccc;
@@ -444,16 +437,22 @@ li.goods {
     position: absolute;
 }
 
-.search .btn {
-    height: 35px;
-    width: 35px;
-    position: absolute;
-    background: url("images/topbar.png") no-repeat -2px -99px;
-    top: 6px;
-    left: 285px;
-    border: none;
-    outline: none;
-    cursor: pointer;
+/*.navbt3 > .btn {*/
+/*    width: 100px;*/
+/*    height: 30px;*/
+/*    border-radius: 18px;*/
+/*    outline: none;*/
+/*    border: 1px solid #ccc;*/
+/*    padding-left: 50px;*/
+/*    position: absolute;*/
+/*}*/
+
+
+.btn{
+    width: 100px;
+    height: 30px;
+
+
 }
 
 label {
