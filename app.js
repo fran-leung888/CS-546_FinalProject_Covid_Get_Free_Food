@@ -6,6 +6,7 @@ const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
 const path = require("path");
 
+const multer  = require('multer')
 
 const handlebarsInstance = exphbs.create({
   defaultLayout: 'main',
@@ -35,7 +36,46 @@ app.set('views', path.join(__dirname, '/views'));
 
 app.set('view engine', 'handlebars');
 
+
+// app.post('/foodEdit/:id', upload.single('imageForMulter'), function (req, res, next) {
+//
+//   console.log(req.body);
+//
+//   res.render("posts/foodList")
+//   // req.file is the `avatar` file
+//   // req.body will hold the text fields, if there were any
+// })
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'public', 'images'))
+
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    let ext = path.extname(file.originalname);
+    cb(null,  uniqueSuffix+ext)
+
+  }
+})
+
+const upload = multer({ storage: storage }).single("imageForMulter")
+
+app.use(upload)
+
+
 configRoutes(app);
+
+
+// let storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(__dirname, 'public', 'uploads'))
+//   },
+//   filename: function (req, file, cb) {
+//     let ext = path.extname(file.originalname);
+//     cb(null, uuid.v4() + ext);
+//   }
+// })
 
 app.listen(3000, () => {
   console.log("We've now got a server!");
@@ -90,4 +130,6 @@ app.listen(3000, () => {
 // main().catch((err) => {
 //     console.log(err);
 // });
+
+
 
