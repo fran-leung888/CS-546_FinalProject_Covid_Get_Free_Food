@@ -9,6 +9,7 @@ const express = require("express");
 
 const router = express.Router();
 
+const categoryData = data.category;
 
 
 
@@ -16,6 +17,15 @@ const constructorMethod = (app) => {
   //app.use('/customer', customerRoutes);
   app.use('/users', userRoutes);
   app.get('/', (req, res) => {
+    res.render("home/index", {
+      helpers: {
+        whichLinks: () => 'head/home-links'
+      },
+      categories: categoryData.getAll()
+    });
+  });
+
+  app.get('/posts', (req, res) => {
     res.render("posts/index");
   });
 
