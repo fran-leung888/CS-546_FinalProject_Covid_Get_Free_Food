@@ -1,9 +1,23 @@
 const mongoCollections = require('../config/mongoCollections');
-const merchant = mongoCollections.merchant;
+const merchants = mongoCollections.merchant;
 
 const exportedMethods = {
 
-    async addMerchant(foodName,price,foodDes,filename) {
+
+    async getMerchant(_id) {
+
+
+        const merchantCollection = await merchants();
+
+        const merchant = await merchantCollection.findOne({
+            _id: _id
+        });
+
+        return merchant;
+    },
+
+
+    async addMerchant(foodName, price, foodDes, filename) {
 
         //todo 数据验证
 
@@ -14,11 +28,13 @@ const exportedMethods = {
             filename: filename
         }
 
-        const merchantCollection = await merchant()
+        const merchantCollection = await merchants();
 
         const insert = await merchantCollection.insertOne(newItem)
+        console.log(insert);
 
-        return await this.get(insert.insertedId)
+        console.log(insert.insertedId);
+        return this.getMerchant(insert.insertedId)
 
 
     },
@@ -36,8 +52,6 @@ const exportedMethods = {
     }
 
 };
-
-
 
 
 module.exports = exportedMethods;
