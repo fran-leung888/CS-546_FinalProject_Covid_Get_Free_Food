@@ -1,4 +1,5 @@
 const userRoutes = require('./users');
+const foodRoutes = require('./food');
 const path = require('path');
 const data = require('../data');
 const mongoCollections = require("../config/mongoCollections");
@@ -16,6 +17,7 @@ const categoryData = data.category;
 const constructorMethod = (app) => {
   //app.use('/customer', customerRoutes);
   app.use('/users', userRoutes);
+  app.use('/food', foodRoutes);
   app.get('/', (req, res) => {
     res.render("home/index", {
       helpers: {
@@ -61,54 +63,10 @@ const constructorMethod = (app) => {
 
 
 
-  app.get('/foodDetail/:id', async (req, res) => {
-    //res.render("posts/foodList");
-
-
-      res.render("posts/foodDetail");
 
 
 
 
-
-  });
-
-
-  //todo 缺少食物的主人才可以编辑的验证
-  app.post("/foodEdit/:id", async (req, res) => {
-
-    let foodName = req.body.foodName;
-    let foodPrice = parseInt(req.body.foodPrice);
-    let foodDes = req.body.foodDes;
-    let filename;
-
-
-    if (req.file) {
-      filename = "/public/uploads/" + req.file.filename;
-    }
-
-    console.log(filename);
-    if (!foodName || !foodPrice || !foodDes || !filename) {
-      //todo 不全的错误提示
-      res.render("layouts/form_item", {
-        pageTitle: "Create a new item!",
-        name: name,
-        categories: categories,
-        description: description,
-        price: price,
-        payment: payment,
-        zip: geo,
-        minDays: time.minDays,
-        maxDays: time.maxDays,
-        error: "Please complete all fields"
-      });
-      return;
-    }
-
-    await merchantData.addMerchant(foodName, foodPrice, foodDes, filename);
-
-
-  });
 
 
 
@@ -118,17 +76,7 @@ const constructorMethod = (app) => {
   //
   // });
 
-  app.get('/foodEdit/:id', async (req, res) => {
-    //res.render("posts/foodList");
 
-
-    res.render("posts/foodEdit");
-
-
-
-
-
-  });
 
 
   // app.use('*', (req, res) => {
