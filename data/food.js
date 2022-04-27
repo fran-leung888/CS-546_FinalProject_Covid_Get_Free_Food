@@ -5,8 +5,8 @@ const { ObjectId } = require('mongodb');
 
 const exportedMethods = {
     async getAllFood() {
-        const foodCollection = await foodCollection();
-        return await foodCollection.find({}).toArray();
+        const foodCollection1 = await foodCollection();
+        return await foodCollection1.find({}).toArray();
     },
 
     async getFoodByFilter(filterObj) {
@@ -16,13 +16,34 @@ const exportedMethods = {
         return await foodCollection.find(filterObj).toArray();
     },
 
-    async addFood(foodName, price, foodDes, filename) {
+    async updateFood(_id,updateObj) {
+
+        //todo 数据验证
+
+
+
+
+
+        const foodCollection1 = await foodCollection();
+
+
+        const insert = await foodCollection1.updateOne(  { _id:ObjectId.createFromHexString(_id)} , { $set: updateObj } )
+
+        //console.log(insert);
+
+        //console.log(insert.insertedId);
+        return this.getFood(_id)
+
+
+    },
+
+    async addFood(foodName, foodPrice, foodDes, filename) {
 
         //todo 数据验证
 
         let newItem = {
             foodName: foodName,
-            price: price,
+            foodPrice: foodPrice,
             foodDes: foodDes,
             filename: filename
         }
