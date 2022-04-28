@@ -37,7 +37,7 @@ const exportedMethods = {
 
     },
 
-    async addFood(foodName, foodPrice, foodDes, filename) {
+    async addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2) {
 
         //todo 数据验证
 
@@ -45,7 +45,9 @@ const exportedMethods = {
             foodName: foodName,
             foodPrice: foodPrice,
             foodDes: foodDes,
-            filename: filename
+            filename: filename,
+            foodCategory1: foodCategory1,
+            foodCategory2: foodCategory2
         }
 
         const merchantCollection = await foodCollection();

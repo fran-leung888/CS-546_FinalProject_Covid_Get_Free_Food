@@ -1,19 +1,76 @@
 <link rel="stylesheet" type="text/css" href="/public/css/foodDetail.css">
 
+<link rel="stylesheet" type="text/css" href="/public/css/foodAddStyle.css">
 
 <!--<link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">-->
 
 
 
+<div class="header-wrap">
+    <div class="navwrap">
+        <div id="nav">
+
+
+
+            <div class="pros subpage">
+                <h2 id="currentCategory">全部分类 </h2>
+                <ul class="prosul clearfix" id="proinfo">
+                    <li class="food">
+                        <i>&gt;</i>
+                        <a class="ti" >快餐1</a>
+                        <div class="prosmore hide">
+                            <span><em><a >汉堡1</a></em></span>
+                            <span><em><a >薯条1</a></em></span>
+                            <span><em><a >辣翅1</a></em></span>
+                        </div>
+                    </li>
+                    <li class="food">
+                        <i>&gt;</i>
+                        <a class="ti" href="">快餐2</a>
+                        <div class="prosmore hide">
+                            <span><em><a>汉堡2</a></em></span>
+                            <span><em><a >薯条2</a></em></span>
+                            <span><em><a >辣翅2</a></em></span>
+                        </div>
+                    </li>
+                    <li class="food">
+                        <i>&gt;</i>
+                        <a class="ti" >快餐3</a>
+                        <div class="prosmore hide">
+                            <span><em><a>汉堡3</a></em></span>
+                            <span><em><a >薯条3</a></em></span>
+                            <span><em><a >辣翅3</a></em></span>
+                        </div>
+                    </li>
+                    <li class="food">
+                        <i>&gt;</i>
+                        <a class="ti" >快餐4</a>
+                        <div class="prosmore hide">
+                            <span><em><a >汉堡4</a></em></span>
+                            <span><em><a >薯条4</a></em></span>
+                            <span><em><a >辣翅4</a></em></span>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+</div>
 
 <!--<div style=" margin:0 20%;border: 1px solid">-->
 
 <!--    <div style="width: 800px;height: 500px;">1</div>-->
 
 <!--</div>-->
-<div class="bootstrap-iso">
+<div class="bootstrap-iso" >
 
-    <section class="product-details spad">
+    <section class="product-details spad" style="padding-top: 0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -32,7 +89,11 @@
                 </div>
                 <form class="col-lg-6 col-md-6" method="post" enctype="multipart/form-data">
                     <div class="product__details__text">
+
+
                         <h3 style="display: inline">Food name: </h3> <input type="text" name="foodName" />
+                         <input id="category1" style="display:none" type="text" name="foodCategory1" />
+                        <input id="category2" style="display:none " type="text" name="foodCategory2" />
 
 
                         <div class="product__details__price">$<input type="text" name="foodPrice" /></div>
@@ -43,6 +104,8 @@
                             <label for="photo">Photo</label>
                             <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
                         </div>
+
+
 
 
 
@@ -124,6 +187,63 @@
         }
         $button.parent().find('input').val(newVal);
     });
+
+
+</script>
+
+<script type="text/javascript">
+
+    (function() {
+
+        var $subblock = $(".subpage"),
+                $head = $subblock.find('h2'),
+                $ul = $("#proinfo"),
+                $lis = $ul.find("li"),
+                inter = false;
+
+        $head.click(function(e) {
+            e.stopPropagation();
+            if (!inter) {
+                $ul.show();
+            } else {
+                $ul.hide();
+            }
+            inter = !inter;
+        });
+
+        $ul.click(function(event) {
+            event.stopPropagation();
+        });
+
+        $(document).click(function() {
+            $ul.hide();
+            inter = !inter;
+        });
+        $("em").click(function () {
+            let $this = $(this)
+            $ul.hide();
+            inter = !inter;
+            $("#currentCategory").html($this.parent().parent().prev()[0].innerText + "->" + $this[0].innerText)
+
+            $("#category1").val($this.parent().parent().prev()[0].innerText)
+            $("#category2").val($this[0].innerText)
+        });
+
+        $lis.hover(function() {
+            if (!$(this).hasClass('nochild')) {
+                $(this).addClass("prosahover");
+                $(this).find(".prosmore").removeClass('hide');
+            }
+        }, function() {
+            if (!$(this).hasClass('nochild')) {
+                if ($(this).hasClass("prosahover")) {
+                    $(this).removeClass("prosahover");
+                }
+                $(this).find(".prosmore").addClass('hide');
+            }
+        });
+
+    })();
 
 
 </script>

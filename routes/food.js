@@ -77,6 +77,8 @@ router.post("/add", async (req, res) => {
     let foodName = req.body.foodName;
     let foodPrice = parseInt(req.body.foodPrice);
     let foodDes = req.body.foodDes;
+    let foodCategory1 = req.body.foodCategory1;
+    let foodCategory2 = req.body.foodCategory2;
     let filename;
 
 
@@ -85,8 +87,9 @@ router.post("/add", async (req, res) => {
     }
 
     console.log(filename);
+    //todo 不全的错误提示
     if (!foodName || !foodPrice || !foodDes || !filename) {
-        //todo 不全的错误提示
+
         res.render("layouts/form_item", {
             pageTitle: "Create a new item!",
             name: name,
@@ -102,7 +105,7 @@ router.post("/add", async (req, res) => {
         return;
     }
 
-    const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename);
+    const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2);
     console.log(newVar._id.toString());
 
     res.redirect("/food/Detail/"+newVar._id.toString());

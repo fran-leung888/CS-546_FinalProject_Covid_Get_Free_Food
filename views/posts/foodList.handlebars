@@ -200,11 +200,7 @@
         });
 
         $("em").click(function () {
-            //console.log("点击ul 隐藏ul");
-            //console.log($(this)[0].innerText);
-            console.log();
             let $this = $(this)
-            console.log($this.parent().parent().prev()[0].innerText);
             $ul.hide();
             inter = !inter;
             $("#currentCategory").html($this.parent().parent().prev()[0].innerText + "->" + $this[0].innerText)
