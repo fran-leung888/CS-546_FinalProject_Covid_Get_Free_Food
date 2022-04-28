@@ -40,7 +40,7 @@
 
 
             <div class="pros subpage">
-                <h2 ><span id="foodCategory1"></span> <span id="foodCategoryHelper"></span><span id="foodCategory2"></span></h2>
+                <h2 ><span id="foodCategory1">{{searchParams.foodCategory1}}</span><span id="foodCategoryHelper">{{searchParams.foodCategoryHelper}}</span><span id="foodCategory2">{{searchParams.foodCategory2}}</span></h2>
                 <ul class="prosul clearfix" id="proinfo">
                     <li class="food">
                         <i>&gt;</i>
@@ -144,8 +144,9 @@
 <script type="text/javascript">
 
     //todo 自动执行 如果url里有关键词 重新写回搜索框
-
+    // todo 废弃了 用后端回写了
     window.onload = function () {
+       /* alert(1)
 
         var searchParams = new URLSearchParams(window.location.search)
         var obj ={}
@@ -167,7 +168,7 @@
             $("#foodCategoryHelper").html(  "->")
 
 
-        }
+        }*/
 
 
 
@@ -259,6 +260,7 @@
         });
 
         $("em").click(function () {
+            console.log("选择了新的分类");
             let $this = $(this)
             $ul.hide();
             inter = !inter;
@@ -274,7 +276,7 @@
             $ul.hide();
             inter = !inter;
             $("#foodCategory1").html("")
-            $("#foodCategoryHelper").html("")
+            $("#foodCategoryHelper").html("ALL")
 
             $("#foodCategory2").html("")
         });
