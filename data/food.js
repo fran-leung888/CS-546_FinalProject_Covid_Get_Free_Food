@@ -10,10 +10,10 @@ const exportedMethods = {
     },
 
     async getFoodByFilter(filterObj) {
-        const foodCollection = await foodCollection();
+        const foodCollection1 = await foodCollection();
 
         //一二级 日期 餐厅 关键词 有库存
-        return await foodCollection.find(filterObj).toArray();
+        return await foodCollection1.find(filterObj).toArray();
     },
 
     async updateFood(_id,updateObj) {

@@ -13,42 +13,43 @@
 
 
             <div class="pros subpage">
-                <h2 id="currentCategory">全部分类 </h2>
+                <h2 ><span id="foodCategory1"></span> <span id="foodCategoryHelper">全部分类</span><span id="foodCategory2"></span></h2>
+
                 <ul class="prosul clearfix" id="proinfo">
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" >快餐1</a>
+                        <a class="ti" >Fast Food</a>
                         <div class="prosmore hide">
-                            <span><em><a >汉堡1</a></em></span>
-                            <span><em><a >薯条1</a></em></span>
-                            <span><em><a >辣翅1</a></em></span>
+                            <span><em><a >Burgers</a></em></span>
+                            <span><em><a >Pizza</a></em></span>
+                            <span><em><a >Sandwiches</a></em></span>
                         </div>
                     </li>
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" href="">快餐2</a>
+                        <a class="ti" href="">Asian</a>
                         <div class="prosmore hide">
-                            <span><em><a>汉堡2</a></em></span>
-                            <span><em><a >薯条2</a></em></span>
-                            <span><em><a >辣翅2</a></em></span>
+                            <span><em><a>Sushi</a></em></span>
+                            <span><em><a >Noodle</a></em></span>
+                            <span><em><a >Dumplings</a></em></span>
                         </div>
                     </li>
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" >快餐3</a>
+                        <a class="ti" >Fried Food</a>
                         <div class="prosmore hide">
-                            <span><em><a>汉堡3</a></em></span>
-                            <span><em><a >薯条3</a></em></span>
-                            <span><em><a >辣翅3</a></em></span>
+                            <span><em><a>Fried Chicken</a></em></span>
+                            <span><em><a >Fries</a></em></span>
+                            <span><em><a >Fried fish</a></em></span>
                         </div>
                     </li>
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" >快餐4</a>
+                        <a class="ti" >Drink</a>
                         <div class="prosmore hide">
-                            <span><em><a >汉堡4</a></em></span>
-                            <span><em><a >薯条4</a></em></span>
-                            <span><em><a >辣翅4</a></em></span>
+                            <span><em><a >Soup</a></em></span>
+                            <span><em><a >Juice</a></em></span>
+                            <span><em><a >Liquor</a></em></span>
                         </div>
                     </li>
 
@@ -223,10 +224,16 @@
             let $this = $(this)
             $ul.hide();
             inter = !inter;
-            $("#currentCategory").html($this.parent().parent().prev()[0].innerText + "->" + $this[0].innerText)
 
+            $("#foodCategory1").html($this.parent().parent().prev()[0].innerText)
+            $("#foodCategoryHelper").html(  "->")
+            $("#foodCategory2").html($this[0].innerText)
+
+            //add to input of form
             $("#category1").val($this.parent().parent().prev()[0].innerText)
             $("#category2").val($this[0].innerText)
+
+
         });
 
         $lis.hover(function() {

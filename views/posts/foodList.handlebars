@@ -24,13 +24,13 @@
                 <label class="navbt" ><input class="mui-switch mui-switch-animbg"
                                                                   type="checkbox"></label>
                 <div class="navbt"  style="left: 80%">
-                        <input type="text" class="search" placeholder="搜索">
+                        <input type="text"  class="search" placeholder="搜索">
                 </div>
 
                 <div class="navbt" style="left: 100%">
 <!--                    <button type="button"  class="btn">search</button>-->
 
-                    <input type="button"  value="搜索"  name="" id="" class="btn">
+                    <input type="button"  id="foodSearchButton" value="搜索"  name="" id="" class="btn">
                 </div>
 
 
@@ -40,43 +40,52 @@
 
 
             <div class="pros subpage">
-                <h2 id="currentCategory">全部分类 </h2>
+                <h2 ><span id="foodCategory1"></span> <span id="foodCategoryHelper"></span><span id="foodCategory2"></span></h2>
                 <ul class="prosul clearfix" id="proinfo">
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" >快餐1</a>
+                        <a class="ti" >Fast Food</a>
                         <div class="prosmore hide">
-                            <span><em><a >汉堡1</a></em></span>
-                            <span><em><a href="#">薯条1</a></em></span>
-                            <span><em><a href="#">辣翅1</a></em></span>
+                            <span><em><a >Burgers</a></em></span>
+                            <span><em><a >Pizza</a></em></span>
+                            <span><em><a >Sandwiches</a></em></span>
                         </div>
                     </li>
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" href="#">快餐2</a>
+                        <a class="ti" >Asian</a>
                         <div class="prosmore hide">
-                            <span><em><a href="#">汉堡2</a></em></span>
-                            <span><em><a href="#">薯条2</a></em></span>
-                            <span><em><a href="#">辣翅2</a></em></span>
+                            <span><em><a >Sushi</a></em></span>
+                            <span><em><a >Noodle</a></em></span>
+                            <span><em><a >Dumplings</a></em></span>
                         </div>
                     </li>
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" href="#">快餐3</a>
+                        <a class="ti" >Fried Food</a>
                         <div class="prosmore hide">
-                            <span><em><a href="#">汉堡3</a></em></span>
-                            <span><em><a href="#">薯条3</a></em></span>
-                            <span><em><a href="#">辣翅3</a></em></span>
+                            <span><em><a >Fried Chicken</a></em></span>
+                            <span><em><a >Fries</a></em></span>
+                            <span><em><a >Fried fish</a></em></span>
                         </div>
                     </li>
                     <li class="food">
                         <i>&gt;</i>
-                        <a class="ti" href="#">快餐4</a>
+                        <a class="ti" >Drink</a>
                         <div class="prosmore hide">
-                            <span><em><a href="#">汉堡4</a></em></span>
-                            <span><em><a href="#">薯条4</a></em></span>
-                            <span><em><a href="#">辣翅4</a></em></span>
+                            <span><em><a >Soup</a></em></span>
+                            <span><em><a >Juice</a></em></span>
+                            <span><em><a >Liquor</a></em></span>
                         </div>
+                    </li>
+
+                    <li class="food" id="tiAll">
+                        <i>&gt;</i>
+                        <a class="ti" >ALL</a>
+<!--                        <div class="prosmore hide">-->
+<!--                            <span><em><a >ALL</a></em></span>-->
+<!--                        </div>-->
+
                     </li>
 
                 </ul>
@@ -138,14 +147,64 @@
 
     window.onload = function () {
 
-        console.log(window.location.href)
+        var searchParams = new URLSearchParams(window.location.search)
+        var obj ={}
+
+        for(var [key, value] of searchParams.entries()) {
+            obj[key] = value
+        }
+        console.log("我读到了url 我要开始回写搜索框了",obj)
+
+        //todo 判断是否有
+        if (obj.foodCategory1) {
+            $("#foodCategory1").html(obj.foodCategory1)
+            $("#foodCategoryHelper").html(  "->")
+
+        }
+
+        if (obj.foodCategory2) {
+            $("#foodCategory2").html(obj.foodCategory2)
+            $("#foodCategoryHelper").html(  "->")
+
+
+        }
+
+
+
     }
+
+    function generateUrlWithParams(url, params) {
+        var urlParams = [];
+        for (var key in params) {
+            if (params[key]) {
+                urlParams.push(`${key}=${params[key]}`)
+            }
+        }
+        url += '?' + urlParams.join('&');
+        return url
+    };
 
     $('#foodSearchButton').click(function () {
 
-
+        console.log(1);
         let key = $("#foodSearchInput").val()
-        location.href = window.location.host + "/foodList/?key=" + key
+        let foodCategory1 = $("#foodCategory1").html()
+        let foodCategory2 = $("#foodCategory2").html()
+        console.log(foodCategory1);
+
+        console.log(foodCategory2);
+
+        let url = window.location.origin+ window.location.pathname;
+        //let parentUrl = window.location.href.split("/").slice(0, -1).join("/");
+
+        //window.location.href = window.location.host + "/foodList/?key=" + key
+
+        url=generateUrlWithParams(url,{foodCategory1:foodCategory1,foodCategory2:foodCategory2})
+        url=encodeURI(url)
+
+        console.log(url);
+        window.location.href = url
+
         //todo 跳转到3000:foodList?key=food1
 
     });
@@ -203,8 +262,24 @@
             let $this = $(this)
             $ul.hide();
             inter = !inter;
-            $("#currentCategory").html($this.parent().parent().prev()[0].innerText + "->" + $this[0].innerText)
+            $("#foodCategory1").html($this.parent().parent().prev()[0].innerText)
+            $("#foodCategoryHelper").html(  "->")
+
+            $("#foodCategory2").html($this[0].innerText)
         });
+
+        $("#tiAll").click(function () {
+            console.log("tiALL");
+            let $this = $(this)
+            $ul.hide();
+            inter = !inter;
+            $("#foodCategory1").html("")
+            $("#foodCategoryHelper").html("")
+
+            $("#foodCategory2").html("")
+        });
+
+
 
         $("#proinfo2 > li").click(function () {
             //console.log("点击ul 隐藏ul");
