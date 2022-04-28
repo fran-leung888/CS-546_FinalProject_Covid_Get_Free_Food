@@ -39,27 +39,7 @@ const constructorMethod = (app) => {
 
 
 
-  app.get('/foodList', async (req, res) => {
-    //res.render("posts/foodList");
 
-    console.log(req.query);
-
-    if (JSON.stringify(req.query ) === '{}') {
-      console.log("没有参数")
-      const itemsArray = [await foodData.getAllFood()];
-      res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray});
-
-
-    }else{
-      console.log("有参数")
-      const itemsArray = [await foodData.getFoodByFilter()];
-      res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray});
-
-    }
-
-
-    //res.send("posts/foodList");
-  });
 
 
 
