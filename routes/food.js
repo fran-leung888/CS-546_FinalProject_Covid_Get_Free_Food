@@ -45,6 +45,22 @@ router.get('/edit/:id', async (req, res) => {
 
 });
 
+router.get('/history', async (req, res) => {
+
+
+
+
+    res.render("posts/userOrderHistory");
+
+
+
+
+
+
+});
+
+
+
 
 router.get('/add', async (req, res) => {
     //res.render("posts/foodList");

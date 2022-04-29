@@ -176,12 +176,16 @@
 
     function generateUrlWithParams(url, params) {
         var urlParams = [];
+        let flag=false;
         for (var key in params) {
             if (params[key]) {
+                flag=true;
                 urlParams.push(`${key}=${params[key]}`)
             }
         }
-        url += '?' + urlParams.join('&');
+        if (flag) {
+            url += '?' + urlParams.join('&');
+        }
         return url
     };
 
@@ -206,7 +210,6 @@
         console.log(url);
         window.location.href = url
 
-        //todo 跳转到3000:foodList?key=food1
 
     });
 
