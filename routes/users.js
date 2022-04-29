@@ -110,4 +110,35 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+
+router.get('/history', async (req, res) => {
+
+
+
+
+  res.render("posts/userHistory");
+
+
+
+
+
+
+});
+
+
+router.get('/likes', async (req, res) => {
+
+
+
+
+  res.render("posts/userLikes");
+
+
+
+
+
+
+});
+
 module.exports = router;
