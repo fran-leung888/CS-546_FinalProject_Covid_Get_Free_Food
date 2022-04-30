@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const static = express.static(__dirname + '/public');
+const session = require("express-session");
 
 const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
@@ -39,6 +40,14 @@ app.set('views', path.join(__dirname, '/views'));
 
 app.set('view engine', 'handlebars');
 
+
+// init session
+app.use(session({
+  name: 'AuthCookie',
+  secret: 'some secret string!',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // app.post('/foodEdit/:id', upload.single('imageForMulter'), function (req, res, next) {
 //
