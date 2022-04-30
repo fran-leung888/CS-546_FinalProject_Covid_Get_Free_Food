@@ -31,11 +31,16 @@
             <li><a href="">shop</a></li>
             <li class="li_3"><a class="noclick" href="">user</a>
                 <dl class="li_3_content">
-                    <dt></dt>
-                    <dd><a href=""><span>编辑</span></a></dd>
-                    <dd><a href="/users/history"><span>order</span></a></dd>
-                    <dd><a href=""><span>收藏</span></a></dd>
-                    <dd class="lastItem"><a href=""><span>登出</span></a></dd>
+
+                    {{!-- {{#if Login}} --}}
+                        <dt></dt>
+                        <dd><a href="/users/account"><span>Account</span></a></dd>
+                        <dd><a href="/users/history"><span>My Order</span></a></dd>
+                        <dd><a href=""><span>Favorite</span></a></dd>
+                        <dd class="lastItem"><a href=""><span>Log out</span></a></dd>
+                    {{!-- {{else}} --}}
+                        {{!-- <dd class="lastItem"><a href=""><span>Log in</span></a></dd> --}}
+                    {{!-- {{/if}} --}}
                 </dl>
             </li>
             <li><a class="noborder" href="">留着</a></li>

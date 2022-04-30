@@ -1,11 +1,11 @@
 const mongoCollections = require('../config/mongoCollections');
-const foods = mongoCollections.food;
+const users = mongoCollections.user;
 const uuid = require('uuid/v4');
+const {ObjectId} = require('mongodb');
 
 
 const exportedMethods = {
   
-
   async create(name) {
     if (!name) throw 'You must provide a name';
     // if (!genre) throw 'You must provide a genre';
@@ -40,9 +40,9 @@ const exportedMethods = {
     // if (typeof yearFormed !== 'number') throw 'YearFormed must be a string';
     // if (yearFormed < 1900 || yearFormed > 2022) throw 'YearFormed is not between 1900 and 2022';
     
-    const foodCollection = await foods();
+    const userCollection = await users();
 
-    const newFoodInfo = {
+    const newUserInfo = {
       name: name,
       // genre: genre,
       // website: website,
@@ -53,15 +53,15 @@ const exportedMethods = {
       // overallRating: 0
     };
 
-    const insertInfo = await foodCollection.insertOne(newFoodInfo);
+    const insertInfo = await userCollection.insertOne(newUserInfo);
     if (insertInfo.insertedCount === 0) throw 'Could not add band';
 
     let newId = insertInfo.insertedId;
     
-    const food = await foodCollection.findOne({ _id: newId });
-    food._id = food._id.toString();
+    const user = await userCollection.findOne({ _id: newId });
+    user._id = user._id.toString();
 
-    return food;
+    return user;
 
   },
 
@@ -70,10 +70,20 @@ const exportedMethods = {
     return await postCollection.find({}).toArray();
   },
 
-  async getUserById() {
-    const postCollection = await customers();
-    return await postCollection.find({}).toArray();
+  async getUserById(id) {
+
+    // if (!id) throw 'You must provide an id to search for';
+    // if (typeof id != "string") throw 'The type of id should be string';
+    id = ObjectId(id);
+    const userCollection = await users();
+    const user = await userCollection.findOne({ _id: id });
+    if (user === null) throw 'No user with that id';
+    user._id = user._id.toString();
+
+    return user;
   }
+
+
 
 };
 
