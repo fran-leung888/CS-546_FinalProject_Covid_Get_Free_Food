@@ -1,0 +1,16 @@
+.user-photo{
+    width: 175px;
+    height: 175px;
+    display: flex;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;   
+    
+}
+
+
+
+.jumbotron{
+    text-align: center;
+}
+    

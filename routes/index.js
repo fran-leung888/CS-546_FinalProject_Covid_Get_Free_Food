@@ -1,4 +1,4 @@
-const userRoutes = require('./users');
+const userRoutes = require('./user');
 const foodRoutes = require('./food');
 const path = require('path');
 const data = require('../data');
@@ -16,7 +16,7 @@ const categoryData = data.category;
 
 const constructorMethod = (app) => {
   //app.use('/customer', customerRoutes);
-  app.use('/users', userRoutes);
+  app.use('/user', userRoutes);
   app.use('/food', foodRoutes);
   app.get('/', (req, res) => {
     res.render("home/index", {
