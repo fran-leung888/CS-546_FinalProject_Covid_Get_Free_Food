@@ -7,10 +7,24 @@
     margin: 0 auto;   
     
 }
+/* 
+.user-name{
+    margin: 0 auto;
+} */
 
+.line1{
+    width: 900px;
+    margin: 0 auto;
+}
 
+.list-group{
+    width: 900px;
+    margin: 0 auto;
+}
 
 .jumbotron{
-    text-align: center;
+    width: 960px;
+    margin: 0 auto;
 }
-    
+
+ 
