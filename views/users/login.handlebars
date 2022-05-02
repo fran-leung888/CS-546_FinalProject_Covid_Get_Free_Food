@@ -1,15 +1,135 @@
-<h1>Log-in</h1>
-<form action="/login" method="POST" id="login-form">
-    <label for="username">username</label>
-    <input id="username" name="username">
-    <label for="password">password</label>
-    <input id="password" name="password">
-    <button type="submit">Submit</button>
-</form>
 
-{{#if error}}
-    <p>Either the username or password is invalid</p>
-{{/if}}
 
-<a href="/signup">Need to register? Click here to sign-up</a>
+
+<ul class="nav nav-tabs d-flex" id="myTab">
+    <li class="nav-item"><button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#login" type="button">login</button></li>
+    <li class="nav-item"><button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#register1" type="button">register1</button></li>
+    <li class="nav-item"><button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#register2" type="button">register2</button></li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="login">
+<!--        start form 1-->
+        <div class="container-fluid vh-75" >
+            <div class="" style="margin-top:5% ">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                        <div class="text-center">
+                            <h3 class="text-primary">Login</h3>
+                        </div>
+                        <div class="p-4" style="margin-bottom: 5%">
+                            <form action="">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" placeholder="password">
+                                </div>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button class="btn btn-primary" type="button"><span></span> Sign up</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        end form1-->
+    </div>
+    <div class="tab-pane fade" id="register1">
+
+        <!--        start form 1-->
+        <div class="container-fluid vh-75" >
+            <div class="" style="margin-top:5% ">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                        <div class="text-center">
+                            <h3 class="text-primary">Create User Account</h3>
+                        </div>
+                        <div class="p-4" style="margin-bottom: 5%">
+                            <form action="">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-envelope text-white"></i></span>
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" placeholder="password">
+                                </div>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button class="btn btn-primary" type="button"><span></span> Sign up</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        end form1-->
+
+
+    </div>
+
+
+    <div class="tab-pane fade" id="register2">
+
+        <!--        start form 1-->
+        <div class="container-fluid vh-75" >
+            <div class="" style="margin-top:5% ">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                        <div class="text-center">
+                            <h3 class="text-primary">Create Merchant Account</h3>
+                        </div>
+                        <div class="p-4" style="margin-bottom: 5%">
+                            <form action="">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-envelope text-white"></i></span>
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" placeholder="password">
+                                </div>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button class="btn btn-primary" type="button"><span></span> Sign up</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        end form1-->
+
+
+    </div>
+</div>
+
+
+
+
+
 

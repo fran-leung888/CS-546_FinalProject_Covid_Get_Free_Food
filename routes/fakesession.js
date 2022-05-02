@@ -19,4 +19,29 @@ router.get('/login', async (req, res) => {
 });
 
 
+router.get('/login2', async (req, res) => {
+
+
+
+    res.render('users/login');
+
+
+
+});
+
+
+router.get('/register', async (req, res) => {
+
+
+
+    res.render('users/login');
+
+
+
+});
+
+
+
+
+
 module.exports = router;
