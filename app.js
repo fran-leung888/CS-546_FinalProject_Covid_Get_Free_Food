@@ -102,13 +102,13 @@ app.listen(3000, () => {
 
 // async function main() {
 
-    //users
-    // const Qinyun = await users.create("Qinyun Wang");
-    // console.log(Qinyun);
-    // const Annie = await users.create("Annie Chen");
-    // console.log(Annie);
-    // const XingFang = await users.create("XingFang Tan");
-    // console.log(XingFang);
+//     users
+//     const Qinyun = await users.create("Qinyun Wang", "wqy1998", "5512616439", "07030", "I'm happy");
+//     console.log(Qinyun);
+//     const Annie = await users.create("Annie Chen", "can1998", "5512616438", "07031", "I'm so cute");
+//     console.log(Annie);
+//     const XingFang = await users.create("XingFang Tan", "yxf1993", "5512616437", "07032", "I'm so old");
+//     console.log(XingFang);
 
     // const a = await bands.get("62252dc3ad5a274b1620a39e");
     // console.log(a);

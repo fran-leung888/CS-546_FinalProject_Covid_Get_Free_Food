@@ -13,18 +13,27 @@
 } */
 
 .line1{
-    width: 900px;
+    width: 500px;
     margin: 0 auto;
 }
 
 .list-group{
-    width: 900px;
+    width:500px;
     margin: 0 auto;
 }
 
 .jumbotron{
+    background-color: rgb(233,236,239);
     width: 960px;
     margin: 0 auto;
 }
+
+.container{
+    margin-top: 20px;
+    text-align: center;
+    
+}
+
+
 
  
