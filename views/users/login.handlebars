@@ -1,0 +1,15 @@
+<h1>Log-in</h1>
+<form action="/login" method="POST" id="login-form">
+    <label for="username">username</label>
+    <input id="username" name="username">
+    <label for="password">password</label>
+    <input id="password" name="password">
+    <button type="submit">Submit</button>
+</form>
+
+{{#if error}}
+    <p>Either the username or password is invalid</p>
+{{/if}}
+
+<a href="/signup">Need to register? Click here to sign-up</a>
+

@@ -18,95 +18,90 @@ router.get('/account/:id', async (req, res) => {
 
 });
 
-router.get('food/:id', async (req, res) => {
-  try {
-    const post = await postData.getPostById(req.params.id);
-    res.render('posts/single', {post: post});
-  } catch (e) {
-    res.status(500).json({error: e});
+router.post('/edit', async (req, res) => {
+  const users = await userData.getUserById(req.params.id);
+  console.log(users);
+  res.render('posts/new', {users: users});
+});
+
+router.get('/login', async (req, res) => {
+  if (req.session.user) {
+
+      res.redirect('/private');
+      
+  } else {
+
+      res.render('users/login');
+
   }
 });
 
-router.get('/food/:id', async (req, res) => {
-  res.render('posts/foodReservation');
-});
+router.get('/signup', async (req, res) => {
+  if (req.session.user) {
 
-router.get('/', async (req, res) => {
-  const postList = await postData.getAllPosts();
-  res.render('posts/index', {posts: postList});
-});
+      res.redirect('/private');
 
-router.post('/', async (req, res) => {
-  let blogPostData = req.body;
-  let errors = [];
+  } else {
 
-  if (!blogPostData.title) {
-    errors.push('No title provided');
-  }
+      res.render('users/signup');
 
-  if (!blogPostData.body) {
-    errors.push('No body provided');
-  }
-
-  if (!blogPostData.posterId) {
-    errors.push('No poster selected');
-  }
-
-  if (errors.length > 0) {
-    const users = await userData.getAllUsers();
-    res.render('posts/new', {
-      errors: errors,
-      hasErrors: true,
-      post: blogPostData,
-      users: users
-    });
-    return;
-  }
-
-  try {
-    const newPost = await postData.addPost(
-      blogPostData.title,
-      blogPostData.body,
-      blogPostData.tags || ["tag1","tag2"],
-      blogPostData.posterId
-    );
-
-    res.redirect(`/posts/${newPost._id}`);
-  } catch (e) {
-    res.status(500).json({error: e});
   }
 });
 
-router.put('/:id', async (req, res) => {
-  let updatedData = req.body;
-  try {
-    await postData.getPostById(req.params.id);
-  } catch (e) {
-    res.status(404).json({error: 'Post not found'});
-    return;
+router.post('/signup', async (req, res) => {
+  const input = req.body;
+  const username = input['username'];
+  const password = input['password'];
+  userData.create(username,password);
+
+  const createReturn = await userData.create(username,password);
+
+  if (createReturn.dbDown){
+
+      res.status(500).render('users/signup', {
+          dbDown: true
+      });
   }
-  try {
-    const updatedPost = await postData.updatePost(req.params.id, updatedData);
-    res.json(updatedPost);
-  } catch (e) {
-    res.status(500).json({error: e});
+
+  if (createReturn.userInserted){
+
+      res.redirect('/');
+
+  } else {
+
+      res.status(400).render('users/signup', {
+          error: true
+      });
+
   }
+
 });
 
-router.delete('/:id', async (req, res) => {
-  try {
-    await postData.getPostById(req.params.id);
-  } catch (e) {
-    res.status(404).json({error: 'Post not found'});
-    return;
+router.post('/login', async (req, res) => {
+  const input = req.body;
+  const username = input['username'];
+  const password = input['password'];
+
+  const checkReturn = await userData.checkUser(username,password);
+
+  if (checkReturn.authenticated){
+
+      req.session.user = {username: username};
+      res.redirect('/private');
+
+  } else {
+
+      res.status(400).render('users/login', {
+          error: true
+      });
+
   }
 
-  try {
-    await postData.removePost(req.params.id);
-    res.sendStatus(200);
-  } catch (e) {
-    res.status(500).json({error: e});
-  }
+});
+
+router.get('/logout', async (req, res) => {
+  req.session.destroy();
+  res.render('users/logout');
 });
 
 

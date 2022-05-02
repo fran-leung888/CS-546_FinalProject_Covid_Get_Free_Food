@@ -1,0 +1,18 @@
+<h1>Sign-up</h1>
+<form action="/signup" method="POST" id="signup-form">
+    <label for="username">username</label>
+    <input id="username" name="username">
+    <label for="password">password</label>
+    <input id="password" name="password">
+    <button type="submit">Submit</button>
+</form>
+
+{{#if error}}
+    <p>Either the username or/and password is invalid/exist</p>
+{{/if}}
+
+{{#if dbDwon}}
+    <p>Internal Server Error</p>
+{{/if}}
+
+<a href="/login">Already have an account? Click here to log-in</a>
