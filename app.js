@@ -28,9 +28,18 @@
 //   ]
 // });
 
+<<<<<<< HEAD
 // app.use('/public', static);
 // app.use(express.json());
 // app.use(express.urlencoded({extended: true}));
+=======
+
+
+
+app.use('/public', static);
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+>>>>>>> 08d89af82fd6a9d83380dd8c843b79a07b8e1ad5
 
 // //app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}));
 
@@ -58,7 +67,49 @@
 // //   // req.body will hold the text fields, if there were any
 // // })
 
+<<<<<<< HEAD
 // const storage = multer.diskStorage({
+=======
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'public', 'uploads'))
+
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    let ext = path.extname(file.originalname);
+    cb(null,  uniqueSuffix+ext)
+
+  }
+})
+
+const upload = multer({ storage: storage }).single("imageForMulter")
+
+app.use(upload)
+
+
+app.use('/*', async (req, res, next) => {
+  console.log("I'm in the admin middleware");
+
+  handlebarsInstance.handlebars.registerHelper('username', function() {
+
+    if (req.session.user) {
+      return req.session.user.username;
+
+    }else{
+      return "user";
+    }
+  })
+
+  next();
+});
+
+
+configRoutes(app);
+
+
+// let storage = multer.diskStorage({
+>>>>>>> 08d89af82fd6a9d83380dd8c843b79a07b8e1ad5
 //   destination: function (req, file, cb) {
 //     cb(null, path.join(__dirname, 'public', 'uploads'))
 

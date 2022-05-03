@@ -58,7 +58,18 @@ router.get('/detail/:id', async (req, res) => {
     //todo 渲染详情
     const food = await foodData.getFood(req.params.id);
 
-    res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename});
+    res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+
+
+
+});
+
+router.get('/order/:foodId/:userId/:amount', async (req, res) => {
+    //res.render("posts/foodList");
+
+    const food = await foodData.orderFood(req.params.foodId,req.params.userId,req.params.amount);
+
+    res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
 
 
 

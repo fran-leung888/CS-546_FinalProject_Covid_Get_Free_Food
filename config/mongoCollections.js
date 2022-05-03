@@ -19,6 +19,7 @@ const getCollectionFn = (collection) => {
 module.exports = {
     posts: getCollectionFn('items'),
     food: getCollectionFn('Food'),
+    order: getCollectionFn('order'),
     merchant:getCollectionFn('merchant'),
     user: getCollectionFn('User')
 };

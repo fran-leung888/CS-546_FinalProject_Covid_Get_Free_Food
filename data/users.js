@@ -2,6 +2,7 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.user;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
+<<<<<<< HEAD
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -23,11 +24,63 @@ function formatDate(date) {
   );
 }
 
+=======
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+>>>>>>> 08d89af82fd6a9d83380dd8c843b79a07b8e1ad5
 
 const exportedMethods = {
 
 
+<<<<<<< HEAD
   
+=======
+
+  async findUserByUsername(username) {
+
+
+    const userCollection = await users();
+    const user = await userCollection.findOne({ account: username });
+    return user;
+
+  },
+
+  async createUser(username, password) {
+
+
+    const userCollection = await users();
+
+    const hashedPassword = await bcrypt.hash(username, saltRounds);
+
+
+
+    if (await this.findUserByUsername(username)!== null) {
+      throw 'you can not use this account';
+
+    }else{
+
+      const newUserInfo = {
+        username: username,
+        password: hashedPassword,
+        type: "user"
+      };
+
+      const insertInfo = await userCollection.insertOne(newUserInfo);
+      if (insertInfo.insertedCount === 0) throw 'Could not add user';
+
+      let newId = insertInfo.insertedId;
+
+      const user = await userCollection.findOne({ _id: newId });
+      user._id = user._id.toString();
+
+      return user._id;
+    }
+
+
+
+  },
+
+>>>>>>> 08d89af82fd6a9d83380dd8c843b79a07b8e1ad5
   async create(name, password, mobileNumber,zipCode, description) {
 
     if (!name) throw 'You must provide a name';
@@ -205,34 +258,27 @@ const exportedMethods = {
   },
 
   async checkUser(username, password) {
-    if (!username) return {authenticated: false};
-    if (typeof username !== 'string') return {authenticated: false};
-    if (username.trim() == '') return {authenticated: false};
-    if (username.includes(" ")) return {userInserted: false};
-    if (username.length < 4) return {authenticated: false};
-    
-    
-    if (!password) return {authenticated: false};
-    if (typeof password !== 'string') return {authenticated: false};
-    if (password.trim() == '') return {authenticated: false};
-    if (password.includes(" ")) return {userInserted: false};
-    if (password.length < 6) return {authenticated: false};
+
   
     const userCollection = await users();
 
-    newUsername = await username.toLowerCase();
 
-    const user = await userCollection.findOne({'username': newUsername});
-    
-    if (user == null){
-      
-      return {authenticated: false};
-  
+
+
+    const user = await userCollection.findOne({username: username});
+
+    const res=await bcrypt.compare(password, user.password);
+
+
+    if (res){
+      return user;
+
+
+
     }else{
+      throw 'check your account and password';
 
-      error = await bcrypt.compare(password, user.password);
-      return {authenticated: error};
-    
+
     }
   }, 
 
