@@ -1,106 +1,108 @@
-const express = require('express');
-const app = express();
-const static = express.static(__dirname + '/public');
-const session = require("express-session");
+// const express = require('express');
+// const app = express();
+// const static = express.static(__dirname + '/public');
+// const session = require("express-session");
 
-const configRoutes = require('./routes');
-const exphbs = require('express-handlebars');
-const path = require("path");
+// const configRoutes = require('./routes');
+// const exphbs = require('express-handlebars');
+// const path = require("path");
 
-const multer  = require('multer')
+// const multer  = require('multer')
 
-const handlebarsInstance = exphbs.create({
-  defaultLayout: 'main',
-  // Specify helpers which are only registered on this instance.
-  helpers: {
-    asJSON: (obj, spacing) => {
-      if (typeof spacing === "number")
-        return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
+// const handlebarsInstance = exphbs.create({
+//   defaultLayout: 'main',
+//   // Specify helpers which are only registered on this instance.
+//   helpers: {
+//     asJSON: (obj, spacing) => {
+//       if (typeof spacing === "number")
+//         return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
 
-      return new Handlebars.SafeString(JSON.stringify(obj));
-    },
-    whichLinks: () => 'head/links'
-  },
-  partialsDir: [
-    'views/posts/',
-    'views/partials/',
-    'views/home/'
-  ]
-});
+//       return new Handlebars.SafeString(JSON.stringify(obj));
+//     },
+//     whichLinks: () => 'head/links'
+//   },
+//   partialsDir: [
+//     'views/posts/',
+//     'views/partials/',
+//     'views/home/'
+//   ]
+// });
 
-app.use('/public', static);
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+// app.use('/public', static);
+// app.use(express.json());
+// app.use(express.urlencoded({extended: true}));
 
-//app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}));
+// //app.engine('handlebars', exphbs.engine({defaultLayout: 'main'}));
 
-app.engine('handlebars', handlebarsInstance.engine);
+// app.engine('handlebars', handlebarsInstance.engine);
 
-app.set('views', path.join(__dirname, '/views'));
+// app.set('views', path.join(__dirname, '/views'));
 
-app.set('view engine', 'handlebars');
-
-
-// init session
-app.use(session({
-  name: 'AuthCookie',
-  secret: 'some secret string!',
-  resave: false,
-  saveUninitialized: true
-}))
-
-// app.post('/foodEdit/:id', upload.single('imageForMulter'), function (req, res, next) {
-//
-//   console.log(req.body);
-//
-//   res.render("posts/foodList")
-//   // req.file is the `avatar` file
-//   // req.body will hold the text fields, if there were any
-// })
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, 'public', 'uploads'))
-
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    let ext = path.extname(file.originalname);
-    cb(null,  uniqueSuffix+ext)
-
-  }
-})
-
-const upload = multer({ storage: storage }).single("imageForMulter")
-
-app.use(upload)
+// app.set('view engine', 'handlebars');
 
 
-configRoutes(app);
+// // init session
+// app.use(session({
+//   name: 'AuthCookie',
+//   secret: 'some secret string!',
+//   resave: false,
+//   saveUninitialized: true
+// }))
 
+// // app.post('/foodEdit/:id', upload.single('imageForMulter'), function (req, res, next) {
+// //
+// //   console.log(req.body);
+// //
+// //   res.render("posts/foodList")
+// //   // req.file is the `avatar` file
+// //   // req.body will hold the text fields, if there were any
+// // })
 
-// let storage = multer.diskStorage({
+// const storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, path.join(__dirname, 'public', 'uploads'))
+
 //   },
 //   filename: function (req, file, cb) {
+//     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
 //     let ext = path.extname(file.originalname);
-//     cb(null, uuid.v4() + ext);
+//     cb(null,  uniqueSuffix+ext)
+
 //   }
 // })
 
-app.listen(3000, () => {
-  console.log("We've now got a server!");
-  console.log('Your routes will be running on http://localhost:3000');
-});
+// const upload = multer({ storage: storage }).single("imageForMulter")
+
+// app.use(upload)
+
+
+// configRoutes(app);
+
+
+// // let storage = multer.diskStorage({
+// //   destination: function (req, file, cb) {
+// //     cb(null, path.join(__dirname, 'public', 'uploads'))
+// //   },
+// //   filename: function (req, file, cb) {
+// //     let ext = path.extname(file.originalname);
+// //     cb(null, uuid.v4() + ext);
+// //   }
+// // })
+
+// app.listen(3000, () => {
+//   console.log("We've now got a server!");
+//   console.log('Your routes will be running on http://localhost:3000');
+// });
 
 
 
-// const users = require("./data/users");
+const users = require("./data/users");
 // const albums = require("./data/albums")
 
 
-// async function main() {
+async function main() {
+
+
 
 //     users
 //     const Qinyun = await users.create("Qinyun Wang", "wqy1998", "5512616439", "07030", "I'm happy");
@@ -109,6 +111,10 @@ app.listen(3000, () => {
 //     console.log(Annie);
 //     const XingFang = await users.create("XingFang Tan", "yxf1993", "5512616437", "07032", "I'm so old");
 //     console.log(XingFang);
+      
+    // order
+    // const newOrder = await users.createOrder("626f1164d558a63ffbbd57e2", "Meat","50", "1", "50", "/public/images/cart-1.jpg");
+    // console.log(newOrder);
 
     // const a = await bands.get("62252dc3ad5a274b1620a39e");
     // console.log(a);
@@ -139,11 +145,11 @@ app.listen(3000, () => {
     // const a = await albums.remove("622581c9c425f2d2aaa0d59e");
     // console.log(a);
 
-// }
+}
 
-// main().catch((err) => {
-//     console.log(err);
-// });
+main().catch((err) => {
+    console.log(err);
+});
 
 
 

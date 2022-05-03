@@ -3,8 +3,30 @@ const users = mongoCollections.user;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
 
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
+
+function formatDate(date) {
+  return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-') +
+    ' ' +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(':')
+  );
+}
+
 
 const exportedMethods = {
+
+
   
   async create(name, password, mobileNumber,zipCode, description) {
 
@@ -59,6 +81,65 @@ const exportedMethods = {
     return user;
 
   },
+
+  async createOrder(userId, name, price, quantity, total, image) {
+
+    if (!userId) throw 'You must provide a user id';
+    if (typeof userId !== 'string') throw 'User id must be a string';
+
+    if (!name) throw 'You must provide a name';
+    if (typeof name !== 'string') throw 'Name must be a string';
+
+    if (!price) throw 'You must provide a price';
+    if (typeof price !== 'string') throw 'Price must be a string';
+
+    if (!quantity) throw 'You must provide a quantity';
+    if (typeof quantity !== 'string') throw 'Quantity must be a string';
+
+    if (!total) throw 'You must provide a total';
+    if (typeof total !== 'string') throw 'Total must be a string';
+
+    if (!image) throw 'You must provide a image';
+    if (typeof image !== 'string') throw 'Image name must be a string';
+
+    let time = formatDate(new Date());
+
+    const userCollection = await users();
+
+    const newOrderInfo = 
+
+      {
+        orderId: uuid(),
+        name: name,
+        price: price,
+        quantity: quantity,
+        total: total,
+        image: image,
+        // 2021-10-24 16:21:23 (yyyy-mm-dd hh:mm:ss)
+        time: time
+      }
+    
+    ;
+
+    id = ObjectId(userId);
+
+    const updatedInfo = await userCollection.updateOne(
+      { _id: id },
+      { $push: {order: newOrderInfo} }
+
+    );
+
+    if (updatedInfo.modifiedCount === 0) {
+      throw 'could not update band successfully';
+    }
+
+    const user = await userCollection.findOne({ _id: id });
+    user._id = user._id.toString();
+
+    return user;
+
+  },
+
 
   async update(id, name, password, image, mobileNumber, zipCode, description) {
     if (!id) throw 'You must supply an ID';

@@ -23,10 +23,10 @@
 
     <div class="user-info">
       <div class="list-group" id="myList" role="tablist">
-        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab">Password : {{user.password}}</a>
-        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab">Mobile Number : {{user.mobileNumber}}</a>
-        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" >Zip Code : {{user.zipCode}}</a>
-        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab">Description : {{user.description}}</a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Password : <span style="color: rgb(131,158,252);">{{user.password}}</span></a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Mobile Number : <span style="color: rgb(131,158,252);">{{user.mobileNumber}}</span></a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Zip Code : <span style="color: rgb(131,158,252);">{{user.zipCode}}</span></a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Description : <span style="color: rgb(131,158,252);">{{user.description}}</span></a>
       </div>
     </div>
 
@@ -43,7 +43,7 @@
 
           <!-- 模态框头部 -->
           <div class="modal-header">
-            <h4 class="modal-title">Edit Personal Information</h4>
+            <h4 class="modal-title">Place Your Order</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
@@ -82,7 +82,7 @@
 
               <!-- 模态框底部 -->
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal-body">Close</button>
+                {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
                 <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
             </form> 
@@ -98,16 +98,6 @@
 
 
 </div>
-
-  <script>
-    $('#myList').on('click', function (e) {
-      e.preventDefault()
-      $(this).removeClass（）
-    })
-
-  </script>
-
-
 
 
 
