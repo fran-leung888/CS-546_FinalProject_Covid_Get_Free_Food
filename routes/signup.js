@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 
 
     try {
-        const userId = await userData.createUser(req.body["account"],hashedPassword);
+        const userId = await userData.createUser(req.body["username"],hashedPassword);
         res.render("users/login", { msg2: "Account created! Now, log in."});
 
 

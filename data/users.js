@@ -2,36 +2,39 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.user;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const exportedMethods = {
 
 
 
-  async findUserByAccount(account, hashedPassword) {
+  async findUserByUsername(username) {
 
 
     const userCollection = await users();
-    const user = await userCollection.findOne({ account: account });
+    const user = await userCollection.findOne({ account: username });
     return user;
 
   },
 
-  async createUser(account, hashedPassword) {
+  async createUser(username, password) {
 
 
     const userCollection = await users();
 
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 
-    if (await this.findUserByAccount(account)!== null) {
+
+    if (await this.findUserByUsername(username)!== null) {
       throw 'you can not use this account';
 
     }else{
 
       const newUserInfo = {
-        account: account,
-        hashedPassword: hashedPassword,
+        username: username,
+        password: hashedPassword,
         type: "user"
       };
 
@@ -116,18 +119,17 @@ const exportedMethods = {
   
     const userCollection = await users();
 
-    newUsername = await username.toLowerCase();
 
-    const user = await userCollection.findOne({'username': newUsername});
+    const user = await userCollection.findOne({username: username,password:password});
     
     if (user == null){
-      
-      return {authenticated: false};
-  
+
+      throw 'check your account and password';
+
+
     }else{
 
-      error = await bcrypt.compare(password, user.password);
-      return {authenticated: error};
+      return user;
     
     }
   }, 

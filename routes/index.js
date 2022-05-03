@@ -2,6 +2,7 @@ const userRoutes = require('./user');
 const foodRoutes = require('./food');
 const merchantRoutes = require('./merchant');
 const signupRoutes = require('./signup');
+const loginRoutes = require('./login');
 const fakeRouters = require('./fakesession');
 const path = require('path');
 const data = require('../data');
@@ -24,6 +25,7 @@ const constructorMethod = (app) => {
   app.use('/merchant', merchantRoutes);
   app.use('/fake', fakeRouters);
   app.use('/signup', signupRoutes);
+  app.use('/login', loginRoutes);
   app.get('/', (req, res) => {
     res.render("home/index", {
       helpers: {
