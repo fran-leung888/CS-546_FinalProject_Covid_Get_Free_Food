@@ -1,0 +1,484 @@
+<div class="container">
+
+    <!-- ============= COMPONENT ============== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+
+            <div class="collapse navbar-collapse" id="main_nav">
+
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown" style="width: 250px">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <span id="foodCategory1">{{searchParams.foodCategory1}}</span>
+                            <span id="foodCategoryHelper">{{searchParams.foodCategoryHelper}}</span>
+                            <span id="foodCategory2">{{searchParams.foodCategory2}}</span>
+                        </a>
+
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item level1"><span>Fast Food</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Burgers</a></li>
+                                    <li><a class="dropdown-item level2em">Pizza</a></li>
+                                    <li><a class="dropdown-item level2em">Sandwiches</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item level1" ><span>Asian</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Sushi</a></li>
+                                    <li><a class="dropdown-item level2em">Noodle</a></li>
+                                    <li><a class="dropdown-item level2em">Dumplings</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item level1"><span>Fried Food</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Fried Chicken</a></li>
+                                    <li><a class="dropdown-item level2em">Fries</a></li>
+                                    <li><a class="dropdown-item level2em">Fried fish</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item level1"><span>Drink</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Soup</a></li>
+                                    <li><a class="dropdown-item level2em">Juice</a></li>
+                                    <li><a class="dropdown-item level2em">Liquor</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item">ALL</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown" style="width: 250px">
+                        <a class="nav-link dropdown-toggle" id="currentOrder" data-bs-toggle="dropdown"> order by </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item level1em"> more likes first </a></li>
+                            <li><a class="dropdown-item level1em"> higher price first </a></li>
+                            <li><a class="dropdown-item level1em"> more stock first </a></li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <div class="form-check form-switch form-switch-md" style="width: 250px">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">In stock</label>
+
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    </div>
+
+
+
+
+                    <div class="d-flex">
+                        <input class="form-control me-2"  data-onstyle="danger" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-danger" type="submit">Search</button>
+                    </div>
+
+
+
+
+
+
+                </ul>
+
+
+            </div> <!-- navbar-collapse.// -->
+        </div> <!-- container-fluid.// -->
+    </nav>
+
+    <!-- ============= COMPONENT END// ============== -->
+
+
+</div><!-- container //  -->
+
+
+<div>
+    {{#if itemsArray}}
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {{#each itemsArray}}
+
+                        {{> item_item parameter=this}}
+
+
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+
+<style type="text/css">
+
+
+
+    .form-switch.form-switch-md {
+        padding-left: 4.5em;
+        height: 2em;
+    }
+
+    .form-switch.form-switch-md .form-check-input {
+        margin-left: -4.5em;
+        height: 2em;
+        width: 4em;
+    }
+
+    .form-switch.form-switch-md .form-check-label {
+        padding-top: 0.5em;
+    }
+
+    .form-switch.form-switch-lg {
+        padding-left: 8.5em;
+        height: 4.5em;
+    }
+
+    .form-switch.form-switch-lg .form-check-input {
+        margin-left: -8.5em;
+        height: 4em;
+        width: 8em;
+    }
+
+    .form-switch.form-switch-lg .form-check-label {
+        padding-top: 1.5em;
+    }
+
+    /* ============ desktop view ============ */
+    @media all and (min-width: 992px) {
+
+        .dropdown-menu li {
+            position: relative;
+        }
+
+        .dropdown-menu .submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: -7px;
+        }
+
+        .dropdown-menu .submenu-left {
+            right: 100%;
+            left: auto;
+        }
+
+        .dropdown-menu > li:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdown-menu > li:hover > .submenu {
+            display: block;
+        }
+    }
+
+    /* ============ desktop view .end// ============ */
+
+    /* ============ small devices ============ */
+    @media (max-width: 991px) {
+
+        .dropdown-menu .dropdown-menu {
+            margin-left: 0.7rem;
+            margin-right: 0.7rem;
+            margin-bottom: .5rem;
+        }
+
+    }
+
+    /* ============ small devices .end// ============ */
+
+</style>
+
+<script type="text/javascript">
+    //	window.addEventListener("resize", function() {
+    //		"use strict"; window.location.reload();
+    //	});
+
+
+    $(".level2em").click(function () {
+        let $this = $(this)
+
+
+        $("#foodCategory1").html($($this.parent().parent().prev()[0]).find("span")[0].innerText)
+        $("#foodCategoryHelper").html( "&raquo;")
+        $("#foodCategory2").html($this[0].innerText)
+    });
+
+    $(".level1em").click(function () {
+        let $this = $(this)
+
+
+        $("#currentOrder").html($this[0].innerText)
+    });
+
+    $(".level1").each(function () {
+
+        $(this).click(function(e){
+            e.stopPropagation();
+        });
+    })
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+        /////// Prevent closing from click inside dropdown
+
+
+        document.querySelectorAll('.level2').forEach(function (element) {
+            element.addEventListener('click', function (e) {
+                $(".dropdown-menu").removeClass("show");
+                $(".dropdown-toggle").removeClass("show");
+
+
+                e.stopPropagation();
+            });
+        })
+
+
+
+
+
+        // document.querySelectorAll('.ll').forEach(function (element) {
+        //
+        //
+        //
+        //     element.addEventListener('click', function (e) {
+        //
+        //             });
+        //
+        //
+        //
+        //
+        // })
+
+        // document.querySelectorAll('.level1').forEach(function (element) {
+        //
+        //
+        //     $(element).children().each(function(i,n){
+        //         var obj = $(n)
+        //         if (obj.index() !== $(element).children().length-1) {
+        //             console.log(n);
+        //             n.addEventListener('click', function (e) {
+        //
+        //                 e.stopPropagation();
+        //             });
+        //         }
+        //
+        //     });
+        //
+        // })
+
+
+        // make it as accordion for smaller screens
+        if (window.innerWidth < 992) {
+
+            // close all inner dropdowns when parent is closed
+            document.querySelectorAll('.navbar .dropdown').forEach(function (everydropdown) {
+                everydropdown.addEventListener('hidden.bs.dropdown', function () {
+                    // after dropdown is hidden, then find all submenus
+                    this.querySelectorAll('.submenu').forEach(function (everysubmenu) {
+                        // hide every submenu as well
+                        everysubmenu.style.display = 'none';
+                    });
+                })
+            });
+
+            document.querySelectorAll('.dropdown-menu a').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+
+                    let nextEl = this.nextElementSibling;
+                    if (nextEl && nextEl.classList.contains('submenu')) {
+                        // prevent opening link if link needs to open dropdown
+                        e.preventDefault();
+                        console.log(nextEl);
+                        if (nextEl.style.display == 'block') {
+                            nextEl.style.display = 'none';
+                        } else {
+                            nextEl.style.display = 'block';
+                        }
+
+                    }
+                });
+            })
+        }
+        // end if innerWidth
+
+    });
+    // DOMContentLoaded  end
+</script>
+
+
+<script type="text/javascript">
+
+    //todo 自动执行 如果url里有关键词 重新写回搜索框
+    // todo 废弃了 用后端回写了
+    window.onload = function () {
+        /* alert(1)
+
+         var searchParams = new URLSearchParams(window.location.search)
+         var obj ={}
+
+         for(var [key, value] of searchParams.entries()) {
+             obj[key] = value
+         }
+         console.log("我读到了url 我要开始回写搜索框了",obj)
+
+         //todo 判断是否有
+         if (obj.foodCategory1) {
+             $("#foodCategory1").html(obj.foodCategory1)
+             $("#foodCategoryHelper").html(  "->")
+
+         }
+
+         if (obj.foodCategory2) {
+             $("#foodCategory2").html(obj.foodCategory2)
+             $("#foodCategoryHelper").html(  "->")
+
+
+         }*/
+
+
+    }
+
+    function generateUrlWithParams(url, params) {
+        var urlParams = [];
+        let flag = false;
+        for (var key in params) {
+            if (params[key]) {
+                flag = true;
+                urlParams.push(`${key}=${params[key]}`)
+            }
+        }
+        if (flag) {
+            url += '?' + urlParams.join('&');
+        }
+        return url
+    };
+
+    $('#foodSearchButton').click(function () {
+
+        console.log(1);
+        let key = $("#foodSearchInput").val()
+        let foodCategory1 = $("#foodCategory1").html()
+        let foodCategory2 = $("#foodCategory2").html()
+        console.log(foodCategory1);
+
+        console.log(foodCategory2);
+
+        let url = window.location.origin + window.location.pathname;
+        //let parentUrl = window.location.href.split("/").slice(0, -1).join("/");
+
+        //window.location.href = window.location.host + "/foodList/?key=" + key
+
+        url = generateUrlWithParams(url, {foodCategory1: foodCategory1, foodCategory2: foodCategory2})
+        url = encodeURI(url)
+
+        console.log(url);
+        window.location.href = url
+
+
+    });
+
+
+    (function () {
+
+        var $subblock = $(".subpage"),
+                $head = $subblock.find('h2'),
+                $ul = $("#proinfo"),
+                $lis = $ul.find("li"),
+                inter = false;
+
+        $head.click(function (e) {
+            e.stopPropagation();
+            if (!inter) {
+                $ul.show();
+            } else {
+                console.log(146);
+                $ul.hide();
+            }
+            inter = !inter;
+        });
+
+        var $subblock2 = $(".subpage2"),
+                $head2 = $subblock2.find('h2'),
+                $ul2 = $("#proinfo2"),
+                $lis2 = $ul2.find("li"),
+                inter2 = false;
+
+        $head2.click(function (e) {
+            e.stopPropagation();
+            if (!inter2) {
+                $ul2.show();
+            } else {
+                $ul2.hide();
+            }
+            inter2 = !inter2;
+        });
+
+        $ul.click(function (event) {
+            event.stopPropagation();
+        });
+
+        $(document).click(function () {
+            $ul.hide();
+            inter = false;
+            $ul2.hide();
+            inter2 = false;
+
+            console.log("边缘被触发了 两个下拉都false")
+        });
+
+        $("em").click(function () {
+            console.log("选择了新的分类");
+            let $this = $(this)
+            $ul.hide();
+            inter = !inter;
+            $("#foodCategory1").html($this.parent().parent().prev()[0].innerText)
+            $("#foodCategoryHelper").html("->")
+
+            $("#foodCategory2").html($this[0].innerText)
+        });
+
+        $("#tiAll").click(function () {
+            console.log("tiALL");
+            let $this = $(this)
+            $ul.hide();
+            inter = !inter;
+            $("#foodCategory1").html("")
+            $("#foodCategoryHelper").html("ALL")
+
+            $("#foodCategory2").html("")
+        });
+
+
+        $("#proinfo2 > li").click(function () {
+            //console.log("点击ul 隐藏ul");
+            //console.log($(this)[0].innerText);
+            console.log();
+            let $this = $(this)
+            console.log($this[0].innerText);
+            $ul2.hide();
+            inter2 = !inter2;
+            $("#currentOrder").html($this[0].innerText)
+        });
+
+
+        $lis.hover(function () {
+            if (!$(this).hasClass('nochild')) {
+                $(this).addClass("prosahover");
+                $(this).find(".prosmore").removeClass('hide');
+            }
+        }, function () {
+            if (!$(this).hasClass('nochild')) {
+                if ($(this).hasClass("prosahover")) {
+                    $(this).removeClass("prosahover");
+                }
+                $(this).find(".prosmore").addClass('hide');
+            }
+        });
+
+    })();
+
+

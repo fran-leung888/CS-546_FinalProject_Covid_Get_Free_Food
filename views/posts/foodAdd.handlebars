@@ -1,0 +1,278 @@
+<link rel="stylesheet" type="text/css" href="/public/css/foodDetail.css">
+
+
+
+
+
+<div class="container">
+
+    <!-- ============= COMPONENT ============== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+
+            <div class="collapse navbar-collapse" id="main_nav">
+
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown" style="width: 250px">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <span id="foodCategory1">{{searchParams.foodCategory1}}</span>
+                            <span id="foodCategoryHelper">{{searchParams.foodCategoryHelper}}</span>
+                            <span id="foodCategory2">{{searchParams.foodCategory2}}</span>
+                        </a>
+
+                        <ul class="dropdown-menu ">
+                            <li><a class="dropdown-item level1"><span>Fast Food</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Burgers</a></li>
+                                    <li><a class="dropdown-item level2em">Pizza</a></li>
+                                    <li><a class="dropdown-item level2em">Sandwiches</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item level1" ><span>Asian</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Sushi</a></li>
+                                    <li><a class="dropdown-item level2em">Noodle</a></li>
+                                    <li><a class="dropdown-item level2em">Dumplings</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item level1"><span>Fried Food</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Fried Chicken</a></li>
+                                    <li><a class="dropdown-item level2em">Fries</a></li>
+                                    <li><a class="dropdown-item level2em">Fried fish</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item level1"><span>Drink</span><span> &raquo; </span></a>
+                                <ul class="submenu dropdown-menu level2">
+                                    <li><a class="dropdown-item level2em">Soup</a></li>
+                                    <li><a class="dropdown-item level2em">Juice</a></li>
+                                    <li><a class="dropdown-item level2em">Liquor</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item">ALL</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown" style="width: 250px">
+                        <a class="nav-link dropdown-toggle" id="currentOrder" data-bs-toggle="dropdown"> order by </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item level1em"> more likes first </a></li>
+                            <li><a class="dropdown-item level1em"> higher price first </a></li>
+                            <li><a class="dropdown-item level1em"> more stock first </a></li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+                </ul>
+
+
+            </div> <!-- navbar-collapse.// -->
+        </div> <!-- container-fluid.// -->
+    </nav>
+
+    <!-- ============= COMPONENT END// ============== -->
+
+
+</div><!-- container //  -->
+
+<!--<div style=" margin:0 20%;border: 1px solid">-->
+
+<!--    <div style="width: 800px;height: 500px;">1</div>-->
+
+<!--</div>-->
+<div class="bootstrap-iso" >
+
+    <section class="product-details spad" style="padding-top: 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+
+<!--                        todo 编辑时显示之间的图片 新增时图片为待更新-->
+                        <div class="product__details__pic__item">
+<!--                            <img class="product__details__pic__item--large"-->
+<!--                                 src="/public/uploads/food1.png" alt="">-->
+                            <img id="viewImg" />
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <form class="col-lg-6 col-md-6" method="post" enctype="multipart/form-data">
+                    <div class="product__details__text">
+
+
+                        <h3 style="display: inline">Food name: </h3> <input type="text" name="foodName" />
+                         <input id="category1" style="display:none" type="text" name="foodCategory1" />
+                        <input id="category2" style="display:none " type="text" name="foodCategory2" />
+
+
+                        <div class="product__details__price">$<input type="text" name="foodPrice" /></div>
+                        <p><textarea cols="50" name="foodDes" rows="10"></textarea>
+                            </p>
+
+                        <div class="form-group">
+                            <label for="photo">Photo</label>
+                            <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
+                        </div>
+
+
+
+
+
+
+
+                        <ul>
+                            <li><b>stock</b> <input type="text" name="stock" /></li>
+                            <li><b>Shipping</b><input type="text" name="Shipping" /></li>
+                            <li><b>Weight</b> <input type="text" name="Weight" /></li>
+                            <li><b>Share on</b><input type="text" name="Share on" /> </li>
+                        </ul>
+
+                        <button type="submit">submit</button>
+
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    var img = document.getElementById("viewImg");
+    function uploadImg(fileDom) {
+        //取到file文件的本地路径，就是你电脑上的存储路径
+        console.log(fileDom.value);
+
+        // 获取图片数据对象
+        var file = fileDom.files[0];
+
+        // 获取图片名字
+        console.log(file.name);
+
+        // 获取图片文件大小,单位为byte
+        console.log(file.size);
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        //确保文件成功获取，base64数据量比较大
+        reader.onload = function (event) {
+            console.log(96);
+            var e = event || window.event
+            var img = document.getElementById("viewImg");
+            img.src = e.target.result;
+            let user = sessionStorage.getItem('user')
+
+
+            //或者 img.src = this.result; 因为e.target == this
+        }
+    }
+
+
+
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+
+
+</script>
+
+<script type="text/javascript">
+
+    (function() {
+
+        var $subblock = $(".subpage"),
+                $head = $subblock.find('h2'),
+                $ul = $("#proinfo"),
+                $lis = $ul.find("li"),
+                inter = false;
+
+        $head.click(function(e) {
+            e.stopPropagation();
+            if (!inter) {
+                $ul.show();
+            } else {
+                $ul.hide();
+            }
+            inter = !inter;
+        });
+
+        $ul.click(function(event) {
+            event.stopPropagation();
+        });
+
+        $(document).click(function() {
+            $ul.hide();
+            inter = !inter;
+        });
+        $("em").click(function () {
+            let $this = $(this)
+            $ul.hide();
+            inter = !inter;
+
+            $("#foodCategory1").html($this.parent().parent().prev()[0].innerText)
+            $("#foodCategoryHelper").html(  "->")
+            $("#foodCategory2").html($this[0].innerText)
+
+            //add to input of form
+            $("#category1").val($this.parent().parent().prev()[0].innerText)
+            $("#category2").val($this[0].innerText)
+
+
+        });
+
+        $lis.hover(function() {
+            if (!$(this).hasClass('nochild')) {
+                $(this).addClass("prosahover");
+                $(this).find(".prosmore").removeClass('hide');
+            }
+        }, function() {
+            if (!$(this).hasClass('nochild')) {
+                if ($(this).hasClass("prosahover")) {
+                    $(this).removeClass("prosahover");
+                }
+                $(this).find(".prosmore").addClass('hide');
+            }
+        });
+
+    })();
+
+
+</script>

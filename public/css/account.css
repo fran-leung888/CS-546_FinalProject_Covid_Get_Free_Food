@@ -1,0 +1,39 @@
+.user-photo{
+    width: 175px;
+    height: 175px;
+    display: flex;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;   
+    
+}
+/* 
+.user-name{
+    margin: 0 auto;
+} */
+
+.line1{
+    width: 500px;
+    margin: 0 auto;
+}
+
+.list-group{
+    width:500px;
+    margin: 0 auto;
+}
+
+.jumbotron{
+    background-color: rgb(233,236,239);
+    width: 960px;
+    margin: 0 auto;
+}
+
+.container{
+    margin-top: 20px;
+    text-align: center;
+    
+}
+
+
+
+ 

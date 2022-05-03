@@ -1,0 +1,22 @@
+<div class="home-category-list position-relative">
+    <ul>
+        {{#each categories}}
+        <li class="category-title">
+            <div class="item-text">{{title}}</div>
+            <div class="category-detail position-absolute top-0">
+                {{#each subcategories}}
+                <div class="row">
+                    <div class="col-2 subcategory-title">{{subtitle}}</div>
+                    <div class="col">
+                        {{#each items}}
+                        <a href="{{link}}" class="home-category-list-item position-relative">{{text}}</a>
+                        {{/each}}
+                    </div>
+                </div>
+                <hr class="divider">
+                {{/each}}
+            </div>
+        </li>
+        {{/each}}
+    </ul>
+</div>

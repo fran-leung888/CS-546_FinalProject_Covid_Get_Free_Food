@@ -1,0 +1,111 @@
+
+<link rel="stylesheet" href="/public/css/account.css">
+
+<div class="bootstrap-iso">
+
+  <br>
+  
+  <div class="jumbotron" style="width: 600px;">
+
+    <br>
+
+    <div class="user-photo";>
+      <img src="/public/images/users/{{user.image}}" alt="">
+    </div>
+    <br>
+    <div class="user-name">
+      <h2 style="text-align: center;">{{user.name}}</h2>
+    </div>
+    
+    <div class="line1">
+      <hr class="my-4">
+    </div>
+
+    <div class="user-info">
+      <div class="list-group" id="myList" role="tablist">
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Password : <span style="color: rgb(131,158,252);">{{user.password}}</span></a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Mobile Number : <span style="color: rgb(131,158,252);">{{user.mobileNumber}}</span></a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Zip Code : <span style="color: rgb(131,158,252);">{{user.zipCode}}</span></a>
+        <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" style="text-align: center;">Description : <span style="color: rgb(131,158,252);">{{user.description}}</span></a>
+      </div>
+    </div>
+
+    <div class="container">    
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+        Modify
+      </button>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <!-- 模态框头部 -->
+          <div class="modal-header">
+            <h4 class="modal-title">Place Your Order</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- 模态框内容 -->
+          <div class="modal-body">
+        
+            <form action="/user/edit" method="POST"  id="editInfo">
+              <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" accept="image/*" id="photo" onchange="uploadImg(this)" value='{{this.onchange}}' name="image">
+              </div>
+              <div class="form-group" hidden>
+                <label for="id" class="col-form-label">ID:</label>
+                <input type="text" class="form-control" id="id" value="{{user._id}}" name="id">
+              </div>
+              <div class="form-group">
+                <label for="rename" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="rename" value="{{user.name}}" name="name">
+              </div>
+              <div class="form-group">
+                <label for="repassword" class="col-form-label">Password:</label>
+                <input type="text" class="form-control" id="repassword" value="{{user.password}}" name="password">
+              </div>
+              <div class="form-group">
+                <label for="remobileNumber" class="col-form-label">Mobile Number:</label>
+                <input type="text" class="form-control" id="remobileNumber" value="{{user.mobileNumber}}" name="mobileNumber">
+              </div>
+              <div class="form-group">
+                <label for="rezipCode" class="col-form-label">Zip Code:</label>
+                <input type="text" class="form-control" id="rezipCode" value="{{user.zipCode}}" name="zipCode">
+              </div>
+              <div class="form-group">
+                <label for="redescription" class="col-form-label">Description:</label>
+                <textarea class="form-control" id="redescription" name="discription">{{user.description}}</textarea>
+              </div> 
+
+              <!-- 模态框底部 -->
+              <div class="modal-footer">
+                {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form> 
+
+          </div>     
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+  </div>
+
+
+</div>
+
+
+
+
+{{!-- <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">  --}}
+{{!-- <link rel="stylesheet" href="https://formden.com/static/assets/demos/bootstrap-iso/bootstrap-iso/bootstrap-iso.css" /> --}}
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js" rel="stylesheet"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='/public/js/users/account.js'></script>

@@ -1,0 +1,186 @@
+
+
+
+<ul class="nav nav-tabs d-flex" id="myTab" >
+    <li class="nav-item"><button class="nav-link" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button">login</button></li>
+    <li class="nav-item"><button class="nav-link" id="register1-tab" data-bs-toggle="tab" data-bs-target="#register1" type="button">register1</button></li>
+    <li class="nav-item"><button class="nav-link" id="register2-tab" data-bs-toggle="tab" data-bs-target="#register2" type="button">register2</button></li>
+
+
+</ul>
+
+
+
+<div class="tab-content" id="myTabContent">
+
+
+
+
+    <div class="tab-pane fade " id="login">
+
+
+<!--        start form 1-->
+        <div class="container-fluid vh-75" >
+            <div class="" style="margin-top:5% ">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+
+                        <div class="text-center">
+                            <h3 class="text-danger">{{msg1}}</h3>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-primary">Login</h3>
+                        </div>
+                        <div class="p-4" style="margin-bottom: 5%">
+                            <form method="post" action="/login">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" name="username" class="form-control" placeholder="Username">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" name="password" class="form-control" placeholder="password">
+                                </div>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button class="btn btn-primary" type="submit"><span></span>login</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        end form1-->
+    </div>
+    <div class="tab-pane fade" id="register1">
+
+        <!--        start form 1-->
+        <div class="container-fluid vh-75" >
+            <div class="" style="margin-top:5% ">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+
+                        <div class="text-center">
+                            <h3 class="text-danger">{{msg2}}</h3>
+                        </div>
+
+                        <div class="text-center">
+                            <h3 class="text-primary">Create User Account</h3>
+                        </div>
+                        <div class="p-4" style="margin-bottom: 5%">
+                            <form method="post" action="/signup">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" name="username" placeholder="Username">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" name="password" placeholder="password">
+                                </div>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button class="btn btn-primary" type="submit"><span></span> Sign up</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        end form1-->
+
+
+    </div>
+
+
+    <div class="tab-pane fade" id="register2">
+
+        <!--        start form 1-->
+        <div class="container-fluid vh-75" >
+            <div class="" style="margin-top:5% ">
+                <div class="rounded d-flex justify-content-center">
+                    <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                        <div class="text-center">
+                            <h3 class="text-danger">{{msg3}}</h3>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-primary">Create Merchant Account</h3>
+                        </div>
+                        <div class="p-4" style="margin-bottom: 5%">
+                            <form action="">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-envelope text-white"></i></span>
+                                    <input type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                    <input type="password" class="form-control" placeholder="password">
+                                </div>
+                                <div class="d-grid col-12 mx-auto">
+                                    <button class="btn btn-primary" type="button"><span></span> Sign up</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        end form1-->
+
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+ function function1(){
+
+     let msg1='{{msg1}}'
+     let msg2='{{msg2}}'
+     let msg3='{{msg3}}'
+
+     console.log(msg2);
+     //todo 改成弹窗提示
+    //alert(msg)
+     //register1-tab
+
+     $("#login-tab").removeClass("active")
+     $("#login").removeClass("show active")
+     $("#register1-tab").removeClass("active")
+     $("#register1").removeClass("show active")
+     $("#register2-tab").removeClass("active")
+     $("#register2").removeClass("show active")
+
+     $("#register1-tab").addClass("active")
+     $("#register1").addClass("show active")
+
+ }
+
+ $(document).ready(function(){
+     function1();
+ })
+
+ //window.onload = function1;//不要括号
+
+</script>
+
+
+

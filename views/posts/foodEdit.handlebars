@@ -1,0 +1,129 @@
+<link rel="stylesheet" type="text/css" href="/public/css/foodDetail.css">
+
+
+<!--<link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">-->
+
+
+
+
+<!--<div style=" margin:0 20%;border: 1px solid">-->
+
+<!--    <div style="width: 800px;height: 500px;">1</div>-->
+
+<!--</div>-->
+<div class="bootstrap-iso">
+
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+
+<!--                        todo 编辑时显示之间的图片 新增时图片为待更新-->
+                        <div class="product__details__pic__item">
+<!--                            <img class="product__details__pic__item--large"-->
+<!--                                 src="/public/uploads/food1.png" alt="">-->
+                            <img id="viewImg" src={{filename}}>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <form class="col-lg-6 col-md-6" method="post" enctype="multipart/form-data">
+                    <div class="product__details__text">
+                        <h3 style="display: inline">Food name: </h3> <input type="text" value={{foodName}} name="foodName" />
+
+
+                        <div class="product__details__price">$<input type="text" value={{foodPrice}} name="foodPrice" /></div>
+                        <p><textarea cols="50" name="foodDes" rows="10">{{foodDes}}</textarea>
+                            </p>
+
+                        <div class="form-group">
+                            <label for="photo">Photo</label>
+                            <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
+                        </div>
+
+
+
+
+
+                        <ul>
+                            <li><b>Availability</b> <input type="text" name="Availability" /></li>
+                            <li><b>Shipping</b><input type="text" name="Shipping" /></li>
+                            <li><b>Weight</b> <input type="text" name="Weight" /></li>
+                            <li><b>Share on</b><input type="text" name="Share on" /> </li>
+                        </ul>
+
+                        <button type="submit">submit</button>
+
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    var img = document.getElementById("viewImg");
+    function uploadImg(fileDom) {
+        //取到file文件的本地路径，就是你电脑上的存储路径
+        console.log(fileDom.value);
+
+        // 获取图片数据对象
+        var file = fileDom.files[0];
+
+        // 获取图片名字
+        console.log(file.name);
+
+        // 获取图片文件大小,单位为byte
+        console.log(file.size);
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        //确保文件成功获取，base64数据量比较大
+        reader.onload = function (event) {
+            console.log(96);
+            var e = event || window.event
+            var img = document.getElementById("viewImg");
+            img.src = e.target.result;
+            let user = sessionStorage.getItem('user')
+
+
+            //或者 img.src = this.result; 因为e.target == this
+        }
+    }
+
+
+
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+
+
+</script>
