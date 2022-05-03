@@ -23,7 +23,7 @@ const exportedMethods = {
 
     const userCollection = await users();
 
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(username, saltRounds);
 
 
 
@@ -171,33 +171,27 @@ const exportedMethods = {
   },
 
   async checkUser(username, password) {
-    if (!username) return {authenticated: false};
-    if (typeof username !== 'string') return {authenticated: false};
-    if (username.trim() == '') return {authenticated: false};
-    if (username.includes(" ")) return {userInserted: false};
-    if (username.length < 4) return {authenticated: false};
-    
-    
-    if (!password) return {authenticated: false};
-    if (typeof password !== 'string') return {authenticated: false};
-    if (password.trim() == '') return {authenticated: false};
-    if (password.includes(" ")) return {userInserted: false};
-    if (password.length < 6) return {authenticated: false};
+
   
     const userCollection = await users();
 
 
-    const user = await userCollection.findOne({username: username,password:password});
-    
-    if (user == null){
 
-      throw 'check your account and password';
+
+    const user = await userCollection.findOne({username: username});
+
+    const res=await bcrypt.compare(password, user.password);
+
+
+    if (res){
+      return user;
+
 
 
     }else{
+      throw 'check your account and password';
 
-      return user;
-    
+
     }
   }, 
 

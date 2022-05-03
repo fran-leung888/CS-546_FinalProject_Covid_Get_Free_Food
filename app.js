@@ -28,6 +28,9 @@ const handlebarsInstance = exphbs.create({
   ]
 });
 
+
+
+
 app.use('/public', static);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -74,6 +77,23 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("imageForMulter")
 
 app.use(upload)
+
+
+app.use('/*', async (req, res, next) => {
+  console.log("I'm in the admin middleware");
+
+  handlebarsInstance.handlebars.registerHelper('username', function() {
+
+    if (req.session.user) {
+      return req.session.user.username;
+
+    }else{
+      return "user";
+    }
+  })
+
+  next();
+});
 
 
 configRoutes(app);

@@ -70,9 +70,7 @@ router.post("/add", async (req, res) => {
         return res.send("你不是merchant");
     }
 
-    if (req.session.user.id!==req.params.id) {
-        return res.send("别看别人的");
-    }
+
 
 
     let foodName = req.body.foodName;
@@ -80,6 +78,8 @@ router.post("/add", async (req, res) => {
     let foodDes = req.body.foodDes;
     let foodCategory1 = req.body.foodCategory1;
     let foodCategory2 = req.body.foodCategory2;
+    let merchantId = req.session.user.id;
+    let stock = parseInt(req.body.stock);
     let filename;
 
 
@@ -89,24 +89,9 @@ router.post("/add", async (req, res) => {
 
     console.log(filename);
     //todo 不全的错误提示
-    if (!foodName || !foodPrice || !foodDes || !filename) {
 
-        res.render("layouts/form_item", {
-            pageTitle: "Create a new item!",
-            name: name,
-            categories: categories,
-            description: description,
-            price: price,
-            payment: payment,
-            zip: geo,
-            minDays: time.minDays,
-            maxDays: time.maxDays,
-            error: "Please complete all fields"
-        });
-        return;
-    }
 
-    const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2);
+    const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2,merchantId,stock);
     console.log(newVar._id.toString());
 
     res.redirect("/food/Detail/"+newVar._id.toString());

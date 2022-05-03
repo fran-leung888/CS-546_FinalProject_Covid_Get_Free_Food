@@ -3,11 +3,9 @@ const foodRoutes = require('./food');
 const merchantRoutes = require('./merchant');
 const signupRoutes = require('./signup');
 const loginRoutes = require('./login');
-const fakeRouters = require('./fakesession');
 const path = require('path');
 const data = require('../data');
 const mongoCollections = require("../config/mongoCollections");
-const customerData = data.customers;
 const merchantData = data.merchant;
 const foodData = data.food;
 const express = require("express");
@@ -23,7 +21,6 @@ const constructorMethod = (app) => {
   app.use('/user', userRoutes);
   app.use('/food', foodRoutes);
   app.use('/merchant', merchantRoutes);
-  app.use('/fake', fakeRouters);
   app.use('/signup', signupRoutes);
   app.use('/login', loginRoutes);
   app.get('/', (req, res) => {

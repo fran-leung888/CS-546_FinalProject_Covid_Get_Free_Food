@@ -5,6 +5,28 @@ const userData = data.users;
 
 
 
+router.get('/', async (req, res) => {
+
+
+    //todo 已经登录就不能再进入了
+
+    if(req.session.user){
+        return res.redirect("/")
+    }
+
+    if(req.session.signUpMsg){
+        let msg=req.session.signUpMsg
+        req.session.signUpMsg=null;
+        return res.render('users/login',{msg2:msg});
+    }
+
+    res.render('users/login');
+
+
+
+});
+
+
 router.post("/", async (req, res) => {
 
     //todo 校验
@@ -13,8 +35,12 @@ router.post("/", async (req, res) => {
 
 
     try {
-        const userId = await userData.checkUser(req.body["username"],req.body["password"]);
-        res.redirect("food/list");
+        let user = await userData.checkUser(req.body["username"],req.body["password"]);
+
+
+        user={id:user._id.toString(),username:user.username,type:user.type}
+        req.session.user=user
+        return res.redirect("food/list");
 
 
     } catch (e) {

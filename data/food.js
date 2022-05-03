@@ -1,5 +1,6 @@
 const mongoCollections = require('../config/mongoCollections');
 const foodCollection = mongoCollections.food;
+const orderCollection = mongoCollections.order;
 const uuid = require('uuid/v4');
 const { ObjectId } = require('mongodb');
 
@@ -37,7 +38,7 @@ const exportedMethods = {
 
     },
 
-    async addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2) {
+    async addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2,merchantId,stock) {
 
         //todo 数据验证
 
@@ -47,7 +48,9 @@ const exportedMethods = {
             foodDes: foodDes,
             filename: filename,
             foodCategory1: foodCategory1,
-            foodCategory2: foodCategory2
+            foodCategory2: foodCategory2,
+            merchantId: merchantId,
+            stock: stock
         }
 
         const merchantCollection = await foodCollection();
@@ -71,6 +74,50 @@ const exportedMethods = {
 
         const food = await foodCollection1.findOne({
             _id: objId
+        });
+
+        return food;
+    },
+
+
+    async orderFood(foodId,userId,amount) {
+
+        //todo <=0则不可以订了
+
+
+        //todo 产生一条订单
+        let time=""
+        let newItem = {
+            foodId: foodId,
+            userId: userId,
+            amount: amount,
+            time: new Date()
+        }
+
+        const orderCollection1 = await orderCollection();
+
+        const insert = await orderCollection1.insertOne(newItem)
+
+
+        //todo 食物当前库存-1
+
+
+        const foodCollection1 = await foodCollection();
+
+        foodId = ObjectId.createFromHexString(foodId);
+
+
+
+        const updateRes = await foodCollection1.updateOne(
+            {_id: foodId},
+            {$inc: {stock: -1*amount}}
+
+
+        );
+
+
+        const food = await foodCollection1.findOne({
+            _id: foodId
         });
 
         return food;
