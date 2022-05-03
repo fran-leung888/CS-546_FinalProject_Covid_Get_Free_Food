@@ -1,1 +1,0 @@
-# CS-546_FinalProject_Covid_Get_Free_Food
