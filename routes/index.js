@@ -20,7 +20,7 @@ const categoryData = data.category;
 
 const constructorMethod = (app) => {
   //app.use('/customer', customerRoutes);
-  // app.use('/user', userRoutes);
+  app.use('/user', userRoutes);
   app.use('/food', foodRoutes);
   app.use('/merchant', merchantRoutes);
   app.use('/fake', fakeRouters);
