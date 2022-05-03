@@ -23,28 +23,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="shoping__cart__item">
-                                <p>ORDER PLACED: 2022-5-3 09:39</p>
-                                <img src="/public/images/cart-1.jpg" alt="">
-                                <h5>Vegetable’s Package</h5>
-                            </td>
-                            <td class="shoping__cart__price">
-                                $55.00
-                            </td>
-                            <td class="shoping__cart__quantity">
-                                <div class="quantity">
-                                    1
-                                </div>
-                            </td>
-                            <td class="shoping__cart__total">
-                                $110.00
-                            </td>
-                            <td class="shoping__cart__item__close">
-                                <span class="icon_close"></span>
-                            </td>
-                        </tr>
-
+                        {{#each user.order}} 
+                            <tr>
+                                <td class="shoping__cart__item">
+                                    
+                                    <p>{{this.time}}</p>
+                                    <img src="{{this.image}}" alt="" style="width: 128px; height: auto">
+                                    <h5>{{this.name}}</h5>
+                   
+                                </td>
+                                <td class="shoping__cart__price">
+                                    ${{this.price}}
+                                </td>
+                                <td class="shoping__cart__quantity">
+                                    <div class="quantity">
+                                        {{this.quantity}}
+                                    </div>
+                                </td>
+                                <td class="shoping__cart__total">
+                                    ${{this.total}}
+                                </td>
+                                <td class="shoping__cart__item__close">
+                                    <span class="icon_close"></span>
+                                </td>
+                            </tr>
+                        {{/each}}
 
                         </tbody>
                     </table>

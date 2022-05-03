@@ -120,6 +120,8 @@ app.listen(3000, () => {
     // order
     // const newOrder = await users.createOrder("626f1164d558a63ffbbd57e2", "Meat","50", "1", "50", "/public/images/cart-1.jpg");
     // console.log(newOrder);
+    // const newOrder = await users.createOrder("626f1164d558a63ffbbd57e2", "Pizza","34", "1", "34", "/public/images/side-food-3.png");
+    // console.log(newOrder);
 
     // const a = await bands.get("62252dc3ad5a274b1620a39e");
     // console.log(a);
