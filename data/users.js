@@ -2,7 +2,6 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.user;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
-<<<<<<< HEAD
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -24,17 +23,15 @@ function formatDate(date) {
   );
 }
 
-=======
+
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
->>>>>>> 08d89af82fd6a9d83380dd8c843b79a07b8e1ad5
+
 
 const exportedMethods = {
 
+ 
 
-<<<<<<< HEAD
-  
-=======
 
   async findUserByUsername(username) {
 
@@ -80,7 +77,6 @@ const exportedMethods = {
 
   },
 
->>>>>>> 08d89af82fd6a9d83380dd8c843b79a07b8e1ad5
   async create(name, password, mobileNumber,zipCode, description) {
 
     if (!name) throw 'You must provide a name';
