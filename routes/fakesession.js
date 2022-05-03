@@ -22,6 +22,11 @@ router.get('/login', async (req, res) => {
 router.get('/login2', async (req, res) => {
 
 
+    if(req.session.signUpMsg){
+        let msg=req.session.signUpMsg
+        req.session.signUpMsg=null;
+        return res.render('users/login',{msg2:msg});
+    }
 
     res.render('users/login');
 

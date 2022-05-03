@@ -5,7 +5,51 @@ const {ObjectId} = require('mongodb');
 
 
 const exportedMethods = {
-  
+
+
+
+  async findUserByAccount(account, hashedPassword) {
+
+
+    const userCollection = await users();
+    const user = await userCollection.findOne({ account: account });
+    return user;
+
+  },
+
+  async createUser(account, hashedPassword) {
+
+
+    const userCollection = await users();
+
+
+
+    if (await this.findUserByAccount(account)!== null) {
+      throw 'you can not use this account';
+
+    }else{
+
+      const newUserInfo = {
+        account: account,
+        hashedPassword: hashedPassword,
+        type: "user"
+      };
+
+      const insertInfo = await userCollection.insertOne(newUserInfo);
+      if (insertInfo.insertedCount === 0) throw 'Could not add user';
+
+      let newId = insertInfo.insertedId;
+
+      const user = await userCollection.findOne({ _id: newId });
+      user._id = user._id.toString();
+
+      return user._id;
+    }
+
+
+
+  },
+
   async create(name, password, mobileNumber,zipCode, description) {
 
     if (!name) throw 'You must provide a name';
