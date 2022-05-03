@@ -13,8 +13,8 @@ router.get('/', async (req, res) => {
 
 router.get('/account/:id', async (req, res) => {
 
-  const user = await userData.getUserById(req.params.id);
-  res.render('users/account', {user: user});
+  //const user = await userData.getUserById(req.params.id);
+  res.render('users/account');
 
 });
 

@@ -1,0 +1,41 @@
+ <!--        start form 1-->
+    <div class="container-fluid vh-75" >
+        <div class="" style="margin-top:5% ">
+            <div class="rounded d-flex justify-content-center">
+                <div class="col-md-4 col-sm-12 shadow-lg p-5 bg-light">
+                    <div class="text-center">
+                        <h3 class="text-danger">{{msg}}</h3>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-primary">Create Merchant Account</h3>
+                    </div>
+                    <div class="p-4" style="margin-bottom: 5%">
+                        <form method="post" action="/signup/merchant">
+                            <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-person-plus-fill text-white"></i></span>
+                                <input type="text" name="username" class="form-control" placeholder="Username">
+                            </div>
+                            <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-envelope text-white"></i></span>
+                                <input type="text" name="restaurantName" class="form-control" placeholder="restaurant name">
+                            </div>
+                            <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="password">
+                            </div>
+                            <div class="d-grid col-12 mx-auto">
+                                <button class="btn btn-primary" type="submit"><span></span> Sign up</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--        end form1-->
+
+

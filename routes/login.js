@@ -14,10 +14,11 @@ router.get('/', async (req, res) => {
         return res.redirect("/")
     }
 
-    if(req.session.signUpMsg){
-        let msg=req.session.signUpMsg
-        req.session.signUpMsg=null;
-        return res.render('users/login',{msg2:msg});
+    //todo 如果上一次没注册成功就会显示错误信息
+    if(req.session.loginMsg){
+        let msg=req.session.loginMsg
+        req.session.loginMsg=null;
+        return res.render('users/login',{msg:msg});
     }
 
     res.render('users/login');
@@ -37,7 +38,7 @@ router.post("/", async (req, res) => {
     try {
         let user = await userData.checkUser(req.body["username"],req.body["password"]);
 
-
+        //登陆成功 加session
         user={id:user._id.toString(),username:user.username,type:user.type}
         req.session.user=user
         return res.redirect("food/list");
@@ -48,8 +49,8 @@ router.post("/", async (req, res) => {
         //页面显示错误 account不能用之类
         //res.redirect("fake/login3")
 
-        req.session.signUpMsg=e.toString()
-        res.redirect("fake/login2")
+        req.session.loginMsg=e.toString()
+        res.redirect("/login")
 
         // res.render("users/login", { msg2: e},);
 
