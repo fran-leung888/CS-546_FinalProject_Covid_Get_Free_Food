@@ -19,9 +19,23 @@ router.get('/account/:id', async (req, res) => {
 });
 
 router.post('/edit', async (req, res) => {
-  const users = await userData.getUserById(req.params.id);
-  console.log(users);
-  res.render('posts/new', {users: users});
+  const input = req.body;
+  const id = input['id'];
+  const image = input['image'];
+  const name = input['name'];
+  const password = input['password'];
+  const mobileNumber = input['mobileNumber'];
+  const zipCode = input['zipCode'];
+  const discription = input['discription']
+
+  try {
+    const user = await userData.update(id, name, password, image, mobileNumber, zipCode, discription);
+    res.render('users/account', {user: user});
+  } catch (e) {
+    console.log(e);
+  }
+  
+  
 });
 
 router.get('/login', async (req, res) => {
