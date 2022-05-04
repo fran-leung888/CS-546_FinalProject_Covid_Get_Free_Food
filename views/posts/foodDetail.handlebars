@@ -36,11 +36,11 @@
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input id="orderAmount" type="text" value="1">
                                 </div>
                             </div>
                         </div>
-                        <div   style="cursor: pointer;" class="primary-btn"><a style=" text-decoration: none;color:inherit;" href="/food/order/6270bcc3a57d62c9f82da310/627097b46e78c0e4c7b5130d/2">Order now</a></div>
+                        <div  id="orderButton" style="cursor: pointer;" class="primary-btn"><span style=" text-decoration: none;color:inherit;" >Order now</span></div>
 
 
 
@@ -102,6 +102,16 @@
             }
         }
         $button.parent().find('input').val(newVal);
+    });
+
+    $("#orderButton").click(function(event) {
+
+        let amount=$("#orderAmount")[0].value;
+
+
+        let href="/food/order/{{foodId}}/"+amount
+        window.location.href = href;
+
     });
 
 

@@ -3,6 +3,7 @@ const foodRoutes = require('./food');
 const merchantRoutes = require('./merchant');
 const signupRoutes = require('./signup');
 const loginRoutes = require('./login');
+const logoutRoutes = require('./logout');
 const path = require('path');
 const data = require('../data');
 const mongoCollections = require("../config/mongoCollections");
@@ -23,6 +24,7 @@ const constructorMethod = (app) => {
   app.use('/merchant', merchantRoutes);
   app.use('/signup', signupRoutes);
   app.use('/login', loginRoutes);
+  app.use('/logout', logoutRoutes);
   app.get('/', (req, res) => {
     res.render("home/index", {
       helpers: {

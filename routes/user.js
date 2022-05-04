@@ -5,16 +5,13 @@ const foodData = data.food;
 const userData = data.users;
 
 
-router.get('/', async (req, res) => {
-  const users = await userData.getAllUsers();
-  res.render('posts/new', {users: users});
-});
 
 
+//todo 可以照着改改
 router.get('/account/:id', async (req, res) => {
 
-  const user = await userData.getUserById(req.params.id);
-  res.render('users/account', {user: user});
+  //const user = await userData.getUserById(req.params.id);
+  res.render('users/account');
 
 });
 
@@ -38,30 +35,10 @@ router.post('/edit', async (req, res) => {
   
 });
 
-router.get('/login', async (req, res) => {
-  if (req.session.user) {
 
-      res.redirect('/private');
-      
-  } else {
 
-      res.render('users/login');
 
-  }
-});
-
-router.get('/signup', async (req, res) => {
-  if (req.session.user) {
-
-      res.redirect('/private');
-
-  } else {
-
-      res.render('users/signup');
-
-  }
-});
-
+//todo 可以照着改改
 router.post('/signup', async (req, res) => {
   const input = req.body;
   const username = input['username'];
@@ -120,11 +97,14 @@ router.get('/logout', async (req, res) => {
 
 
 
-router.get('/history/:id', async (req, res) => {
+router.get('/history', async (req, res) => {
 
 
+    if (!req.session.user) {
+        return res.redirect("/login");
 
-  const user = await userData.getUserById(req.params.id);
+    }
+  const user = await userData.getUserById(req.session.user.id);
   res.render("posts/userHistory", {user: user});
 
 

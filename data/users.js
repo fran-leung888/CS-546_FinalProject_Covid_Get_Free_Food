@@ -38,7 +38,7 @@ const exportedMethods = {
 
 
     const userCollection = await users();
-    const user = await userCollection.findOne({ account: username });
+    const user = await userCollection.findOne({ username: username });
     return user;
 
   },
@@ -61,6 +61,42 @@ const exportedMethods = {
         username: username,
         password: hashedPassword,
         type: "user"
+      };
+
+      const insertInfo = await userCollection.insertOne(newUserInfo);
+      if (insertInfo.insertedCount === 0) throw 'Could not add user';
+
+      let newId = insertInfo.insertedId;
+
+      const user = await userCollection.findOne({ _id: newId });
+      user._id = user._id.toString();
+
+      return user._id;
+    }
+
+
+
+  },
+
+  async createMerchant(username, password,restaurantName) {
+
+
+    const userCollection = await users();
+
+    const hashedPassword = await bcrypt.hash(username, saltRounds);
+
+
+
+    if (await this.findUserByUsername(username)!== null) {
+      throw 'you can not use this account';
+
+    }else{
+
+      const newUserInfo = {
+        username: username,
+        password: hashedPassword,
+        type: "merchant",
+        restaurantName:restaurantName
       };
 
       const insertInfo = await userCollection.insertOne(newUserInfo);
@@ -141,13 +177,13 @@ const exportedMethods = {
     if (typeof name !== 'string') throw 'Name must be a string';
 
     if (!price) throw 'You must provide a price';
-    if (typeof price !== 'string') throw 'Price must be a string';
+    //todo 数字检测
 
     if (!quantity) throw 'You must provide a quantity';
-    if (typeof quantity !== 'string') throw 'Quantity must be a string';
+    //todo 数字检测
 
     if (!total) throw 'You must provide a total';
-    if (typeof total !== 'string') throw 'Total must be a string';
+    //todo 数字检测
 
     if (!image) throw 'You must provide a image';
     if (typeof image !== 'string') throw 'Image name must be a string';
@@ -263,6 +299,11 @@ const exportedMethods = {
 
 
     const user = await userCollection.findOne({username: username});
+
+    if(!user){
+      throw 'check your account and password';
+
+    }
 
     const res=await bcrypt.compare(password, user.password);
 

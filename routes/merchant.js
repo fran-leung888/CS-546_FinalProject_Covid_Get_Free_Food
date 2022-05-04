@@ -5,12 +5,12 @@ const {ObjectId} = require("mongodb");
 const router = express.Router();
 const foodData = data.food;
 
-router.get('/myfood/:id', async (req, res) => {
+router.get('/myfood', async (req, res) => {
     //res.render("posts/foodList");
 
 
     if (!req.session.user) {
-        return res.send("没登录");
+        return res.redirect("/login");
 
     }
 
@@ -18,13 +18,10 @@ router.get('/myfood/:id', async (req, res) => {
         return res.send("你不是merchant");
     }
 
-    if (req.session.user.id!==req.params.id) {
-        return res.send("别看别人的");
-    }
 
-        console.log("没有参数")
-        const itemsArray = await foodData.getAllFood();
-        res.render("merchant/myfood", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
+
+    const itemsArray = await foodData.getFoodByMerchant(req.session.user.id);
+    res.render("merchant/myfood", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
 
 
 

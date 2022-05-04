@@ -6,24 +6,25 @@
                 <div class="text-center">
                     <h3 class="text-danger">{{msg}}</h3>
                 </div>
+
                 <div class="text-center">
-                    <h3 class="text-primary">Login</h3>
+                    <h3 class="text-primary">Create User Account</h3>
                 </div>
                 <div class="p-4" style="margin-bottom: 5%">
-                    <form method="post" action="/login">
+                    <form method="post" action="/signup/user">
                         <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
-                            <input type="text" name="username" class="form-control" placeholder="Username">
+                            <input type="text" class="form-control" name="username" placeholder="Username">
                         </div>
 
                         <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i
                                             class="bi bi-key-fill text-white"></i></span>
-                            <input type="password" name="password" class="form-control" placeholder="password">
+                            <input type="password" class="form-control" name="password" placeholder="password">
                         </div>
                         <div class="d-grid col-12 mx-auto">
-                            <button class="btn btn-primary" type="submit"><span></span>login</button>
+                            <button class="btn btn-primary" type="submit"><span></span> Sign up</button>
                         </div>
 
                     </form>
