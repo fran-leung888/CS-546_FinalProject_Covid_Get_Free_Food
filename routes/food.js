@@ -58,7 +58,21 @@ router.get('/detail/:id', async (req, res) => {
     //todo 渲染详情
     const food = await foodData.getFood(req.params.id);
 
-    res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+    //todo 同时把评论也渲染上去
+
+
+    if (req.session.user) {
+        for (const key in food.comment) {
+            if (food.comment[key]["userId"] === req.session.user.id) {
+                food.comment[key]["isMine"]=1
+            }
+        }
+    }
+
+
+
+    res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
+        ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment});
 
 
 
@@ -81,7 +95,42 @@ router.get('/order/:id/:amount', async (req, res) => {
 });
 
 
+router.get('/deleteComment/:id', async (req, res) => {
 
+    let commentId=req.params.id
+    //todo 没登陆不能删除
+    if (!req.session.user) {
+        return res.redirect("/login");
+    }
+    //todo 查一下id主人是不是你 不是你不让删
+    const food = await foodData.deleteComment(commentId,req.session.user.id);
+
+    res.redirect('back');
+    //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+
+
+
+});
+
+
+router.post("/comment/:id", async (req, res) => {
+
+    if (!req.session.user) {
+        return res.redirect("/login");
+
+    }
+
+
+
+    //todo 这里没有返回值 应该没事
+    await foodData.createComment(req.params.id,req.session.user.id,req.session.user.username,req.body.commentContent);
+
+
+    res.redirect("/food/Detail/"+req.params.id.toString());
+
+
+
+});
 
 
 
