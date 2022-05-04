@@ -85,6 +85,7 @@ router.get('/order/:id/:amount', async (req, res) => {
         return res.redirect("/login");
 
     }
+
     const food = await foodData.orderFood(req.params.id,req.session.user.id,req.params.amount);
 
     res.redirect("/user/history")

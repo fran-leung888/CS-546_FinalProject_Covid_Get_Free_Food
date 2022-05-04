@@ -175,12 +175,21 @@ const exportedMethods = {
         //todo <=0则不可以订了
         const foodCollection1 = await foodCollection();
 
-        foodId = ObjectId.createFromHexString(foodId);
+        foodId = ObjectId(foodId);
 
 
         // 产生一条订单
         //通过foodid 查到food详情
         const curFood = await foodCollection1.findOne({_id: foodId})
+
+        if (amount<1) {
+            //todo 外面没有try catch
+            throw "check your amount";
+        }
+        if (curFood.stock < amount) {
+            //todo 外面没有try catch
+            throw "no stock";
+        }
         await userData.createOrder(userId, curFood.foodName, curFood.foodPrice, amount, curFood.foodPrice * amount, curFood.filename)
 
 
