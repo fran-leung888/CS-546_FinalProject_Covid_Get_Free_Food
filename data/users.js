@@ -176,13 +176,13 @@ const exportedMethods = {
     if (typeof name !== 'string') throw 'Name must be a string';
 
     if (!price) throw 'You must provide a price';
-    if (typeof price !== 'string') throw 'Price must be a string';
+    //todo 数字检测
 
     if (!quantity) throw 'You must provide a quantity';
-    if (typeof quantity !== 'string') throw 'Quantity must be a string';
+    //todo 数字检测
 
     if (!total) throw 'You must provide a total';
-    if (typeof total !== 'string') throw 'Total must be a string';
+    //todo 数字检测
 
     if (!image) throw 'You must provide a image';
     if (typeof image !== 'string') throw 'Image name must be a string';

@@ -1,6 +1,7 @@
 const mongoCollections = require('../config/mongoCollections');
 const foodCollection = mongoCollections.food;
 const orderCollection = mongoCollections.order;
+const userData = require('./users');
 const uuid = require('uuid/v4');
 const { ObjectId } = require('mongodb');
 
@@ -83,28 +84,21 @@ const exportedMethods = {
     async orderFood(foodId,userId,amount) {
 
         //todo <=0则不可以订了
+        const foodCollection1 = await foodCollection();
+
+        foodId = ObjectId.createFromHexString(foodId);
 
 
         //todo 产生一条订单
-        let time=""
-        let newItem = {
-            foodId: foodId,
-            userId: userId,
-            amount: amount,
-            time: new Date()
-        }
+        //通过foodid 查到food详情
+        const curFood=await foodCollection1.findOne({_id:foodId})
+        await userData.createOrder(userId,curFood.foodName,curFood.foodPrice,amount,curFood.foodPrice*amount,curFood.filename)
 
-        const orderCollection1 = await orderCollection();
 
-        const insert = await orderCollection1.insertOne(newItem)
 
 
         //todo 食物当前库存-1
 
-
-        const foodCollection1 = await foodCollection();
-
-        foodId = ObjectId.createFromHexString(foodId);
 
 
 
