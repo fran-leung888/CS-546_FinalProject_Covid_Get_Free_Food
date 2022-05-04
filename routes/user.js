@@ -97,12 +97,12 @@ router.get('/logout', async (req, res) => {
 
 
 
-router.get('/history', async (req, res) => {
+router.get('/history/:id', async (req, res) => {
 
 
 
-
-  res.render("posts/userHistory");
+  const user = await userData.getUserById(req.params.id);
+  res.render("posts/userHistory", {user: user});
 
 
 
