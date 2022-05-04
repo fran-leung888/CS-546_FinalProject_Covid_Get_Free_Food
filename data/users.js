@@ -2,6 +2,8 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.user;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -24,8 +26,7 @@ function formatDate(date) {
 }
 
 
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+
 
 
 const exportedMethods = {
