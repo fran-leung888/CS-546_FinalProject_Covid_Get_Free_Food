@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 const static = express.static(__dirname + '/public');
 const session = require("express-session");
 
@@ -80,20 +81,63 @@ app.use(upload)
 
 
 app.use('/*', async (req, res, next) => {
-  console.log("I'm in the admin middleware");
 
   handlebarsInstance.handlebars.registerHelper('username', function() {
+
+    console.log("I'm in a middleware");
 
     if (req.session.user) {
       return req.session.user.username;
 
     }else{
-      return "user";
+      return "you have not logged";
     }
   })
 
+  handlebarsInstance.handlebars.registerHelper('logged', function () {
+
+    console.log(333);
+    if (req.session.user) {
+      return true
+    }
+    return null
+  })
+
+  handlebarsInstance.handlebars.registerHelper('loggedAsUser', function () {
+
+    console.log(444);
+    if (req.session.user) {
+      if(req.session.user.type==="merchant"){
+        return null;
+      }else if(req.session.user.type==="user"){
+        return true;
+      }
+    }
+    return null;
+  })
+
+
+
+
+
+
   next();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 configRoutes(app);
