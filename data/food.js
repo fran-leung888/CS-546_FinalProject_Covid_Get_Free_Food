@@ -80,6 +80,19 @@ const exportedMethods = {
         return food;
     },
 
+    async getFoodByMerchant(merchantId) {
+
+
+        const foodCollection1 = await foodCollection();
+
+
+        const food = await foodCollection1.find({
+            merchantId: merchantId
+        }).toArray();
+
+        return food;
+    },
+
 
     async orderFood(foodId,userId,amount) {
 
@@ -89,17 +102,14 @@ const exportedMethods = {
         foodId = ObjectId.createFromHexString(foodId);
 
 
-        //todo 产生一条订单
+        // 产生一条订单
         //通过foodid 查到food详情
         const curFood=await foodCollection1.findOne({_id:foodId})
         await userData.createOrder(userId,curFood.foodName,curFood.foodPrice,amount,curFood.foodPrice*amount,curFood.filename)
 
 
 
-
-        //todo 食物当前库存-1
-
-
+        // 食物当前库存-1
 
 
         const updateRes = await foodCollection1.updateOne(
