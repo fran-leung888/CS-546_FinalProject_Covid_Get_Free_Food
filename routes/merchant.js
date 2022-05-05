@@ -4,6 +4,25 @@ const data = require("../data");
 const {ObjectId} = require("mongodb");
 const router = express.Router();
 const foodData = data.food;
+const merchantData = data.merchant;
+
+
+
+router.get('/list', async (req, res) => {
+    //res.render("posts/foodList");
+
+    console.log(req.query);
+
+
+    const itemsArray = await merchantData.getAllMerchant();
+    res.render("posts/merchantList", { itemsArray: itemsArray});
+
+
+
+
+
+    //res.send("posts/foodList");
+});
 
 router.get('/myfood', async (req, res) => {
     //res.render("posts/foodList");

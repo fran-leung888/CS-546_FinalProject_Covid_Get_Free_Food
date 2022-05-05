@@ -34,9 +34,22 @@ router.get('/edit/:id', async (req, res) => {
     //res.render("posts/foodList");
 
 
-    //todo 把已经有的信息渲染上 但是可以修改的状态
+    //todo 不是你的不能进入edit
 
     const food = await foodData.getFood(req.params.id);
+    if(!food){
+        return res.redirect("/food/list")
+    }
+
+    if(!req.session.user){
+        return res.redirect("/food/list")
+    }
+    if(req.session.user.id!==food.merchantId){
+        return res.redirect("/food/list")
+
+    }
+
+
 
     res.render("posts/foodEdit",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename});
 
@@ -59,6 +72,9 @@ router.get('/detail/:id', async (req, res) => {
     //todo 渲染详情
     const food = await foodData.getFood(req.params.id);
 
+    if(!food){
+        return res.redirect("/food/list")
+    }
     //todo 同时把评论也渲染上去
 
 
