@@ -3,98 +3,119 @@ const router = express.Router();
 const data = require('../data');
 const foodData = data.food;
 const userData = data.users;
+const xss = require('xss');
 
 
+router.post('/addLike', async (req, res) => {
+
+    console.log(1);
+
+    //todo 捕捉异常
+    if (req.session.user) {
+        let foodId = req.body.foodId;
+        let userId = req.session.user.id;
+
+        if (await userData.createLikes(foodId, userId)) {
+            return res.status(200).send("red");
+        }else{
+            return res.status(200).send("grey");
+
+        }
+    } else {
+        return res.status(200).send("black");
+
+
+    }
+
+
+});
 
 
 //todo 可以照着改改
 router.get('/account/:id', async (req, res) => {
 
-  //const user = await userData.getUserById(req.params.id);
-  res.render('users/account');
+    //const user = await userData.getUserById(req.params.id);
+    res.render('users/account');
 
 });
 
 router.post('/edit', async (req, res) => {
-  const input = req.body;
-  const id = input['id'];
-  const image = input['image'];
-  const name = input['name'];
-  const password = input['password'];
-  const mobileNumber = input['mobileNumber'];
-  const zipCode = input['zipCode'];
-  const discription = input['discription']
+    const input = req.body;
+    const id = input['id'];
+    const image = input['image'];
+    const name = input['name'];
+    const password = input['password'];
+    const mobileNumber = input['mobileNumber'];
+    const zipCode = input['zipCode'];
+    const discription = input['discription']
 
-  try {
-    const user = await userData.update(id, name, password, image, mobileNumber, zipCode, discription);
-    res.render('users/account', {user: user});
-  } catch (e) {
-    console.log(e);
-  }
-  
-  
+    try {
+        const user = await userData.update(id, name, password, image, mobileNumber, zipCode, discription);
+        res.render('users/account', {user: user});
+    } catch (e) {
+        console.log(e);
+    }
+
+
 });
-
-
 
 
 //todo 可以照着改改
 router.post('/signup', async (req, res) => {
-  const input = req.body;
-  const username = input['username'];
-  const password = input['password'];
-  userData.create(username,password);
+    const input = req.body;
+    const username = input['username'];
+    const password = input['password'];
+    userData.create(username, password);
 
-  const createReturn = await userData.create(username,password);
+    const createReturn = await userData.create(username, password);
 
-  if (createReturn.dbDown){
+    if (createReturn.dbDown) {
 
-      res.status(500).render('users/signup', {
-          dbDown: true
-      });
-  }
+        res.status(500).render('users/signup', {
+            dbDown: true
+        });
+    }
 
-  if (createReturn.userInserted){
+    if (createReturn.userInserted) {
 
-      res.redirect('/');
+        res.redirect('/');
 
-  } else {
+    } else {
 
-      res.status(400).render('users/signup', {
-          error: true
-      });
+        res.status(400).render('users/signup', {
+            error: true
+        });
 
-  }
+    }
 
 });
 
 router.post('/login', async (req, res) => {
-  const input = req.body;
-  const username = input['username'];
-  const password = input['password'];
+    const input = req.body;
+    const username = input['username'];
+    const password = input['password'];
 
-  const checkReturn = await userData.checkUser(username,password);
+    const checkReturn = await userData.checkUser(username, password);
 
-  if (checkReturn.authenticated){
+    if (checkReturn.authenticated) {
 
-      req.session.user = {username: username};
-      res.redirect('/private');
+        req.session.user = {username: username};
+        res.redirect('/private');
 
-  } else {
+    } else {
 
-      res.status(400).render('users/login', {
-          error: true
-      });
+        res.status(400).render('users/login', {
+            error: true
+        });
 
-  }
+    }
 
 });
 
 router.get('/logout', async (req, res) => {
-  req.session.destroy();
-  res.render('users/logout');
+    req.session.destroy();
+    res.render('users/logout');
 });
-
 
 
 router.get('/history', async (req, res) => {
@@ -104,12 +125,8 @@ router.get('/history', async (req, res) => {
         return res.redirect("/login");
 
     }
-  const user = await userData.getUserById(req.session.user.id);
-  res.render("posts/userHistory", {user: user});
-
-
-
-
+    const user = await userData.getUserById(req.session.user.id);
+    res.render("posts/userHistory", {user: user});
 
 
 });
@@ -118,13 +135,7 @@ router.get('/history', async (req, res) => {
 router.get('/likes', async (req, res) => {
 
 
-
-
-  res.render("posts/userLikes");
-
-
-
-
+    res.render("posts/userLikes");
 
 
 });

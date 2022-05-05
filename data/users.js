@@ -167,6 +167,57 @@ const exportedMethods = {
 
   },
 
+  async checkLiked(foodId,userId){
+
+    const userCollection = await users();
+
+    const res = await userCollection.findOne(
+        {_id: ObjectId(userId)}
+    );
+
+    for (let key in res.likedFood) {
+      if (res.likedFood[key] === foodId) {
+        return true
+      }
+    }
+
+    return false
+
+  },
+  async createLikes(foodId, userId) {
+
+
+
+    const userCollection = await users();
+
+
+    if(await this.checkLiked(foodId,userId)){
+      await userCollection.updateOne(
+          {_id: ObjectId(userId)},
+          {$pull: {likedFood: foodId}}
+      );
+      return false
+    }
+
+
+
+
+
+
+    const updatedInfo = await userCollection.updateOne(
+        {_id: ObjectId(userId)},
+        {$push: {likedFood: foodId}}
+    );
+
+    console.log("updatedInfo",updatedInfo);
+
+    if (updatedInfo.modifiedCount === 0) {
+      throw 'could not update band successfully';
+    }
+    return true
+
+
+  },
   async createOrder(userId, name, price, quantity, total, image) {
 
     if (!userId) throw 'You must provide a user id';

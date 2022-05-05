@@ -2,6 +2,7 @@ const express = require("express");
 const data = require("../data");
 const router = express.Router();
 const foodData = data.food;
+const userData = data.users;
 
 
 
@@ -61,7 +62,20 @@ router.get('/detail/:id', async (req, res) => {
     //todo 同时把评论也渲染上去
 
 
+
+    food.liked=0
     if (req.session.user) {
+
+
+        //todo 展示有没有likes
+
+        if (await userData.checkLiked(req.params.id, req.session.user.id)) {
+            food.liked=1
+        }
+
+
+
+        //自己发表的评论才可以出现delete按钮
         for (const key in food.comment) {
             if (food.comment[key]["userId"] === req.session.user.id) {
                 food.comment[key]["isMine"]=1
@@ -72,7 +86,7 @@ router.get('/detail/:id', async (req, res) => {
 
 
     res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
-        ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment});
+        ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment,liked:food.liked});
 
 
 
