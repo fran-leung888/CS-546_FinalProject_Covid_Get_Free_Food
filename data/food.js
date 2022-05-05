@@ -169,6 +169,22 @@ const exportedMethods = {
         return food;
     },
 
+    async getFoodInList(idList) {
+
+
+        const foodCollection1 = await foodCollection();
+
+        for (let key in idList) {
+            idList[key]=ObjectId(idList[key])
+        }
+        const food=await foodCollection1
+            .find({_id: {$in: idList}})
+            .toArray();
+
+
+        return food;
+    },
+
 
     async orderFood(foodId, userId, amount) {
 

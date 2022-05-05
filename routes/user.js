@@ -134,10 +134,39 @@ router.get('/history', async (req, res) => {
 
 router.get('/likes', async (req, res) => {
 
+    if (!req.session.user) {
+        return res.redirect("/login");
 
-    res.render("posts/userLikes");
+    }
+    const user = await userData.getUserById(req.session.user.id);
+
+    if(!user.likedFood){
+        user.likedFood=[]
+    }
+    const itemsArray = await foodData.getFoodInList(user.likedFood);
+
+    res.render("posts/userLikes", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
 
 
+});
+
+
+
+router.get('/myfood', async (req, res) => {
+    //res.render("posts/foodList");
+
+
+
+
+
+
+
+    const itemsArray = await foodData.getFoodByMerchant(req.session.user.id);
+
+
+
+
+    //res.send("posts/foodList");
 });
 
 module.exports = router;
