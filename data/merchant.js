@@ -11,7 +11,7 @@ const exportedMethods = {
 
     async getAllMerchant() {
         const merchantCollection = await merchants;
-        return await merchantCollection.find({}).toArray();
+        return await merchantCollection.find({type:"merchant"}).toArray();
     },
 
 
