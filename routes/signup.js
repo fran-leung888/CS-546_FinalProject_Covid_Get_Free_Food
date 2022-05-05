@@ -62,11 +62,10 @@ router.post("/user", async (req, res) => {
     //todo 校验
 
 
-    const hashedPassword = await bcrypt.hash(req.body["password"], saltRounds);
 
 
     try {
-        const userId = await userData.createUser(req.body["username"],hashedPassword);
+        const userId = await userData.createUser(req.body["username"],req.body["password"]);
 
         //通过session传递 跳转后要显示的msg
         req.session.loginMsg="user created! Now, log in."

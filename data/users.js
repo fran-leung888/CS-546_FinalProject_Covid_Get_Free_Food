@@ -47,19 +47,19 @@ const exportedMethods = {
 
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
-    if (username.trim() == '') throw 'User name with empty spaces are not valid';
+    if (username.trim() === '') throw 'User name with empty spaces are not valid';
     if (username.length < 4) throw 'User name must longer than 4 characters'
 
     if (!password) throw 'You must provide a password';
     if (typeof password !== 'string') throw 'Password must be a string';
-    if (password.trim() == '') throw 'Password with spaces are not valid';
+    if (password.trim() === '') throw 'Password with spaces are not valid';
     if (password.includes(" ")) throw 'Password with spaces are not valid';
-    if (password.length < 6) throw 'Password must longer than 6 characters';
+    if (password.length < 4) throw 'Password must longer than 4 characters';
 
 
     const userCollection = await users();
 
-    const hashedPassword = await bcrypt.hash(username, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 
 
@@ -370,17 +370,17 @@ const exportedMethods = {
 
   async checkUser(username, password) {
 
-    if (!username) return {authenticated: false};
-    if (typeof username !== 'string') return {authenticated: false};
-    if (username.trim() == '') return {authenticated: false};
-    if (username.includes(" ")) return {userInserted: false};
-    if (username.length < 4) return {authenticated: false};
+    if (!username) throw "no username"
+    if (typeof username !== 'string') throw "not string"
+    if (username.trim() == '') throw "all space"
+    if (username.includes(" ")) throw "have space"
+    if (username.length < 4) throw "too short"
     
-    if (!password) return {authenticated: false};
-    if (typeof password !== 'string') return {authenticated: false};
-    if (password.trim() == '') return {authenticated: false};
-    if (password.includes(" ")) return {userInserted: false};
-    if (password.length < 6) return {authenticated: false};
+    if (!password) throw "no password"
+    if (typeof password !== 'string') throw "no string"
+    if (password.trim() == '') throw "all space"
+    if (password.includes(" ")) throw "have space"
+    if (password.length < 4) throw "too short"
 
   
     const userCollection = await users();
@@ -414,7 +414,7 @@ const exportedMethods = {
 
   async getUserById(id) {
     if (!id) throw 'You must provide an id to search for';
-    if(typeof id =="string") throw 'ID must be a string'
+    if(typeof id !=="string") throw 'ID must be a string'
 
     id = ObjectId(id);
     const userCollection = await users();

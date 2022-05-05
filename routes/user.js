@@ -125,7 +125,6 @@ router.get('/history', async (req, res) => {
         return res.redirect("/login");
 
     }
-    const user = await userData.getUserById(req.session.user.id);
     res.render("posts/userHistory", {user: user});
 
 
