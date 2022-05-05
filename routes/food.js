@@ -21,7 +21,7 @@ router.get('/list', async (req, res) => {
     }else{
         console.log("有参数")
         const itemsArray = await foodData.getFoodByFilter(req.query);
-        req.query.foodCategoryHelper="->"
+        req.query.foodCategoryHelper="»"
         res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:req.query});
 
     }

@@ -97,12 +97,12 @@ router.get('/add', async (req, res) => {
 
 
     if (!req.session.user) {
-        return res.send("没登录");
+       return res.redirect("/login")
 
     }
 
     if (req.session.user.type!=="merchant") {
-        return res.send("你不是merchant");
+        return res.redirect("/food/list")
     }
 
 

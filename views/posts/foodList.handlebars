@@ -44,7 +44,7 @@
                                     <li><a class="dropdown-item level2em">Liquor</a></li>
                                 </ul>
                             </li>
-                            <li><a class="dropdown-item">ALL</a></li>
+                            <li><a id="tiAll"class="dropdown-item">ALL</a></li>
 
 
                         </ul>
@@ -73,7 +73,7 @@
 
                     <div class="d-flex">
                         <input class="form-control me-2"  data-onstyle="danger" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-danger" type="submit">Search</button>
+                        <button class="btn btn-danger" id="foodSearchButton" type="button">go</button>
                     </div>
 
 
@@ -192,12 +192,12 @@
 </style>
 
 <script type="text/javascript">
-    //	window.addEventListener("resize", function() {
-    //		"use strict"; window.location.reload();
-    //	});
+
 
 
     $(".level2em").click(function () {
+
+        console.log(11111);
         let $this = $(this)
 
 
@@ -220,6 +220,14 @@
         });
     })
 
+
+    $("#tiAll").click(function () {
+        $("#foodCategory1").html("")
+        $("#foodCategoryHelper").html("ALL")
+
+        $("#foodCategory2").html("")
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
 
 
@@ -240,35 +248,6 @@
 
 
 
-        // document.querySelectorAll('.ll').forEach(function (element) {
-        //
-        //
-        //
-        //     element.addEventListener('click', function (e) {
-        //
-        //             });
-        //
-        //
-        //
-        //
-        // })
-
-        // document.querySelectorAll('.level1').forEach(function (element) {
-        //
-        //
-        //     $(element).children().each(function(i,n){
-        //         var obj = $(n)
-        //         if (obj.index() !== $(element).children().length-1) {
-        //             console.log(n);
-        //             n.addEventListener('click', function (e) {
-        //
-        //                 e.stopPropagation();
-        //             });
-        //         }
-        //
-        //     });
-        //
-        // })
 
 
         // make it as accordion for smaller screens
@@ -312,35 +291,6 @@
 
 <script type="text/javascript">
 
-    //todo 自动执行 如果url里有关键词 重新写回搜索框
-    // todo 废弃了 用后端回写了
-    window.onload = function () {
-        /* alert(1)
-
-         var searchParams = new URLSearchParams(window.location.search)
-         var obj ={}
-
-         for(var [key, value] of searchParams.entries()) {
-             obj[key] = value
-         }
-         console.log("我读到了url 我要开始回写搜索框了",obj)
-
-         //todo 判断是否有
-         if (obj.foodCategory1) {
-             $("#foodCategory1").html(obj.foodCategory1)
-             $("#foodCategoryHelper").html(  "->")
-
-         }
-
-         if (obj.foodCategory2) {
-             $("#foodCategory2").html(obj.foodCategory2)
-             $("#foodCategoryHelper").html(  "->")
-
-
-         }*/
-
-
-    }
 
     function generateUrlWithParams(url, params) {
         var urlParams = [];
@@ -382,103 +332,4 @@
     });
 
 
-    (function () {
-
-        var $subblock = $(".subpage"),
-                $head = $subblock.find('h2'),
-                $ul = $("#proinfo"),
-                $lis = $ul.find("li"),
-                inter = false;
-
-        $head.click(function (e) {
-            e.stopPropagation();
-            if (!inter) {
-                $ul.show();
-            } else {
-                console.log(146);
-                $ul.hide();
-            }
-            inter = !inter;
-        });
-
-        var $subblock2 = $(".subpage2"),
-                $head2 = $subblock2.find('h2'),
-                $ul2 = $("#proinfo2"),
-                $lis2 = $ul2.find("li"),
-                inter2 = false;
-
-        $head2.click(function (e) {
-            e.stopPropagation();
-            if (!inter2) {
-                $ul2.show();
-            } else {
-                $ul2.hide();
-            }
-            inter2 = !inter2;
-        });
-
-        $ul.click(function (event) {
-            event.stopPropagation();
-        });
-
-        $(document).click(function () {
-            $ul.hide();
-            inter = false;
-            $ul2.hide();
-            inter2 = false;
-
-            console.log("边缘被触发了 两个下拉都false")
-        });
-
-        $("em").click(function () {
-            console.log("选择了新的分类");
-            let $this = $(this)
-            $ul.hide();
-            inter = !inter;
-            $("#foodCategory1").html($this.parent().parent().prev()[0].innerText)
-            $("#foodCategoryHelper").html("->")
-
-            $("#foodCategory2").html($this[0].innerText)
-        });
-
-        $("#tiAll").click(function () {
-            console.log("tiALL");
-            let $this = $(this)
-            $ul.hide();
-            inter = !inter;
-            $("#foodCategory1").html("")
-            $("#foodCategoryHelper").html("ALL")
-
-            $("#foodCategory2").html("")
-        });
-
-
-        $("#proinfo2 > li").click(function () {
-            //console.log("点击ul 隐藏ul");
-            //console.log($(this)[0].innerText);
-            console.log();
-            let $this = $(this)
-            console.log($this[0].innerText);
-            $ul2.hide();
-            inter2 = !inter2;
-            $("#currentOrder").html($this[0].innerText)
-        });
-
-
-        $lis.hover(function () {
-            if (!$(this).hasClass('nochild')) {
-                $(this).addClass("prosahover");
-                $(this).find(".prosmore").removeClass('hide');
-            }
-        }, function () {
-            if (!$(this).hasClass('nochild')) {
-                if ($(this).hasClass("prosahover")) {
-                    $(this).removeClass("prosahover");
-                }
-                $(this).find(".prosmore").addClass('hide');
-            }
-        });
-
-    })();
-
-
+</script>
