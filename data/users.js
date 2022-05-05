@@ -89,7 +89,8 @@ const exportedMethods = {
 
   },
 
-  async createMerchant(username, password,restaurantName) {
+  async createMerchant(username, password,restaurantName,file) {
+    //todo 这里需要加字段和检查
 
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
@@ -100,17 +101,20 @@ const exportedMethods = {
     if (typeof password !== 'string') throw 'Password must be a string';
     if (password.trim() == '') throw 'Password with spaces are not valid';
     if (password.includes(" ")) throw 'Password with spaces are not valid';
-    if (password.length < 6) throw 'Password must longer than 6 characters';
+    if (password.length < 4) throw 'Password must longer than 6 characters';
 
     if (!restaurantName) throw 'You must provide a restaurant name';
     if (typeof restaurantName !== 'string') throw 'Restaurant name must be a string';
     if (restaurantName.trim() == '') throw 'User name with empty spaces are not valid';
-    
+
+
+    if (!file) throw 'must upload a merchant image';
+
 
 
     const userCollection = await users();
 
-    const hashedPassword = await bcrypt.hash(username, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
 
 
@@ -123,7 +127,8 @@ const exportedMethods = {
         username: username,
         password: hashedPassword,
         type: "merchant",
-        restaurantName:restaurantName
+        restaurantName:restaurantName,
+        filename:"/public/uploads/"+file.filename
       };
 
       const insertInfo = await userCollection.insertOne(newUserInfo);

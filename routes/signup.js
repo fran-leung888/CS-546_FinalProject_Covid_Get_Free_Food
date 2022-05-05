@@ -101,11 +101,10 @@ router.post("/merchant", async (req, res) => {
     //todo 校验
 
 
-    const hashedPassword = await bcrypt.hash(req.body["password"], saltRounds);
 
 
     try {
-        const userId = await userData.createMerchant(req.body["username"],hashedPassword,req.body["restaurantName"]);
+        const userId = await userData.createMerchant(req.body["username"],req.body["password"],req.body["restaurantName"],req.file);
         //通过session传递 跳转后要显示的msg
         req.session.loginMsg="merchant created! Now, log in."
         res.redirect("/login")

@@ -10,7 +10,11 @@
                         <h3 class="text-primary">Create Merchant Account</h3>
                     </div>
                     <div class="p-4" style="margin-bottom: 5%">
-                        <form method="post" action="/signup/merchant">
+                        <form method="post" action="/signup/merchant" enctype="multipart/form-data">
+
+
+                            <img width="100%"  id="viewImg" >
+
                             <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary"><i
                                             class="bi bi-person-plus-fill text-white"></i></span>
@@ -26,6 +30,15 @@
                                             class="bi bi-key-fill text-white"></i></span>
                                 <input type="password" name="password" class="form-control" placeholder="password">
                             </div>
+
+                            <div class="input-group mb-3">
+                                    <span class="input-group-text bg-primary"><i
+                                            class="bi bi-key-fill text-white"></i></span>
+                                <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
+                            </div>
+
+
+
                             <div class="d-grid col-12 mx-auto">
                                 <button class="btn btn-primary" type="submit"><span></span> Sign up</button>
                             </div>
@@ -39,3 +52,35 @@
     <!--        end form1-->
 
 
+ <script type="text/javascript">
+
+
+    function uploadImg(fileDom) {
+        //取到file文件的本地路径，就是你电脑上的存储路径
+        console.log(fileDom.value);
+
+        // 获取图片数据对象
+        var file = fileDom.files[0];
+
+        // 获取图片名字
+        console.log(file.name);
+
+        // 获取图片文件大小,单位为byte
+        console.log(file.size);
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        //确保文件成功获取，base64数据量比较大
+        reader.onload = function (event) {
+            console.log(96);
+            var e = event || window.event
+            var img = document.getElementById("viewImg");
+            img.src = e.target.result;
+            let user = sessionStorage.getItem('user')
+
+
+            //或者 img.src = this.result; 因为e.target == this
+        }
+    }
+</script>
