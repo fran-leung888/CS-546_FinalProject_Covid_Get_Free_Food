@@ -31,11 +31,15 @@ const exportedMethods = {
         return await foodCollection1.find({}).toArray();
     },
 
-    async getFoodByFilter(filterObj) {
+    async getFoodByFilter(filterObj,likesOrder) {
         const foodCollection1 = await foodCollection();
 
-        //一二级 日期 餐厅 关键词 有库存
+        if(likesOrder===1){
+            return await foodCollection1.find(filterObj).sort({likes: -1}).toArray();
+
+        }
         return await foodCollection1.find(filterObj).toArray();
+
     },
 
     async updateFood(_id, updateObj) {

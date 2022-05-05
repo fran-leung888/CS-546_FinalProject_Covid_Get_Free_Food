@@ -1,5 +1,6 @@
 const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.user;
+const foods = mongoCollections.food;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
 const bcrypt = require("bcrypt");
@@ -222,6 +223,7 @@ const exportedMethods = {
 
 
     const userCollection = await users();
+    const foodCollection = await foods();
 
 
     if(await this.checkLiked(foodId,userId)){
@@ -229,6 +231,7 @@ const exportedMethods = {
           {_id: ObjectId(userId)},
           {$pull: {likedFood: foodId}}
       );
+      await foodCollection.updateOne({_id:ObjectId(foodId)},{$inc:{likes:-1}})
       return false
     }
 
@@ -241,6 +244,8 @@ const exportedMethods = {
         {_id: ObjectId(userId)},
         {$push: {likedFood: foodId}}
     );
+    await foodCollection.updateOne({_id:ObjectId(foodId)},{$inc:{likes:1}})
+
 
     console.log("updatedInfo",updatedInfo);
 

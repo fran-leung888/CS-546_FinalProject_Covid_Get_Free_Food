@@ -15,13 +15,27 @@ router.get('/list', async (req, res) => {
     if (JSON.stringify(req.query ) === '{}') {
         console.log("没有参数")
         const itemsArray = await foodData.getAllFood();
-        res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
+        res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray});
 
 
     }else{
         console.log("有参数")
-        const itemsArray = await foodData.getFoodByFilter(req.query);
-        req.query.foodCategoryHelper="»"
+
+        //filterObj 只包含foodCategory1 foodCategory2
+        let filterObj={}
+        let likesOrder=0
+        if(req.query.foodCategory1){
+            filterObj["foodCategory1"]=req.query.foodCategory1
+        }
+        if(req.query.foodCategory2){
+            filterObj["foodCategory2"]=req.query.foodCategory2
+        }
+        if(req.query.likesOrder){
+            likesOrder=1
+        }
+
+        const itemsArray = await foodData.getFoodByFilter(filterObj,likesOrder);
+        console.log(req.query);
         res.render("posts/foodList", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:req.query});
 
     }

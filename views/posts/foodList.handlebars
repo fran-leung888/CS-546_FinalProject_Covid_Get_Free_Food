@@ -11,7 +11,7 @@
                     <li class="nav-item dropdown" style="width: 250px">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <span id="foodCategory1">{{searchParams.foodCategory1}}</span>
-                            <span id="foodCategoryHelper">{{searchParams.foodCategoryHelper}}</span>
+                            <span id="foodCategoryHelper">&raquo;</span>
                             <span id="foodCategory2">{{searchParams.foodCategory2}}</span>
                         </a>
 
@@ -51,7 +51,7 @@
                     </li>
 
                     <li class="nav-item dropdown" style="width: 250px">
-                        <a class="nav-link dropdown-toggle" id="currentOrder" value=0 data-bs-toggle="dropdown"> in default order </a>
+                        <a class="nav-link dropdown-toggle" id="likesOrder"  data-bs-toggle="dropdown">{{#if searchParams.likesOrder}}{{searchParams.likesOrder}}{{else}}in default order{{/if}}</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item level1em" value=1>more likes first</a></li>
                             <li><a class="dropdown-item level1em" value=0>in default order</a></li>
@@ -201,15 +201,13 @@
 
 
         $("#foodCategory1").html($($this.parent().parent().prev()[0]).find("span")[0].innerText)
-        $("#foodCategoryHelper").html( "&raquo;")
         $("#foodCategory2").html($this[0].innerText)
     });
 
     $(".level1em").click(function () {
         let $this = $(this)
 
-        $("#currentOrder").html($this[0].innerText)
-        $("#currentOrder").attr("value",$this.attr("value"))
+        $("#likesOrder").html($this[0].innerText)
 
     });
 
@@ -223,7 +221,6 @@
 
     $("#tiAll").click(function () {
         $("#foodCategory1").html("")
-        $("#foodCategoryHelper").html("ALL")
 
         $("#foodCategory2").html("")
     });
@@ -313,14 +310,14 @@
         let key = $("#foodSearchInput").val()
         let foodCategory1 = $("#foodCategory1").html()
         let foodCategory2 = $("#foodCategory2").html()
-        let currentOrder = $("#currentOrder").attr("value")
-        let likesOrder=""
+        let likesOrder = $("#likesOrder").html()
         console.log(foodCategory1);
         console.log(foodCategory2);
-        console.log(currentOrder);
-        if (currentOrder === "1") {
-            likesOrder=1
+        console.log(likesOrder);
+        if (likesOrder === "in default order") {
+            likesOrder=''
         }
+
 
         let url = window.location.origin + window.location.pathname;
         //let parentUrl = window.location.href.split("/").slice(0, -1).join("/");
