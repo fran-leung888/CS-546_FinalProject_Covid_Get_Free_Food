@@ -2,6 +2,8 @@ const mongoCollections = require('../config/mongoCollections');
 const users = mongoCollections.user;
 const uuid = require('uuid/v4');
 const {ObjectId} = require('mongodb');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 function padTo2Digits(num) {
   return num.toString().padStart(2, '0');
@@ -24,8 +26,7 @@ function formatDate(date) {
 }
 
 
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
+
 
 
 const exportedMethods = {
@@ -43,6 +44,17 @@ const exportedMethods = {
   },
 
   async createUser(username, password) {
+
+    if (!username) throw 'You must provide a user name';
+    if (typeof username !== 'string') throw 'User name must be a string';
+    if (username.trim() == '') throw 'User name with empty spaces are not valid';
+    if (username.length < 4) throw 'User name must longer than 4 characters'
+
+    if (!password) throw 'You must provide a password';
+    if (typeof password !== 'string') throw 'Password must be a string';
+    if (password.trim() == '') throw 'Password with spaces are not valid';
+    if (password.includes(" ")) throw 'Password with spaces are not valid';
+    if (password.length < 6) throw 'Password must longer than 6 characters';
 
 
     const userCollection = await users();
@@ -78,6 +90,22 @@ const exportedMethods = {
   },
 
   async createMerchant(username, password,restaurantName) {
+
+    if (!username) throw 'You must provide a user name';
+    if (typeof username !== 'string') throw 'User name must be a string';
+    if (username.trim() == '') throw 'User name with empty spaces are not valid';
+    if (username.length < 4) throw 'User name must longer than 4 characters'
+
+    if (!password) throw 'You must provide a password';
+    if (typeof password !== 'string') throw 'Password must be a string';
+    if (password.trim() == '') throw 'Password with spaces are not valid';
+    if (password.includes(" ")) throw 'Password with spaces are not valid';
+    if (password.length < 6) throw 'Password must longer than 6 characters';
+
+    if (!restaurantName) throw 'You must provide a restaurant name';
+    if (typeof restaurantName !== 'string') throw 'Restaurant name must be a string';
+    if (restaurantName.trim() == '') throw 'User name with empty spaces are not valid';
+    
 
 
     const userCollection = await users();
@@ -342,11 +370,20 @@ const exportedMethods = {
 
   async checkUser(username, password) {
 
+    if (!username) return {authenticated: false};
+    if (typeof username !== 'string') return {authenticated: false};
+    if (username.trim() == '') return {authenticated: false};
+    if (username.includes(" ")) return {userInserted: false};
+    if (username.length < 4) return {authenticated: false};
+    
+    if (!password) return {authenticated: false};
+    if (typeof password !== 'string') return {authenticated: false};
+    if (password.trim() == '') return {authenticated: false};
+    if (password.includes(" ")) return {userInserted: false};
+    if (password.length < 6) return {authenticated: false};
+
   
     const userCollection = await users();
-
-
-
 
     const user = await userCollection.findOne({username: username});
 
@@ -376,9 +413,9 @@ const exportedMethods = {
   },
 
   async getUserById(id) {
+    if (!id) throw 'You must provide an id to search for';
+    if(typeof id =="string") throw 'ID must be a string'
 
-    // if (!id) throw 'You must provide an id to search for';
-    // if (typeof id != "string") throw 'The type of id should be string';
     id = ObjectId(id);
     const userCollection = await users();
     const user = await userCollection.findOne({ _id: id });
@@ -391,8 +428,6 @@ const exportedMethods = {
 
 
 };
-
-
 
 
 module.exports = exportedMethods;
