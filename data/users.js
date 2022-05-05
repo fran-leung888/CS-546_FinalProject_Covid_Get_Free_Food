@@ -126,7 +126,9 @@ const exportedMethods = {
 
     if (!phone) throw 'You must provide a phone';
     if (typeof phone !== 'string') throw 'phone must be a string';
-    if (description.trim() === '') throw 'phone all empty spaces are not valid';
+    if (phone.trim() === '') throw 'phone all empty spaces are not valid';
+    if (phone.includes(" ")) throw 'phone with spaces are not valid';
+
 
     if (!phone.match(/^\d{10}$/g)) {
       throw 'check phone format';
