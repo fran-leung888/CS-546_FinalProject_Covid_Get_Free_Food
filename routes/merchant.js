@@ -4,6 +4,7 @@ const data = require("../data");
 const {ObjectId} = require("mongodb");
 const router = express.Router();
 const foodData = data.food;
+const userData = data.users;
 const merchantData = data.merchant;
 
 
@@ -24,6 +25,47 @@ router.get('/list', async (req, res) => {
     //res.send("posts/foodList");
 });
 
+
+
+
+
+
+
+
+router.get('/detail/:id', async (req, res) => {
+
+
+    //todo 先验证是不是真merchant
+    let merchant
+    try {
+        merchant = await userData.getUserById(req.params.id);
+
+    }catch (e) {
+        return res.redirect("/merchant/list")
+
+    }
+    if(!merchant||merchant.type!=="merchant"){
+        return res.redirect("/merchant/list")
+    }
+
+
+
+
+
+    const itemsArray = await foodData.getFoodByMerchant(req.params.id);
+
+    //todo 显示merchant详情
+    // res.render("posts/merchantDetail", { merchant:merchant,itemsArray: itemsArray});
+
+    return res.render("posts/merchantDetail",{restaurantName:merchant.restaurantName,filename:merchant.filename,itemsArray:itemsArray});
+
+
+
+
+    //res.send("posts/foodList");
+});
+
+
 router.get('/myfood', async (req, res) => {
     //res.render("posts/foodList");
 
@@ -34,7 +76,7 @@ router.get('/myfood', async (req, res) => {
     }
 
     if (req.session.user.type!=="merchant") {
-        return res.send("你不是merchant");
+        return res.redirect("/food/list");
     }
 
 

@@ -421,7 +421,10 @@ const exportedMethods = {
     if (!id) throw 'You must provide an id to search for';
     if(typeof id !=="string") throw 'ID must be a string'
 
-    id = ObjectId(id);
+
+      id = ObjectId(id);
+
+
     const userCollection = await users();
     const user = await userCollection.findOne({ _id: id });
     if (user === null) throw 'No user with that id';
