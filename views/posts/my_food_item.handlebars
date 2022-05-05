@@ -20,7 +20,7 @@
                     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="javascript:window.location.href='/food/detail/{{_id}}'">View</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="javascript:window.location.href='/food/edit/{{_id}}'">Edit</button>
                 </div>
-                <small class="text-muted">9 mins</small>
+                <small class="text-muted">{{#if likes}}{{likes}}{{else}}0{{/if}} likes</small>
             </div>
         </div>
     </div>
