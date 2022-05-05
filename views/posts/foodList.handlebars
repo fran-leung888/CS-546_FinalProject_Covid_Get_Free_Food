@@ -51,11 +51,10 @@
                     </li>
 
                     <li class="nav-item dropdown" style="width: 250px">
-                        <a class="nav-link dropdown-toggle" id="currentOrder" data-bs-toggle="dropdown"> order by </a>
+                        <a class="nav-link dropdown-toggle" id="currentOrder" value=0 data-bs-toggle="dropdown"> in default order </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item level1em"> more likes first </a></li>
-                            <li><a class="dropdown-item level1em"> higher price first </a></li>
-                            <li><a class="dropdown-item level1em"> more stock first </a></li>
+                            <li><a class="dropdown-item level1em" value=1>more likes first</a></li>
+                            <li><a class="dropdown-item level1em" value=0>in default order</a></li>
                         </ul>
                     </li>
 
@@ -209,8 +208,9 @@
     $(".level1em").click(function () {
         let $this = $(this)
 
-
         $("#currentOrder").html($this[0].innerText)
+        $("#currentOrder").attr("value",$this.attr("value"))
+
     });
 
     $(".level1").each(function () {
@@ -293,6 +293,7 @@
 
 
     function generateUrlWithParams(url, params) {
+        console.log("params",params);
         var urlParams = [];
         let flag = false;
         for (var key in params) {
@@ -309,20 +310,24 @@
 
     $('#foodSearchButton').click(function () {
 
-        console.log(1);
         let key = $("#foodSearchInput").val()
         let foodCategory1 = $("#foodCategory1").html()
         let foodCategory2 = $("#foodCategory2").html()
+        let currentOrder = $("#currentOrder").attr("value")
+        let likesOrder=""
         console.log(foodCategory1);
-
         console.log(foodCategory2);
+        console.log(currentOrder);
+        if (currentOrder === "1") {
+            likesOrder=1
+        }
 
         let url = window.location.origin + window.location.pathname;
         //let parentUrl = window.location.href.split("/").slice(0, -1).join("/");
 
         //window.location.href = window.location.host + "/foodList/?key=" + key
 
-        url = generateUrlWithParams(url, {foodCategory1: foodCategory1, foodCategory2: foodCategory2})
+        url = generateUrlWithParams(url, {foodCategory1: foodCategory1, foodCategory2: foodCategory2,likesOrder:likesOrder})
         url = encodeURI(url)
 
         console.log(url);
