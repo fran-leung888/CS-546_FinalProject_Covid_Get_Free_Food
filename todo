@@ -3,6 +3,8 @@
 
 
 所有post会出错的地方 catch里redirect到这里 并把e存在session里 现在有三个地方做到了 登陆 注册user 注册merchant
+可以把所有错误统一为一个session名 req.session.错误
 
 
 ObjectId()需要try router外面还有没有外层了？
+

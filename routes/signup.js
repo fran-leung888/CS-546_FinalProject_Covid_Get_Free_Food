@@ -98,13 +98,13 @@ router.post("/user", async (req, res) => {
 
 router.post("/merchant", async (req, res) => {
 
-    //todo 校验
 
 
 
 
     try {
-        const userId = await userData.createMerchant(req.body["username"],req.body["password"],req.body["restaurantName"],req.file);
+        const userId = await userData.createMerchant(req.body["username"],req.body["password"],req.body["restaurantName"]
+            ,req.file,req.body["address"],req.body["description"],req.body["phone"]);
         //通过session传递 跳转后要显示的msg
         req.session.loginMsg="merchant created! Now, log in."
         res.redirect("/login")

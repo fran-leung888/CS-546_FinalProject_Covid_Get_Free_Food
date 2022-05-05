@@ -90,26 +90,48 @@ const exportedMethods = {
 
   },
 
-  async createMerchant(username, password,restaurantName,file) {
-    //todo 这里需要加字段和检查
+  async createMerchant(username, password,restaurantName,file,address,description,phone) {
 
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
-    if (username.trim() == '') throw 'User name with empty spaces are not valid';
+    if (username.trim() === '') throw 'User name with empty spaces are not valid';
+    if (username.includes(" ")) throw 'username with spaces are not valid';
     if (username.length < 4) throw 'User name must longer than 4 characters'
 
     if (!password) throw 'You must provide a password';
     if (typeof password !== 'string') throw 'Password must be a string';
-    if (password.trim() == '') throw 'Password with spaces are not valid';
+    if (password.trim() === '') throw 'Password with spaces are not valid';
     if (password.includes(" ")) throw 'Password with spaces are not valid';
     if (password.length < 4) throw 'Password must longer than 6 characters';
 
     if (!restaurantName) throw 'You must provide a restaurant name';
     if (typeof restaurantName !== 'string') throw 'Restaurant name must be a string';
-    if (restaurantName.trim() == '') throw 'User name with empty spaces are not valid';
+    if (restaurantName.trim() === '') throw 'User name with empty spaces are not valid';
 
 
     if (!file) throw 'must upload a merchant image';
+
+
+    if (!address) throw 'You must provide a address';
+    if (typeof address !== 'string') throw 'address must be a string';
+    if (address.trim() === '') throw 'address all empty spaces are not valid';
+    if (address.length < 4) throw 'address must longer than 4 characters'
+
+
+    if (!description) throw 'You must provide a description';
+    if (typeof description !== 'string') throw 'description must be a string';
+    if (description.trim() === '') throw 'description all empty spaces are not valid';
+    if (description.length < 4) throw 'description must longer than 4 characters'
+
+
+    if (!phone) throw 'You must provide a phone';
+    if (typeof phone !== 'string') throw 'phone must be a string';
+    if (description.trim() === '') throw 'phone all empty spaces are not valid';
+
+    if (!phone.match(/^\d{10}$/g)) {
+      throw 'check phone format';
+    }
+
 
 
 
@@ -128,7 +150,10 @@ const exportedMethods = {
         username: username,
         password: hashedPassword,
         type: "merchant",
+        address:address,
+        description:description,
         restaurantName:restaurantName,
+        phone:phone,
         filename:"/public/uploads/"+file.filename
       };
 
