@@ -4,7 +4,7 @@
 
 
 
-<div class="container">
+<div class="container" style="width: 20%;margin-left: 60%">
 
     <!-- ============= COMPONENT ============== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -17,7 +17,7 @@
                     <li class="nav-item dropdown" style="width: 250px">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <span id="foodCategory1">{{searchParams.foodCategory1}}</span>
-                            <span id="foodCategoryHelper">{{searchParams.foodCategoryHelper}}</span>
+                            <span id="foodCategoryHelper">&raquo;</span>
                             <span id="foodCategory2">{{searchParams.foodCategory2}}</span>
                         </a>
 
@@ -50,20 +50,16 @@
                                     <li><a class="dropdown-item level2em">Liquor</a></li>
                                 </ul>
                             </li>
-                            <li><a class="dropdown-item">ALL</a></li>
 
 
                         </ul>
                     </li>
 
-                    <li class="nav-item dropdown" style="width: 250px">
-                        <a class="nav-link dropdown-toggle" id="currentOrder" data-bs-toggle="dropdown"> order by </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item level1em"> more likes first </a></li>
-                            <li><a class="dropdown-item level1em"> higher price first </a></li>
-                            <li><a class="dropdown-item level1em"> more stock first </a></li>
-                        </ul>
-                    </li>
+
+
+
+
+
 
 
 
@@ -91,7 +87,6 @@
 <!--    <div style="width: 800px;height: 500px;">1</div>-->
 
 <!--</div>-->
-<div class="bootstrap-iso" >
 
     <section class="product-details spad" style="padding-top: 0">
         <div class="container">
@@ -115,8 +110,8 @@
 
 
                         <h3 style="display: inline">Food name: </h3> <input type="text" name="foodName" />
-                         <input id="category1" style="display:none" type="text" name="foodCategory1" />
-                        <input id="category2" style="display:none " type="text" name="foodCategory2" />
+                         <input id="category1"  type="text" name="foodCategory1" />
+                        <input id="category2"  type="text" name="foodCategory2" />
 
 
                         <div class="product__details__price">$<input type="text" name="foodPrice" /></div>
@@ -153,8 +148,84 @@
     </section>
 
 
-</div>
+<style type="text/css">
 
+
+
+    .form-switch.form-switch-md {
+        padding-left: 4.5em;
+        height: 2em;
+    }
+
+    .form-switch.form-switch-md .form-check-input {
+        margin-left: -4.5em;
+        height: 2em;
+        width: 4em;
+    }
+
+    .form-switch.form-switch-md .form-check-label {
+        padding-top: 0.5em;
+    }
+
+    .form-switch.form-switch-lg {
+        padding-left: 8.5em;
+        height: 4.5em;
+    }
+
+    .form-switch.form-switch-lg .form-check-input {
+        margin-left: -8.5em;
+        height: 4em;
+        width: 8em;
+    }
+
+    .form-switch.form-switch-lg .form-check-label {
+        padding-top: 1.5em;
+    }
+
+    /* ============ desktop view ============ */
+    @media all and (min-width: 992px) {
+
+        .dropdown-menu li {
+            position: relative;
+        }
+
+        .dropdown-menu .submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: -7px;
+        }
+
+        .dropdown-menu .submenu-left {
+            right: 100%;
+            left: auto;
+        }
+
+        .dropdown-menu > li:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdown-menu > li:hover > .submenu {
+            display: block;
+        }
+    }
+
+    /* ============ desktop view .end// ============ */
+
+    /* ============ small devices ============ */
+    @media (max-width: 991px) {
+
+        .dropdown-menu .dropdown-menu {
+            margin-left: 0.7rem;
+            margin-right: 0.7rem;
+            margin-bottom: .5rem;
+        }
+
+    }
+
+    /* ============ small devices .end// ============ */
+
+</style>
 
 
 
@@ -216,63 +287,95 @@
 
 <script type="text/javascript">
 
-    (function() {
 
-        var $subblock = $(".subpage"),
-                $head = $subblock.find('h2'),
-                $ul = $("#proinfo"),
-                $lis = $ul.find("li"),
-                inter = false;
 
-        $head.click(function(e) {
+    $(".level2em").click(function () {
+
+        console.log(11111);
+        let $this = $(this)
+
+
+        $("#foodCategory1").html($($this.parent().parent().prev()[0]).find("span")[0].innerText)
+        $("#foodCategory2").html($this[0].innerText)
+
+        //add to input of form
+        $("#category1").val($($this.parent().parent().prev()[0]).find("span")[0].innerText)
+        $("#category2").val($this[0].innerText)
+    });
+
+    $(".level1em").click(function () {
+        let $this = $(this)
+
+        $("#likesOrder").html($this[0].innerText)
+
+    });
+
+    $(".level1").each(function () {
+
+        $(this).click(function(e){
             e.stopPropagation();
-            if (!inter) {
-                $ul.show();
-            } else {
-                $ul.hide();
-            }
-            inter = !inter;
         });
-
-        $ul.click(function(event) {
-            event.stopPropagation();
-        });
-
-        $(document).click(function() {
-            $ul.hide();
-            inter = !inter;
-        });
-        $("em").click(function () {
-            let $this = $(this)
-            $ul.hide();
-            inter = !inter;
-
-            $("#foodCategory1").html($this.parent().parent().prev()[0].innerText)
-            $("#foodCategoryHelper").html(  "->")
-            $("#foodCategory2").html($this[0].innerText)
-
-            //add to input of form
-            $("#category1").val($this.parent().parent().prev()[0].innerText)
-            $("#category2").val($this[0].innerText)
+    })
 
 
-        });
-
-        $lis.hover(function() {
-            if (!$(this).hasClass('nochild')) {
-                $(this).addClass("prosahover");
-                $(this).find(".prosmore").removeClass('hide');
-            }
-        }, function() {
-            if (!$(this).hasClass('nochild')) {
-                if ($(this).hasClass("prosahover")) {
-                    $(this).removeClass("prosahover");
-                }
-                $(this).find(".prosmore").addClass('hide');
-            }
-        });
-
-    })();
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+
+
+        /////// Prevent closing from click inside dropdown
+
+
+        document.querySelectorAll('.level2').forEach(function (element) {
+            element.addEventListener('click', function (e) {
+                $(".dropdown-menu").removeClass("show");
+                $(".dropdown-toggle").removeClass("show");
+
+
+                e.stopPropagation();
+            });
+        })
+
+
+
+
+
+
+
+        // make it as accordion for smaller screens
+        if (window.innerWidth < 992) {
+
+            // close all inner dropdowns when parent is closed
+            document.querySelectorAll('.navbar .dropdown').forEach(function (everydropdown) {
+                everydropdown.addEventListener('hidden.bs.dropdown', function () {
+                    // after dropdown is hidden, then find all submenus
+                    this.querySelectorAll('.submenu').forEach(function (everysubmenu) {
+                        // hide every submenu as well
+                        everysubmenu.style.display = 'none';
+                    });
+                })
+            });
+
+            document.querySelectorAll('.dropdown-menu a').forEach(function (element) {
+                element.addEventListener('click', function (e) {
+
+                    let nextEl = this.nextElementSibling;
+                    if (nextEl && nextEl.classList.contains('submenu')) {
+                        // prevent opening link if link needs to open dropdown
+                        e.preventDefault();
+                        console.log(nextEl);
+                        if (nextEl.style.display == 'block') {
+                            nextEl.style.display = 'none';
+                        } else {
+                            nextEl.style.display = 'block';
+                        }
+
+                    }
+                });
+            })
+        }
+        // end if innerWidth
+
+    });
+    // DOMContentLoaded  end
 </script>
