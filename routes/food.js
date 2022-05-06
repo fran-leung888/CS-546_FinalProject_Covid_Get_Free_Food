@@ -128,6 +128,14 @@ router.get('/detail/:id', async (req, res) => {
             }
         }
 
+        if(req.session.msg){
+            let msg=req.session.msg
+            //通过session传递消息 显示一次后就销毁
+            req.session.msg=null;
+            return res.render("posts/foodDetail",{msg:msg,foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
+                ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment,liked:food.liked});
+        }
+
 
 
         res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
@@ -180,18 +188,24 @@ router.get('/deleteComment/:id', async (req, res) => {
 
 router.post("/comment/:id", async (req, res) => {
 
-    if (!req.session.user) {
-        return res.redirect("/login");
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
+
+        }
+
+
+
+        await foodData.createComment(req.params.id,req.session.user.id,req.session.user.username,req.body.commentContent);
+
+
+        res.redirect("/food/Detail/"+req.params.id.toString());
+    }catch (e) {
+        req.session.msg=e.toString()
+        res.redirect("/food/Detail/"+req.params.id.toString());
 
     }
 
-
-
-    //todo 这里没有返回值 应该没事
-    await foodData.createComment(req.params.id,req.session.user.id,req.session.user.username,req.body.commentContent);
-
-
-    res.redirect("/food/Detail/"+req.params.id.toString());
 
 
 

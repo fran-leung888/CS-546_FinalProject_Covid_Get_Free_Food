@@ -118,6 +118,10 @@ const exportedMethods = {
 
     async createComment(foodId, userId, userName, commentContent) {
 
+        if (!commentContent) throw 'You must provide a commentContent';
+        if (typeof commentContent !== 'string') throw 'commentContent must be a string';
+        if (commentContent.trim() === '') throw 'commentContent all empty spaces are not valid';
+        if (commentContent.length < 4) throw 'commentContent must longer than 4 characters'
 
         let time = formatDate(new Date());
 
