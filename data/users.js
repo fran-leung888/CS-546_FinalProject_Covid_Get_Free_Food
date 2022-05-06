@@ -90,6 +90,89 @@ const exportedMethods = {
 
   },
 
+  async createMerchantSeed(username, password,restaurantName,file,address,description,phone) {
+
+    if (!username) throw 'You must provide a user name';
+    if (typeof username !== 'string') throw 'User name must be a string';
+    if (username.trim() === '') throw 'User name with empty spaces are not valid';
+    if (username.includes(" ")) throw 'username with spaces are not valid';
+    if (username.length < 4) throw 'User name must longer than 4 characters'
+
+    if (!password) throw 'You must provide a password';
+    if (typeof password !== 'string') throw 'Password must be a string';
+    if (password.trim() === '') throw 'Password with spaces are not valid';
+    if (password.includes(" ")) throw 'Password with spaces are not valid';
+    if (password.length < 4) throw 'Password must longer than 6 characters';
+
+    if (!restaurantName) throw 'You must provide a restaurant name';
+    if (typeof restaurantName !== 'string') throw 'Restaurant name must be a string';
+    if (restaurantName.trim() === '') throw 'User name with empty spaces are not valid';
+
+
+
+
+    if (!address) throw 'You must provide a address';
+    if (typeof address !== 'string') throw 'address must be a string';
+    if (address.trim() === '') throw 'address all empty spaces are not valid';
+    if (address.length < 4) throw 'address must longer than 4 characters'
+
+
+    if (!description) throw 'You must provide a description';
+    if (typeof description !== 'string') throw 'description must be a string';
+    if (description.trim() === '') throw 'description all empty spaces are not valid';
+    if (description.length < 4) throw 'description must longer than 4 characters'
+
+
+    if (!phone) throw 'You must provide a phone';
+    if (typeof phone !== 'string') throw 'phone must be a string';
+    if (phone.trim() === '') throw 'phone all empty spaces are not valid';
+    if (phone.includes(" ")) throw 'phone with spaces are not valid';
+
+
+    if (!phone.match(/^\d{10}$/g)) {
+      throw 'check phone format';
+    }
+
+
+
+
+    const userCollection = await users();
+
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+
+
+    if (await this.findUserByUsername(username)!== null) {
+      throw 'you can not use this account';
+
+    }else{
+
+      const newUserInfo = {
+        username: username,
+        password: hashedPassword,
+        type: "merchant",
+        address:address,
+        description:description,
+        restaurantName:restaurantName,
+        phone:phone,
+        filename:"/public/uploads/"+file
+      };
+
+      const insertInfo = await userCollection.insertOne(newUserInfo);
+      if (insertInfo.insertedCount === 0) throw 'Could not add user';
+
+      let newId = insertInfo.insertedId;
+
+      const user = await userCollection.findOne({ _id: newId });
+      user._id = user._id.toString();
+
+      return user._id;
+    }
+
+
+
+  },
+
   async createMerchant(username, password,restaurantName,file,address,description,phone) {
 
     if (!username) throw 'You must provide a user name';
