@@ -59,7 +59,6 @@ router.get('/merchant', async (req, res) => {
 
 router.post("/user", async (req, res) => {
 
-    //todo 校验
 
 
 
