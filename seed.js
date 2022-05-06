@@ -1,6 +1,7 @@
 const connection = require('./config/mongoConnection')
 
 const users = require('./data/users')
+const foods = require('./data/foods')
 
 
 /* Populate the database with samples */
@@ -29,6 +30,9 @@ async function main() {
         ,"merchant4.jpg","806 Washington St A, Hoboken, NJ 07030","Definitely a good Italian spot to go to. All of it was on point, the staff was extremely friendly, efficient and fast. The store has a wide variety of items, very fresh food and well stocked.",
         "2017924944")
         .catch((err) => console.log(err))
+
+
+   await foods.addFood()
 
        await connection.closeConnection()
 }

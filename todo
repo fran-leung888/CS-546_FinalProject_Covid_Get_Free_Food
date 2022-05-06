@@ -7,3 +7,5 @@
 
 
 ObjectId()需要try router外面还有没有外层了？
+
+所有post和get都应该被try catch包裹着

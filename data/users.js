@@ -177,19 +177,19 @@ const exportedMethods = {
 
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
-    if (username.trim() === '') throw 'User name with empty spaces are not valid';
+    if (username.trim() === '') throw 'User name all empty spaces are not valid';
     if (username.includes(" ")) throw 'username with spaces are not valid';
     if (username.length < 4) throw 'User name must longer than 4 characters'
 
     if (!password) throw 'You must provide a password';
     if (typeof password !== 'string') throw 'Password must be a string';
-    if (password.trim() === '') throw 'Password with spaces are not valid';
+    if (password.trim() === '') throw 'Password all spaces are not valid';
     if (password.includes(" ")) throw 'Password with spaces are not valid';
     if (password.length < 4) throw 'Password must longer than 6 characters';
 
     if (!restaurantName) throw 'You must provide a restaurant name';
     if (typeof restaurantName !== 'string') throw 'Restaurant name must be a string';
-    if (restaurantName.trim() === '') throw 'User name with empty spaces are not valid';
+    if (restaurantName.trim() === '') throw 'User name all empty spaces are not valid';
 
 
     if (!file) throw 'must upload a merchant image';

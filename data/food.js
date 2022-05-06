@@ -121,7 +121,25 @@ const exportedMethods = {
 
     async addFood(foodName, foodPrice, foodDes, filename, foodCategory1, foodCategory2, merchantId, stock) {
 
-        //todo 数据验证
+        if (!foodName) throw 'You must provide a foodName';
+        if (typeof foodName !== 'string') throw 'foodName must be a string';
+        if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
+        if (foodName.length < 4) throw 'foodName must longer than 4 characters'
+
+        //todo foodPrice
+
+        if (!foodDes) throw 'You must provide a foodDes';
+        if (typeof foodDes !== 'string') throw 'foodDes must be a string';
+        if (foodDes.trim() === '') throw 'foodDes all empty spaces are not valid';
+        if (foodDes.length < 4) throw 'foodDes must longer than 4 characters'
+
+        if (!filename) throw 'must upload a food image';
+
+        if (!foodCategory1) throw 'You must provide a foodCategory1';
+        if (!foodCategory2) throw 'You must provide a foodCategory2';
+
+        //todo stock
+
 
         let newItem = {
             foodName: foodName,

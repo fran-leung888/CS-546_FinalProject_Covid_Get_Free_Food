@@ -4,7 +4,7 @@
 
 
 
-<div class="container" style="width: 20%;margin-left: 60%">
+<div class="container" style="width: 30%;margin-left: 50%">
 
     <!-- ============= COMPONENT ============== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -12,10 +12,12 @@
 
             <div class="collapse navbar-collapse" id="main_nav">
 
+               category
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" style="padding-left: 10%">
                     <li class="nav-item dropdown" style="width: 250px">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+
                             <span id="foodCategory1">{{searchParams.foodCategory1}}</span>
                             <span id="foodCategoryHelper">&raquo;</span>
                             <span id="foodCategory2">{{searchParams.foodCategory2}}</span>
@@ -98,6 +100,9 @@
                         <div class="product__details__pic__item">
 <!--                            <img class="product__details__pic__item--large"-->
 <!--                                 src="/public/uploads/food1.png" alt="">-->
+                            <div class="text-center">
+                                <h3 class="text-danger">{{msg}}</h3>
+                            </div>
                             <img id="viewImg" />
 
                         </div>
@@ -110,12 +115,12 @@
 
 
                         <h3 style="display: inline">Food name: </h3> <input type="text" name="foodName" />
-                         <input id="category1"  type="text" name="foodCategory1" />
-                        <input id="category2"  type="text" name="foodCategory2" />
+                         <input id="category1"  style="display: none" type="text" name="foodCategory1" />
+                        <input id="category2"  style="display: none" type="text" name="foodCategory2" />
 
 
                         <div class="product__details__price">$<input type="text" name="foodPrice" /></div>
-                        <p><textarea cols="50" name="foodDes" rows="10"></textarea>
+                        <p><textarea cols="50" name="foodDes" rows="10" placeholder="foodDes"></textarea>
                             </p>
 
                         <div class="form-group">
@@ -131,9 +136,6 @@
 
                         <ul>
                             <li><b>stock</b> <input type="text" name="stock" /></li>
-                            <li><b>Shipping</b><input type="text" name="Shipping" /></li>
-                            <li><b>Weight</b> <input type="text" name="Weight" /></li>
-                            <li><b>Share on</b><input type="text" name="Share on" /> </li>
                         </ul>
 
                         <button type="submit">submit</button>

@@ -97,11 +97,17 @@ router.get('/add', async (req, res) => {
 
     if (!req.session.user) {
        return res.redirect("/login")
-
     }
 
     if (req.session.user.type!=="merchant") {
         return res.redirect("/food/list")
+    }
+
+    if(req.session.msg){
+        let msg=req.session.msg
+        //通过session传递消息 显示一次后就销毁
+        req.session.msg=null;
+        return res.render('posts/foodAdd',{msg:msg});
     }
 
 
@@ -113,45 +119,52 @@ router.get('/add', async (req, res) => {
 
 });
 
-//todo 缺少食物的主人才可以编辑的验证
 router.post("/add", async (req, res) => {
 
 
 
-    if (!req.session.user) {
-        return res.send("没登录");
+
+
+
+
+
+
+
+
+
+    try {
+
+      /*  if (!req.session.user) {
+            return res.redirect("/login");
+
+        }
+
+        if (req.session.user.type!=="merchant") {
+            return res.redirect("/food/list");
+        }*/
+        let foodName = req.body.foodName;
+        let foodPrice = parseInt(req.body.foodPrice);
+        let foodDes = req.body.foodDes;
+        let foodCategory1 = req.body.foodCategory1;
+        let foodCategory2 = req.body.foodCategory2;
+        let merchantId = req.session.user.id;
+        let stock = parseInt(req.body.stock);
+        let filename;
+
+        if (req.file) {
+            filename = "/public/uploads/" + req.file.filename;
+        }
+        const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2,merchantId,stock);
+        console.log(newVar._id.toString());
+        res.redirect("/food/Detail/"+newVar._id.toString());
+    }catch (e) {
+
+        req.session.msg=e.toString()
+        res.redirect("/merchant/add/");
 
     }
 
-    if (req.session.user.type!=="merchant") {
-        return res.send("你不是merchant");
-    }
 
-
-
-
-    let foodName = req.body.foodName;
-    let foodPrice = parseInt(req.body.foodPrice);
-    let foodDes = req.body.foodDes;
-    let foodCategory1 = req.body.foodCategory1;
-    let foodCategory2 = req.body.foodCategory2;
-    let merchantId = req.session.user.id;
-    let stock = parseInt(req.body.stock);
-    let filename;
-
-
-    if (req.file) {
-        filename = "/public/uploads/" + req.file.filename;
-    }
-
-    console.log(filename);
-    //todo 不全的错误提示
-
-
-    const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2,merchantId,stock);
-    console.log(newVar._id.toString());
-
-    res.redirect("/food/Detail/"+newVar._id.toString());
 
 
 
