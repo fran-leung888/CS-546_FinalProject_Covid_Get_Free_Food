@@ -55,7 +55,7 @@ router.get('/edit/:id', async (req, res) => {
         }
 
         if(!req.session.user){
-            return res.redirect("/food/list")
+            return res.redirect("/login")
         }
         if(req.session.user.id!==food.merchantId){
             return res.redirect("/food/list")
@@ -93,41 +93,46 @@ router.get('/edit/:id', async (req, res) => {
 
 
 router.get('/detail/:id', async (req, res) => {
-    //res.render("posts/foodList");
-    //todo 渲染详情
-    const food = await foodData.getFood(req.params.id);
-
-    if(!food){
-        return res.redirect("/food/list")
-    }
-    //todo 同时把评论也渲染上去
 
 
+    try {
+        const food = await foodData.getFood(req.params.id);
 
-    food.liked=0
-    if (req.session.user) {
+        if(!food){
+            return res.redirect("/food/list")
 
-
-        //todo 展示有没有likes
-
-        if (await userData.checkLiked(req.params.id, req.session.user.id)) {
-            food.liked=1
         }
 
 
 
-        //自己发表的评论才可以出现delete按钮
-        for (const key in food.comment) {
-            if (food.comment[key]["userId"] === req.session.user.id) {
-                food.comment[key]["isMine"]=1
+        food.liked=0
+        if (req.session.user) {
+
+
+
+            if (await userData.checkLiked(req.params.id, req.session.user.id)) {
+                food.liked=1
+            }
+
+
+
+            //自己发表的评论才可以出现delete按钮
+            for (const key in food.comment) {
+                if (food.comment[key]["userId"] === req.session.user.id) {
+                    food.comment[key]["isMine"]=1
+                }
             }
         }
+
+
+
+        res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
+            ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment,liked:food.liked});
+    }catch (e) {
+        res.redirect("/food/list")
+
     }
 
-
-
-    res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
-        ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment,liked:food.liked});
 
 
 

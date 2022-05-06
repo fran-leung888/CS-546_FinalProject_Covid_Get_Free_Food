@@ -205,7 +205,7 @@ const exportedMethods = {
 
         const foodCollection1 = await foodCollection();
 
-        const objId = ObjectId.createFromHexString(_id);
+        const objId = ObjectId(_id);
 
 
         const food = await foodCollection1.findOne({
