@@ -151,7 +151,7 @@ const exportedMethods = {
             foodName: foodName,
             foodPrice: parseInt(foodPrice),
             foodDes: foodDes,
-            filename: filename,
+            filename:"public/uploads/"+filename,
             foodCategory1: foodCategory1,
             foodCategory2: foodCategory2,
             merchantId: merchantId,
