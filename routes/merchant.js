@@ -54,10 +54,9 @@ router.get('/detail/:id', async (req, res) => {
 
     const itemsArray = await foodData.getFoodByMerchant(req.params.id);
 
-    //todo 显示merchant详情
-    // res.render("posts/merchantDetail", { merchant:merchant,itemsArray: itemsArray});
 
-    return res.render("posts/merchantDetail",{restaurantName:merchant.restaurantName,filename:merchant.filename,itemsArray:itemsArray});
+    return res.render("posts/merchantDetail",{restaurantName:merchant.restaurantName,description:merchant.description
+        ,filename:merchant.filename,phone:merchant.phone,address:merchant.address,itemsArray:itemsArray});
 
 
 

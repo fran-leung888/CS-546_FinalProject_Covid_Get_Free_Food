@@ -1,4 +1,4 @@
-所有get/:id  如果id不存在都得跳
+所有get/:id  如果id不存在都得跳 所有router里保证有一个try catch
 
 
 
@@ -7,4 +7,3 @@
 
 
 ObjectId()需要try router外面还有没有外层了？
-
