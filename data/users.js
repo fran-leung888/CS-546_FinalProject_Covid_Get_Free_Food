@@ -155,7 +155,7 @@ const exportedMethods = {
         description:description,
         restaurantName:restaurantName,
         phone:phone,
-        filename:"/public/uploads/"+file
+        filename:"public/uploads/"+file
       };
 
       const insertInfo = await userCollection.insertOne(newUserInfo);
@@ -239,7 +239,7 @@ const exportedMethods = {
         description:description,
         restaurantName:restaurantName,
         phone:phone,
-        filename:"/public/uploads/"+file.filename
+        filename:"public/uploads/"+file.filename
       };
 
       const insertInfo = await userCollection.insertOne(newUserInfo);

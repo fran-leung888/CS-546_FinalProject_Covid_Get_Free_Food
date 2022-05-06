@@ -152,7 +152,7 @@ router.post("/add", async (req, res) => {
         let filename;
 
         if (req.file) {
-            filename = "/public/uploads/" + req.file.filename;
+            filename = "public/uploads/" + req.file.filename;
         }
         const newVar = await foodData.addFood(foodName, foodPrice, foodDes, filename,foodCategory1,foodCategory2,merchantId,stock);
         console.log(newVar._id.toString());

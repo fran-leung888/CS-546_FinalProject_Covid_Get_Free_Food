@@ -193,7 +193,7 @@ router.post("/edit/:id", async (req, res) => {
         updateObj['foodPrice']=parseInt(req.body.foodPrice)
     }
     if (req.file) {
-        updateObj['filename'] = "/public/uploads/" + req.file.filename;
+        updateObj['filename'] = "public/uploads/" + req.file.filename;
     }
 
 
