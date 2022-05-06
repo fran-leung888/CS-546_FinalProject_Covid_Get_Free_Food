@@ -1,7 +1,7 @@
 const connection = require('./config/mongoConnection')
 
 const users = require('./data/users')
-const foods = require('./data/foods')
+const foods = require('./data/food')
 
 
 /* Populate the database with samples */
@@ -32,7 +32,12 @@ async function main() {
         .catch((err) => console.log(err))
 
 
-   await foods.addFood()
+
+    //这个 merchant4返回的就是id 懒得改了 问题不大
+    const food1 = await foods.addFood("Be My Burger","10","served with your choice of bread, toppings and patty. meats are free-range, pasture raised, humanely raised, antibiotic, gluten and hormone-free"
+        ,"food1.jpg","Fast Food","Burgers",
+        merchant4,"99")
+        .catch((err) => console.log(err))
 
        await connection.closeConnection()
 }
