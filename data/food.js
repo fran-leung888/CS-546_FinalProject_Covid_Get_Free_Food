@@ -126,7 +126,10 @@ const exportedMethods = {
         if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
         if (foodName.length < 4) throw 'foodName must longer than 4 characters'
 
-        //todo foodPrice
+
+        if (!   (/^\+?[1-9]\d*$/.test(foodPrice))     ) {
+            throw 'foodPrice must be a positive int';
+        }
 
         if (!foodDes) throw 'You must provide a foodDes';
         if (typeof foodDes !== 'string') throw 'foodDes must be a string';
@@ -138,18 +141,21 @@ const exportedMethods = {
         if (!foodCategory1) throw 'You must provide a foodCategory1';
         if (!foodCategory2) throw 'You must provide a foodCategory2';
 
-        //todo stock
+
+        if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
+            throw 'stock must be a positive int or 0';
+        }
 
 
         let newItem = {
             foodName: foodName,
-            foodPrice: foodPrice,
+            foodPrice: parseInt(foodPrice),
             foodDes: foodDes,
             filename: filename,
             foodCategory1: foodCategory1,
             foodCategory2: foodCategory2,
             merchantId: merchantId,
-            stock: stock
+            stock: parseInt(stock)
         }
 
         const merchantCollection = await foodCollection();

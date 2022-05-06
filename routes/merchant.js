@@ -134,21 +134,21 @@ router.post("/add", async (req, res) => {
 
     try {
 
-      /*  if (!req.session.user) {
+        if (!req.session.user) {
             return res.redirect("/login");
 
         }
 
         if (req.session.user.type!=="merchant") {
             return res.redirect("/food/list");
-        }*/
+        }
         let foodName = req.body.foodName;
-        let foodPrice = parseInt(req.body.foodPrice);
+        let foodPrice = req.body.foodPrice;
         let foodDes = req.body.foodDes;
         let foodCategory1 = req.body.foodCategory1;
         let foodCategory2 = req.body.foodCategory2;
         let merchantId = req.session.user.id;
-        let stock = parseInt(req.body.stock);
+        let stock = req.body.stock;
         let filename;
 
         if (req.file) {
