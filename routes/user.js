@@ -5,27 +5,31 @@ const foodData = data.food;
 const userData = data.users;
 const xss = require('xss');
 
-
+//这是一个ajax操作
 router.post('/addLike', async (req, res) => {
 
-    console.log(1);
 
-    //todo 捕捉异常
-    if (req.session.user) {
-        let foodId = req.body.foodId;
-        let userId = req.session.user.id;
+    try {
+        if (req.session.user) {
+            let foodId = req.body.foodId;
+            let userId = req.session.user.id;
 
-        if (await userData.createLikes(foodId, userId)) {
-            return res.status(200).send("red");
-        }else{
-            return res.status(200).send("grey");
+            if (await userData.createLikes(foodId, userId)) {
+                return res.status(200).send("red");
+            }else{
+                return res.status(200).send("grey");
+
+            }
+        } else {
+            return res.status(200).send("black");
+
 
         }
-    } else {
+    }catch (e) {
         return res.status(200).send("black");
 
-
     }
+
 
 
 });
