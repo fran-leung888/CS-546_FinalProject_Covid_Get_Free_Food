@@ -48,24 +48,35 @@ router.get('/edit/:id', async (req, res) => {
     //res.render("posts/foodList");
 
 
-    //todo 不是你的不能进入edit
+    try {
+        const food = await foodData.getFood(req.params.id);
+        if(!food){
+            return res.redirect("/food/list")
+        }
 
-    const food = await foodData.getFood(req.params.id);
-    if(!food){
-        return res.redirect("/food/list")
+        if(!req.session.user){
+            return res.redirect("/food/list")
+        }
+        if(req.session.user.id!==food.merchantId){
+            return res.redirect("/food/list")
+
+        }
+
+        if(req.session.msg){
+            let msg=req.session.msg
+            //通过session传递消息 显示一次后就销毁
+            req.session.msg=null;
+            return res.render("posts/foodEdit",{msg:msg,foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+
+        }
+
+
+
+        res.render("posts/foodEdit",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+    }catch (e) {
+        res.redirect("/food/list")
     }
 
-    if(!req.session.user){
-        return res.redirect("/food/list")
-    }
-    if(req.session.user.id!==food.merchantId){
-        return res.redirect("/food/list")
-
-    }
-
-
-
-    res.render("posts/foodEdit",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename});
 
 
 
@@ -181,30 +192,44 @@ router.post("/comment/:id", async (req, res) => {
 
 //todo 缺少食物的主人才可以编辑的验证
 router.post("/edit/:id", async (req, res) => {
-    let updateObj={}
 
-    if (req.body.foodName) {
-        updateObj['foodName']=req.body.foodName
+    try {
+
+        if (!req.session.user) {
+            return res.redirect("/login");
+
+        }
+
+        if (req.session.user.type!=="merchant") {
+            return res.redirect("/food/list");
+        }
+        let foodName = req.body.foodName;
+        let foodPrice = req.body.foodPrice;
+        let foodDes = req.body.foodDes;
+        let stock = req.body.stock;
+        let filename;
+
+        //file可能是有或者没有的
+        if (req.file) {
+            filename = req.file.filename;
+        }
+        const newVar = await foodData.updateFood(req.params.id,foodName, foodPrice, foodDes, filename,stock);
+        console.log(newVar._id.toString());
+        res.redirect("/food/Detail/"+newVar._id.toString());
+    }catch (e) {
+
+        req.session.msg=e.toString()
+        res.redirect("/food/edit/"+req.params.id);
+
     }
-    if (req.body.foodDes) {
-        updateObj['foodDes']=req.body.foodDes
-    }
-    if (req.body.foodPrice) {
-        updateObj['foodPrice']=parseInt(req.body.foodPrice)
-    }
-    if (req.file) {
-        updateObj['filename'] = "public/uploads/" + req.file.filename;
-    }
 
 
 
 
 
-    const newVar = await foodData.updateFood(req.params.id,updateObj);
-    //todo 这里的返回值处理 应该是判断一下是否更新成功
-    console.log(newVar._id.toString());
 
-    res.redirect("/food/Detail/"+newVar._id.toString());
+
+
 
 
 

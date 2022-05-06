@@ -42,15 +42,46 @@ const exportedMethods = {
 
     },
 
-    async updateFood(_id, updateObj) {
+    async updateFood(_id, foodName, foodPrice, foodDes, filename,stock) {
 
-        //todo 数据验证
+        let setObj={}
+
+        if (!foodName) throw 'You must provide a foodName';
+        if (typeof foodName !== 'string') throw 'foodName must be a string';
+        if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
+        if (foodName.length < 4) throw 'foodName must longer than 4 characters'
+        setObj.foodName=foodName
+
+        if (!   (/^\+?[1-9]\d*$/.test(foodPrice))     ) {
+            throw 'foodPrice must be a positive int';
+        }
+        setObj.price=parseInt(foodPrice)
+
+        if (!foodDes) throw 'You must provide a foodDes';
+        if (typeof foodDes !== 'string') throw 'foodDes must be a string';
+        if (foodDes.trim() === '') throw 'foodDes all empty spaces are not valid';
+        if (foodDes.length < 4) throw 'foodDes must longer than 4 characters'
+        setObj.foodDes=foodDes
+
+        //这里是可以没有的
+        if (filename){
+            setObj.filename="public/uploads/"+filename
+        }
+
+        if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
+            throw 'stock must be a positive int or 0';
+        }
+        setObj.stock=stock
+
+
+
 
 
         const foodCollection1 = await foodCollection();
 
 
-        const insert = await foodCollection1.updateOne({_id: ObjectId.createFromHexString(_id)}, {$set: updateObj})
+
+        const insert = await foodCollection1.updateOne({_id: ObjectId(_id)}, {$set: setObj})
 
         //console.log(insert);
 

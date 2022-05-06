@@ -93,26 +93,30 @@ router.get('/myfood', async (req, res) => {
 router.get('/add', async (req, res) => {
     //res.render("posts/foodList");
 
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login")
+        }
+
+        if (req.session.user.type!=="merchant") {
+            return res.redirect("/food/list")
+        }
+
+        if(req.session.msg){
+            let msg=req.session.msg
+            //通过session传递消息 显示一次后就销毁
+            req.session.msg=null;
+            return res.render('posts/foodAdd',{msg:msg});
+        }
 
 
-    if (!req.session.user) {
-       return res.redirect("/login")
+
+        res.render("posts/foodAdd");
+
+    }catch (e) {
+        res.redirect("/food/list")
     }
 
-    if (req.session.user.type!=="merchant") {
-        return res.redirect("/food/list")
-    }
-
-    if(req.session.msg){
-        let msg=req.session.msg
-        //通过session传递消息 显示一次后就销毁
-        req.session.msg=null;
-        return res.render('posts/foodAdd',{msg:msg});
-    }
-
-
-
-    res.render("posts/foodAdd");
 
 
 
@@ -120,13 +124,6 @@ router.get('/add', async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-
-
-
-
-
-
-
 
 
 

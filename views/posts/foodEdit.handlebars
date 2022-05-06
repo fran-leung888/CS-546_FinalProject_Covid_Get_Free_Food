@@ -21,8 +21,11 @@
 
 <!--                        todo 编辑时显示之间的图片 新增时图片为待更新-->
                         <div class="product__details__pic__item">
-<!--                            <img class="product__details__pic__item--large"-->
-<!--                                 src="/public/uploads/food1.png" alt="">-->
+
+
+                            <div class="text-center">
+                                <h3 class="text-danger">{{msg}}</h3>
+                            </div>
                             <img id="viewImg" src=/{{filename}}>
 
                         </div>
@@ -32,7 +35,7 @@
                 </div>
                 <form class="col-lg-6 col-md-6" method="post" enctype="multipart/form-data">
                     <div class="product__details__text">
-                        <h3 style="display: inline">Food name: </h3> <input type="text" value={{foodName}} name="foodName" />
+                        <h3 style="display: inline">Food name: </h3> <input type="text" value="{{foodName}}" name="foodName" />
 
 
                         <div class="product__details__price">$<input type="text" value={{foodPrice}} name="foodPrice" /></div>
@@ -49,10 +52,7 @@
 
 
                         <ul>
-                            <li><b>Availability</b> <input type="text" name="Availability" /></li>
-                            <li><b>Shipping</b><input type="text" name="Shipping" /></li>
-                            <li><b>Weight</b> <input type="text" name="Weight" /></li>
-                            <li><b>Share on</b><input type="text" name="Share on" /> </li>
+                            <li><b>Stock</b> <input type="text" value={{stock}} name="stock" /></li>
                         </ul>
 
                         <button type="submit">submit</button>
