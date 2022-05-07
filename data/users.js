@@ -375,13 +375,19 @@ const exportedMethods = {
     if (typeof name !== 'string') throw 'Name must be a string';
 
     if (!price) throw 'You must provide a price';
-    //todo 数字检测
+    if (!   (/^\+?[1-9]\d*$/.test(price))     ) {
+      throw 'price must be a positive int';
+    }
 
     if (!quantity) throw 'You must provide a quantity';
-    //todo 数字检测
+    if (!   (/^\+?[1-9]\d*$/.test(quantity))     ) {
+      throw 'quantity must be a positive int';
+    }
 
     if (!total) throw 'You must provide a total';
-    //todo 数字检测
+    if (!   (/^\+?[1-9]\d*$/.test(total))     ) {
+      throw 'total must be a positive int';
+    }
 
     if (!image) throw 'You must provide a image';
     if (typeof image !== 'string') throw 'Image name must be a string';
@@ -396,7 +402,7 @@ const exportedMethods = {
         orderId: uuid(),
         name: name,
         price: price,
-        quantity: quantity,
+        quantity: parseInt(quantity),
         total: total,
         image: image,
         // 2021-10-24 16:21:23 (yyyy-mm-dd hh:mm:ss)
