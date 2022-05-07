@@ -43,10 +43,6 @@ router.post('/addLike', async (req, res) => {
 
 
 
-router.get('/logout', async (req, res) => {
-    req.session.destroy();
-    res.render('users/logout');
-});
 
 
 router.get('/history', async (req, res) => {
@@ -83,21 +79,6 @@ router.get('/likes', async (req, res) => {
 
 
 
-router.get('/myfood', async (req, res) => {
-    //res.render("posts/foodList");
 
-
-
-
-
-
-
-    const itemsArray = await foodData.getFoodByMerchant(req.session.user.id);
-
-
-
-
-    //res.send("posts/foodList");
-});
 
 module.exports = router;

@@ -7,14 +7,21 @@ const userData = data.users;
 
 router.get('/', async (req, res) => {
 
-    if(!req.session.user){
-        return res.redirect("/")
+
+    try {
+        if(!req.session.user){
+            return res.redirect("/")
+        }
+
+        req.session.destroy();
+
+
+        res.redirect("/");
+    }catch (e) {
+        res.redirect("/");
+
     }
 
-    req.session.destroy();
-
-
-    res.redirect("/");
 
 
 

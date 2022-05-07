@@ -8,20 +8,24 @@ const userData = data.users;
 router.get('/', async (req, res) => {
 
 
-    //todo 已经登录就不能再进入了
+    try {
+        if(req.session.user){
+            return res.redirect("/")
+        }
 
-    if(req.session.user){
+        if(req.session.loginMsg){
+            let msg=req.session.loginMsg
+            req.session.loginMsg=null;
+            return res.render('users/login',{msg:msg});
+        }
+
+        res.render('users/login');
+    }catch (e) {
         return res.redirect("/")
+
     }
 
-    //todo 如果上一次没注册成功就会显示错误信息
-    if(req.session.loginMsg){
-        let msg=req.session.loginMsg
-        req.session.loginMsg=null;
-        return res.render('users/login',{msg:msg});
-    }
 
-    res.render('users/login');
 
 
 

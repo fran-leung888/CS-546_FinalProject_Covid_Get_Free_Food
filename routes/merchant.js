@@ -12,11 +12,15 @@ const merchantData = data.merchant;
 router.get('/list', async (req, res) => {
     //res.render("posts/foodList");
 
-    console.log(req.query);
+    try {
+        const itemsArray = await merchantData.getAllMerchant();
+        res.render("posts/merchantList", { itemsArray: itemsArray});
+    }catch (e) {
+        return res.redirect("/")
+    }
 
 
-    const itemsArray = await merchantData.getAllMerchant();
-    res.render("posts/merchantList", { itemsArray: itemsArray});
+
 
 
 
@@ -35,28 +39,29 @@ router.get('/list', async (req, res) => {
 router.get('/detail/:id', async (req, res) => {
 
 
-    //todo 先验证是不是真merchant
     let merchant
     try {
         merchant = await userData.getUserById(req.params.id);
+        if(!merchant||merchant.type!=="merchant"){
+            return res.redirect("/merchant/list")
+        }
+        const itemsArray = await foodData.getFoodByMerchant(req.params.id);
+
+
+        return res.render("posts/merchantDetail",{restaurantName:merchant.restaurantName,description:merchant.description
+            ,filename:merchant.filename,phone:merchant.phone,address:merchant.address,itemsArray:itemsArray});
 
     }catch (e) {
         return res.redirect("/merchant/list")
 
     }
-    if(!merchant||merchant.type!=="merchant"){
-        return res.redirect("/merchant/list")
-    }
 
 
 
 
 
-    const itemsArray = await foodData.getFoodByMerchant(req.params.id);
 
 
-    return res.render("posts/merchantDetail",{restaurantName:merchant.restaurantName,description:merchant.description
-        ,filename:merchant.filename,phone:merchant.phone,address:merchant.address,itemsArray:itemsArray});
 
 
 
@@ -68,20 +73,25 @@ router.get('/detail/:id', async (req, res) => {
 router.get('/myfood', async (req, res) => {
     //res.render("posts/foodList");
 
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
 
-    if (!req.session.user) {
-        return res.redirect("/login");
+        }
 
+        if (req.session.user.type!=="merchant") {
+            return res.redirect("/food/list");
+        }
+
+
+
+        const itemsArray = await foodData.getFoodByMerchant(req.session.user.id);
+        res.render("merchant/myfood", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
+    }catch (e) {
+        return res.redirect("/")
     }
 
-    if (req.session.user.type!=="merchant") {
-        return res.redirect("/food/list");
-    }
 
-
-
-    const itemsArray = await foodData.getFoodByMerchant(req.session.user.id);
-    res.render("merchant/myfood", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
 
 
 
@@ -167,15 +177,7 @@ router.post("/add", async (req, res) => {
 
 });
 
-router.get('/login', async (req, res) => {
 
-
-
-
-    res.render("posts/login");
-
-
-});
 
 
 
