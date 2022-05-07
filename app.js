@@ -125,21 +125,6 @@ app.use('/*', async (req, res, next) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 configRoutes(app);
 
 
@@ -158,56 +143,6 @@ app.listen(3000, () => {
   console.log('Your routes will be running on http://localhost:3000');
 });
 
-
-
-// const users = require("./data/users");
-// const albums = require("./data/albums")
-
-
-// async function main() {
-
-//     users
-//     const Qinyun = await users.create("Qinyun Wang", "wqy1998", "5512616439", "07030", "I'm happy");
-//     console.log(Qinyun);
-//     const Annie = await users.create("Annie Chen", "can1998", "5512616438", "07031", "I'm so cute");
-//     console.log(Annie);
-//     const XingFang = await users.create("XingFang Tan", "yxf1993", "5512616437", "07032", "I'm so old");
-//     console.log(XingFang);
-
-// const a = await bands.get("62252dc3ad5a274b1620a39e");
-// console.log(a);
-
-// const b = await bands.getAll();
-// console.log(b);
-
-// const c = await bands.remove("62252deb4b70fa888100f599");
-// console.log(c);
-
-// const theBeatles = await bands.update("6225536c7aad6bdc570228ec", "Tahe Beatles", ["Psychedelic rock", "Blue"], "http://www.theBeatles.com", "Apple Corps", ["John Lennon", "Paul McCartney", "George Harrison"], 1957);
-// console.log(theBeatles);
-
-
-
-// albums
-// const theBeatlesAlbum = await albums.create("6225536c7aad6bdc570228ec", "A", "01/12/2023", ["Progressive Rock", "Psychedelic rock", "Classic Rock"], 6);
-// console.log(theBeatlesAlbum);
-// const theBeatlesAlbum2 = await albums.create("6225536c7aad6bdc570228ec", "B", "03/12/2020", ["Progressive Rock", "Psychedelic rock", "Classic Rock"], 4);
-// console.log(theBeatlesAlbum2);
-
-// const a = await albums.getAll("62252dc3ad5a274b1620a39e");
-// console.log(a);
-
-// const a = await albums.get("622530010682ed697c7165d3");
-// console.log(a);
-
-// const a = await albums.remove("622581c9c425f2d2aaa0d59e");
-// console.log(a);
-
-// }
-
-// main().catch((err) => {
-//     console.log(err);
-// });
 
 
 

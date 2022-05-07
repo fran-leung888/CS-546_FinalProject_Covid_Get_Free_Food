@@ -73,7 +73,7 @@ router.post("/user", async (req, res) => {
         const userId = await userData.createUser(req.body["username"],req.body["password"]);
 
         //通过session传递 跳转后要显示的msg
-        req.session.loginMsg="user created! Now, log in."
+        req.session.loginMsg="User created successfully, please Login!"
         res.redirect("/login")
 
 
@@ -111,7 +111,7 @@ router.post("/merchant", async (req, res) => {
         const userId = await userData.createMerchant(req.body["username"],req.body["password"],req.body["restaurantName"]
             ,req.file,req.body["address"],req.body["description"],req.body["phone"]);
         //通过session传递 跳转后要显示的msg
-        req.session.loginMsg="merchant created! Now, log in."
+        req.session.loginMsg="Merchant created successfully, please Login!"
         res.redirect("/login")
 
 

@@ -95,7 +95,7 @@ const exportedMethods = {
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
     if (username.trim() === '') throw 'User name with empty spaces are not valid';
-    if (username.includes(" ")) throw 'username with spaces are not valid';
+    if (username.includes(" ")) throw 'Username with spaces are not valid';
     if (username.length < 4) throw 'User name must longer than 4 characters'
 
     if (!password) throw 'You must provide a password';
@@ -112,25 +112,25 @@ const exportedMethods = {
 
 
     if (!address) throw 'You must provide a address';
-    if (typeof address !== 'string') throw 'address must be a string';
-    if (address.trim() === '') throw 'address all empty spaces are not valid';
-    if (address.length < 4) throw 'address must longer than 4 characters'
+    if (typeof address !== 'string') throw 'Address must be a string';
+    if (address.trim() === '') throw 'Address all empty spaces are not valid';
+    if (address.length < 4) throw 'Address must longer than 4 characters'
 
 
     if (!description) throw 'You must provide a description';
-    if (typeof description !== 'string') throw 'description must be a string';
-    if (description.trim() === '') throw 'description all empty spaces are not valid';
-    if (description.length < 4) throw 'description must longer than 4 characters'
+    if (typeof description !== 'string') throw 'Description must be a string';
+    if (description.trim() === '') throw 'Description all empty spaces are not valid';
+    if (description.length < 4) throw 'Description must longer than 4 characters'
 
 
     if (!phone) throw 'You must provide a phone';
-    if (typeof phone !== 'string') throw 'phone must be a string';
-    if (phone.trim() === '') throw 'phone all empty spaces are not valid';
-    if (phone.includes(" ")) throw 'phone with spaces are not valid';
+    if (typeof phone !== 'string') throw 'Phone must be a string';
+    if (phone.trim() === '') throw 'Phone all empty spaces are not valid';
+    if (phone.includes(" ")) throw 'Phone with spaces are not valid';
 
 
     if (!phone.match(/^\d{10}$/g)) {
-      throw 'check phone format';
+      throw 'Check phone format';
     }
 
 
@@ -143,7 +143,7 @@ const exportedMethods = {
 
 
     if (await this.findUserByUsername(username)!== null) {
-      throw 'you can not use this account';
+      throw 'You can not use this account';
 
     }else{
 
@@ -179,7 +179,7 @@ const exportedMethods = {
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
     if (username.trim() === '') throw 'User name all empty spaces are not valid';
-    if (username.includes(" ")) throw 'username with spaces are not valid';
+    if (username.includes(" ")) throw 'Username with spaces are not valid';
     if (username.length < 4) throw 'User name must longer than 4 characters'
 
     if (!password) throw 'You must provide a password';
@@ -193,29 +193,29 @@ const exportedMethods = {
     if (restaurantName.trim() === '') throw 'User name all empty spaces are not valid';
 
 
-    if (!file) throw 'must upload a merchant image';
+    if (!file) throw 'Must upload a merchant image';
 
 
     if (!address) throw 'You must provide a address';
-    if (typeof address !== 'string') throw 'address must be a string';
-    if (address.trim() === '') throw 'address all empty spaces are not valid';
-    if (address.length < 4) throw 'address must longer than 4 characters'
+    if (typeof address !== 'string') throw 'Address must be a string';
+    if (address.trim() === '') throw 'Address all empty spaces are not valid';
+    if (address.length < 4) throw 'Address must longer than 4 characters'
 
 
     if (!description) throw 'You must provide a description';
-    if (typeof description !== 'string') throw 'description must be a string';
-    if (description.trim() === '') throw 'description all empty spaces are not valid';
-    if (description.length < 4) throw 'description must longer than 4 characters'
+    if (typeof description !== 'string') throw 'Description must be a string';
+    if (description.trim() === '') throw 'Description all empty spaces are not valid';
+    if (description.length < 4) throw 'Description must longer than 4 characters'
 
 
     if (!phone) throw 'You must provide a phone';
-    if (typeof phone !== 'string') throw 'phone must be a string';
-    if (phone.trim() === '') throw 'phone all empty spaces are not valid';
-    if (phone.includes(" ")) throw 'phone with spaces are not valid';
+    if (typeof phone !== 'string') throw 'Phone must be a string';
+    if (phone.trim() === '') throw 'Phone all empty spaces are not valid';
+    if (phone.includes(" ")) throw 'Phone with spaces are not valid';
 
 
     if (!phone.match(/^\d{10}$/g)) {
-      throw 'check phone format';
+      throw 'Check phone format';
     }
 
 
@@ -228,7 +228,7 @@ const exportedMethods = {
 
 
     if (await this.findUserByUsername(username)!== null) {
-      throw 'you can not use this account';
+      throw 'You can not use this account';
 
     }else{
 
@@ -275,10 +275,10 @@ const exportedMethods = {
     // if (typeof image !== 'string') throw 'Image name must be a string';
 
     if (!mobileNumber) throw 'You must provide a mobileNumber';
-    if (typeof mobileNumber !== 'string') throw 'mobileNumber must be a string';
-    if (mobileNumber.trim() == '') throw 'mobileNumber with spaces are not valid';
-    if (mobileNumber.includes(" ")) throw 'mobileNumber with spaces are not valid';
-    if (mobileNumber.length > 13) throw 'mobileNumber must be less than 14 characters';
+    if (typeof mobileNumber !== 'string') throw 'MobileNumber must be a string';
+    if (mobileNumber.trim() == '') throw 'MobileNumber with spaces are not valid';
+    if (mobileNumber.includes(" ")) throw 'MobileNumber with spaces are not valid';
+    if (mobileNumber.length > 13) throw 'MobileNumber must be less than 14 characters';
 
     if (!zipCode) throw 'You must provide a zipCode';
     if (typeof zipCode !== 'string') throw 'ZipCode must be a string';
@@ -360,7 +360,7 @@ const exportedMethods = {
 
 
     if (updatedInfo.modifiedCount === 0) {
-      throw 'could not update band successfully';
+      throw 'Could not update band successfully';
     }
     return true
 
@@ -376,17 +376,17 @@ const exportedMethods = {
 
     if (!price) throw 'You must provide a price';
     if (!   (/^\+?[1-9]\d*$/.test(price))     ) {
-      throw 'price must be a positive int';
+      throw 'Price must be a positive int';
     }
 
     if (!quantity) throw 'You must provide a quantity';
     if (!   (/^\+?[1-9]\d*$/.test(quantity))     ) {
-      throw 'quantity must be a positive int';
+      throw 'Quantity must be a positive int';
     }
 
     if (!total) throw 'You must provide a total';
     if (!   (/^\+?[1-9]\d*$/.test(total))     ) {
-      throw 'total must be a positive int';
+      throw 'Total must be a positive number';
     }
 
     if (!image) throw 'You must provide a image';
@@ -420,7 +420,7 @@ const exportedMethods = {
     );
 
     if (updatedInfo.modifiedCount === 0) {
-      throw 'could not update band successfully';
+      throw 'Could not update band successfully';
     }
 
     const user = await userCollection.findOne({ _id: id });
@@ -450,10 +450,10 @@ const exportedMethods = {
     if (typeof image !== 'string') throw 'Image name must be a string';
 
     if (!mobileNumber) throw 'You must provide a mobileNumber';
-    if (typeof mobileNumber !== 'string') throw 'mobileNumber must be a string';
-    if (mobileNumber.trim() == '') throw 'mobileNumber with spaces are not valid';
-    if (mobileNumber.includes(" ")) throw 'mobileNumber with spaces are not valid';
-    if (mobileNumber.length > 13) throw 'mobileNumber must be less than 14 characters';
+    if (typeof mobileNumber !== 'string') throw 'MobileNumber must be a string';
+    if (mobileNumber.trim() == '') throw 'MobileNumber with spaces are not valid';
+    if (mobileNumber.includes(" ")) throw 'MobileNumber with spaces are not valid';
+    if (mobileNumber.length > 13) throw 'MobileNumber must be less than 14 characters';
 
     if (!zipCode) throw 'You must provide a zipCode';
     if (typeof zipCode !== 'string') throw 'ZipCode must be a string';
@@ -484,7 +484,7 @@ const exportedMethods = {
     );
 
     if (updatedInfo.modifiedCount === 0) {
-      throw 'could not update band successfully';
+      throw 'Could not update band successfully';
     }
 
     const user = await userCollection.findOne({ _id: id });
@@ -496,17 +496,17 @@ const exportedMethods = {
 
   async checkUser(username, password) {
 
-    if (!username) throw "no username"
-    if (typeof username !== 'string') throw "not string"
-    if (username.trim() == '') throw "all space"
-    if (username.includes(" ")) throw "have space"
-    if (username.length < 4) throw "too short"
+    if (!username) throw "Please input a user name"
+    if (typeof username !== 'string') throw "User name must be a string"
+    if (username.trim() == '') throw "User name includes space"
+    if (username.includes(" ")) throw "User name includes space"
+    if (username.length < 4) throw "User name must looger than 3 characters"
     
-    if (!password) throw "no password"
-    if (typeof password !== 'string') throw "no string"
-    if (password.trim() == '') throw "all space"
-    if (password.includes(" ")) throw "have space"
-    if (password.length < 4) throw "too short"
+    if (!password) throw "Please input a password"
+    if (typeof password !== 'string') throw "Password must be a string"
+    if (password.trim() == '') throw "Password includes space"
+    if (password.includes(" ")) throw "Password includes space"
+    if (password.length < 4) throw "Password must looger than 3 characters"
 
   
     const userCollection = await users();
@@ -514,7 +514,7 @@ const exportedMethods = {
     const user = await userCollection.findOne({username: username});
 
     if(!user){
-      throw 'check your account and password';
+      throw 'Check your account and password';
 
     }
 
@@ -527,7 +527,7 @@ const exportedMethods = {
 
 
     }else{
-      throw 'check your account and password';
+      throw 'Check your account and password';
 
 
     }

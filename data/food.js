@@ -47,9 +47,9 @@ const exportedMethods = {
         let setObj={}
 
         if (!foodName) throw 'You must provide a foodName';
-        if (typeof foodName !== 'string') throw 'foodName must be a string';
-        if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
-        if (foodName.length < 4) throw 'foodName must longer than 4 characters'
+        if (typeof foodName !== 'string') throw 'FoodName must be a string';
+        if (foodName.trim() === '') throw 'FoodName all empty spaces are not valid';
+        if (foodName.length < 4) throw 'FoodName must longer than 4 characters'
         setObj.foodName=foodName
 
         if (!   (/^\+?[1-9]\d*$/.test(foodPrice))     ) {
@@ -58,9 +58,9 @@ const exportedMethods = {
         setObj.price=parseInt(foodPrice)
 
         if (!foodDes) throw 'You must provide a foodDes';
-        if (typeof foodDes !== 'string') throw 'foodDes must be a string';
-        if (foodDes.trim() === '') throw 'foodDes all empty spaces are not valid';
-        if (foodDes.length < 4) throw 'foodDes must longer than 4 characters'
+        if (typeof foodDes !== 'string') throw 'FoodDes must be a string';
+        if (foodDes.trim() === '') throw 'FoodDes all empty spaces are not valid';
+        if (foodDes.length < 4) throw 'FoodDes must longer than 4 characters'
         setObj.foodDes=foodDes
 
         //这里是可以没有的
@@ -69,7 +69,7 @@ const exportedMethods = {
         }
 
         if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
-            throw 'stock must be a positive int or 0';
+            throw 'Stock must be a positive int or 0';
         }
         setObj.stock=parseInt(stock)
 
@@ -102,7 +102,7 @@ const exportedMethods = {
         });
 
         if (!food) {
-            throw "no right to do this"
+            throw "No right to do this"
         } else {
             const res = await foodCollection1.updateOne({
                     _id: food._id
@@ -118,9 +118,9 @@ const exportedMethods = {
     async createComment(foodId, userId, userName, commentContent) {
 
         if (!commentContent) throw 'You must provide a commentContent';
-        if (typeof commentContent !== 'string') throw 'commentContent must be a string';
-        if (commentContent.trim() === '') throw 'commentContent all empty spaces are not valid';
-        if (commentContent.length < 4) throw 'commentContent must longer than 4 characters'
+        if (typeof commentContent !== 'string') throw 'CommentContent must be a string';
+        if (commentContent.trim() === '') throw 'CommentContent all empty spaces are not valid';
+        if (commentContent.length < 4) throw 'CommentContent must longer than 4 characters'
 
         let time = formatDate(new Date());
 
@@ -147,7 +147,7 @@ const exportedMethods = {
         );
 
         if (updatedInfo.modifiedCount === 0) {
-            throw 'could not update band successfully';
+            throw 'Could not update band successfully';
         }
 
 
@@ -155,28 +155,28 @@ const exportedMethods = {
     async addFoodSeed(foodId,foodName, foodPrice, foodDes, filename, foodCategory1, foodCategory2, merchantId, stock) {
 
         if (!foodName) throw 'You must provide a foodName';
-        if (typeof foodName !== 'string') throw 'foodName must be a string';
-        if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
-        if (foodName.length < 4) throw 'foodName must longer than 4 characters'
+        if (typeof foodName !== 'string') throw 'FoodName must be a string';
+        if (foodName.trim() === '') throw 'FoodName all empty spaces are not valid';
+        if (foodName.length < 4) throw 'FoodName must longer than 4 characters'
 
 
         if (!   (/^\+?[1-9]\d*$/.test(foodPrice))     ) {
-            throw 'foodPrice must be a positive int';
+            throw 'FoodPrice must be a positive int';
         }
 
         if (!foodDes) throw 'You must provide a foodDes';
-        if (typeof foodDes !== 'string') throw 'foodDes must be a string';
-        if (foodDes.trim() === '') throw 'foodDes all empty spaces are not valid';
-        if (foodDes.length < 4) throw 'foodDes must longer than 4 characters'
+        if (typeof foodDes !== 'string') throw 'FoodDes must be a string';
+        if (foodDes.trim() === '') throw 'FoodDes all empty spaces are not valid';
+        if (foodDes.length < 4) throw 'FoodDes must longer than 4 characters'
 
-        if (!filename) throw 'must upload a food image';
+        if (!filename) throw 'Must upload a food image';
 
         if (!foodCategory1) throw 'You must provide a foodCategory1';
         if (!foodCategory2) throw 'You must provide a foodCategory2';
 
 
         if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
-            throw 'stock must be a positive int or 0';
+            throw 'Stock must be a positive int or 0';
         }
 
 
@@ -204,28 +204,28 @@ const exportedMethods = {
     async addFood(foodName, foodPrice, foodDes, filename, foodCategory1, foodCategory2, merchantId, stock) {
 
         if (!foodName) throw 'You must provide a foodName';
-        if (typeof foodName !== 'string') throw 'foodName must be a string';
-        if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
-        if (foodName.length < 4) throw 'foodName must longer than 4 characters'
+        if (typeof foodName !== 'string') throw 'FoodName must be a string';
+        if (foodName.trim() === '') throw 'FoodName all empty spaces are not valid';
+        if (foodName.length < 4) throw 'FoodName must longer than 4 characters'
 
 
         if (!   (/^\+?[1-9]\d*$/.test(foodPrice))     ) {
-            throw 'foodPrice must be a positive int';
+            throw 'FoodPrice must be a positive int';
         }
 
         if (!foodDes) throw 'You must provide a foodDes';
-        if (typeof foodDes !== 'string') throw 'foodDes must be a string';
-        if (foodDes.trim() === '') throw 'foodDes all empty spaces are not valid';
-        if (foodDes.length < 4) throw 'foodDes must longer than 4 characters'
+        if (typeof foodDes !== 'string') throw 'FoodDes must be a string';
+        if (foodDes.trim() === '') throw 'FoodDes all empty spaces are not valid';
+        if (foodDes.length < 4) throw 'FoodDes must longer than 4 characters'
 
-        if (!filename) throw 'must upload a food image';
+        if (!filename) throw 'Must upload a food image';
 
         if (!foodCategory1) throw 'You must provide a foodCategory1';
         if (!foodCategory2) throw 'You must provide a foodCategory2';
 
 
         if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
-            throw 'stock must be a positive int or 0';
+            throw 'Stock must be a positive int or 0';
         }
 
 
@@ -308,14 +308,14 @@ const exportedMethods = {
         const curFood = await foodCollection1.findOne({_id: foodId})
 
         if (!curFood) {
-            throw "no food found";
+            throw "No food found";
         }
 
         if (amount<1) {
-            throw "check your amount";
+            throw "Check your amount";
         }
         if (curFood.stock < amount) {
-            throw "stock less than your amount";
+            throw "Stock less than your amount";
         }
         await userData.createOrder(userId, curFood.foodName, curFood.foodPrice, amount, curFood.foodPrice * amount, curFood.filename)
 
