@@ -261,13 +261,15 @@ const exportedMethods = {
         //通过foodid 查到food详情
         const curFood = await foodCollection1.findOne({_id: foodId})
 
+        if (!curFood) {
+            throw "no food found";
+        }
+
         if (amount<1) {
-            //todo 外面没有try catch
             throw "check your amount";
         }
         if (curFood.stock < amount) {
-            //todo 外面没有try catch
-            throw "no stock";
+            throw "check your amount";
         }
         await userData.createOrder(userId, curFood.foodName, curFood.foodPrice, amount, curFood.foodPrice * amount, curFood.filename)
 

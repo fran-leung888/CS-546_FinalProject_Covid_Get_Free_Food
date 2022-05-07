@@ -152,16 +152,22 @@ router.get('/detail/:id', async (req, res) => {
 
 router.get('/order/:id/:amount', async (req, res) => {
 
-    //todo 没登陆不能点
-    if (!req.session.user) {
-        return res.redirect("/login");
+    console.log(1);
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
 
+        }
+
+        const food = await foodData.orderFood(req.params.id,req.session.user.id,req.params.amount);
+
+        res.redirect("/user/history")
+    }catch (e) {
+
+        req.session.msg=e.toString()
+        return res.redirect("/food/detail/"+req.params.id)
     }
 
-    const food = await foodData.orderFood(req.params.id,req.session.user.id,req.params.amount);
-
-    res.redirect("/user/history")
-    //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
 
 
 
