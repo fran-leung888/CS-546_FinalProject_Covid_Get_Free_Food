@@ -102,7 +102,6 @@ const exportedMethods = {
         });
 
         if (!food) {
-            //todo 外面没catch
             throw "no right to do this"
         } else {
             const res = await foodCollection1.updateOne({
@@ -251,7 +250,6 @@ const exportedMethods = {
 
     async orderFood(foodId, userId, amount) {
 
-        //todo <=0则不可以订了
         const foodCollection1 = await foodCollection();
 
         foodId = ObjectId(foodId);
@@ -269,7 +267,7 @@ const exportedMethods = {
             throw "check your amount";
         }
         if (curFood.stock < amount) {
-            throw "check your amount";
+            throw "stock less than your amount";
         }
         await userData.createOrder(userId, curFood.foodName, curFood.foodPrice, amount, curFood.foodPrice * amount, curFood.filename)
 

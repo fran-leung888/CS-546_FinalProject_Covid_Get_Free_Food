@@ -165,7 +165,7 @@ router.get('/order/:id/:amount', async (req, res) => {
     }catch (e) {
 
         req.session.msg=e.toString()
-        return res.redirect("/food/detail/"+req.params.id)
+        res.redirect('back');
     }
 
 
@@ -176,16 +176,21 @@ router.get('/order/:id/:amount', async (req, res) => {
 
 router.get('/deleteComment/:id', async (req, res) => {
 
-    let commentId=req.params.id
-    //todo 没登陆不能删除
-    if (!req.session.user) {
-        return res.redirect("/login");
-    }
-    //todo 查一下id主人是不是你 不是你不让删
-    const food = await foodData.deleteComment(commentId,req.session.user.id);
+    try {
+        let commentId=req.params.id
+        if (!req.session.user) {
+            return res.redirect("/login");
+        }
+        const food = await foodData.deleteComment(commentId,req.session.user.id);
 
-    res.redirect('back');
-    //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+        res.redirect('back');
+        //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+    }catch (e) {
+        req.session.msg=e.toString()
+        res.redirect('back');
+
+    }
+
 
 
 
