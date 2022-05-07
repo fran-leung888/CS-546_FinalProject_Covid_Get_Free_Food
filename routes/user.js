@@ -48,12 +48,17 @@ router.post('/addLike', async (req, res) => {
 router.get('/history', async (req, res) => {
 
 
-    if (!req.session.user) {
-        return res.redirect("/login");
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
 
+        }
+        const user = await userData.getUserById(req.session.user.id);
+        res.render("posts/userHistory", {user: user});
+    }catch (e) {
+        return res.redirect("/food/list")
     }
-    const user = await userData.getUserById(req.session.user.id);
-    res.render("posts/userHistory", {user: user});
+
 
 
 });
@@ -61,18 +66,24 @@ router.get('/history', async (req, res) => {
 
 router.get('/likes', async (req, res) => {
 
-    if (!req.session.user) {
-        return res.redirect("/login");
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
 
+        }
+        const user = await userData.getUserById(req.session.user.id);
+
+        if(!user.likedFood){
+            user.likedFood=[]
+        }
+        const itemsArray = await foodData.getFoodInList(user.likedFood);
+
+        res.render("posts/userLikes", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
+    }catch (e) {
+        return res.redirect("/food/list")
     }
-    const user = await userData.getUserById(req.session.user.id);
 
-    if(!user.likedFood){
-        user.likedFood=[]
-    }
-    const itemsArray = await foodData.getFoodInList(user.likedFood);
 
-    res.render("posts/userLikes", {pageTitle: "List of All Items", itemsArray: itemsArray,searchParams:{foodCategoryHelper:"ALL"}});
 
 
 });

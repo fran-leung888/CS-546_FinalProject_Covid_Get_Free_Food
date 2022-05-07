@@ -358,7 +358,6 @@ const exportedMethods = {
     await foodCollection.updateOne({_id:ObjectId(foodId)},{$inc:{likes:1}})
 
 
-    console.log("updatedInfo",updatedInfo);
 
     if (updatedInfo.modifiedCount === 0) {
       throw 'could not update band successfully';
