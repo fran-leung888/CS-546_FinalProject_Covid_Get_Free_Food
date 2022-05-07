@@ -3,131 +3,109 @@
 module.exports = {
     getAll() {
         return [{
-                title: 'An Item',
+                title: 'Fast Food',
                 subcategories: [{
-                        subtitle: 'Category A',
+                        subtitle: 'Burgers',
                         items: [{
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
+                                text: '⏩',
+                                link: '/food/list?foodCategory1=Fast%20Food&foodCategory2=Burgers'
                             }
                         ]
                     },
                     {
-                        subtitle: 'Category B',
+                        subtitle: 'Pizza',
                         items: [{
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
+                                text: '⏩',
+                                link: '/food/list?foodCategory1=Fast%20Food&foodCategory2=Pizza'
                             }
                         ]
                     },
                     {
-                        subtitle: 'Category B',
+                        subtitle: 'Sandwiches',
                         items: [{
-                            text: 'Item A',
-                            link: '#'
+                            text: '⏩',
+                            link: '/food/list?foodCategory1=Fast%20Food&foodCategory2=Sandwiches'
                         }]
                     }
                 ]
             },
             {
-                title: 'A Second Item',
+                title: 'Asian',
                 subcategories: [{
-                        subtitle: 'Category C',
+                        subtitle: 'Sushi',
                         items: [{
-                            text: 'Item E',
-                            link: '#'
+                            text: '⏩',
+                            link: '/food/list?foodCategory1=Asian&foodCategory2=Sushi'
                         }]
                     },
                     {
-                        subtitle: 'Category D',
+                        subtitle: 'Noodle',
                         items: [{
-                            text: 'Item F',
-                            link: '#'
+                            text: '⏩',
+                            link: '/food/list?foodCategory1=Asian&foodCategory2=Noodle'
                         }]
-                    }
-                ]
-            },
-            {
-                title: 'A third Item',
-                subcategories: [{
-                        subtitle: 'Category A',
-                        items: [{
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
-                            }
-                        ]
                     },
                     {
-                        subtitle: 'Category B',
+                        subtitle: 'Dumplings',
                         items: [{
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
-                            }
-                        ]
-                    },
-                    {
-                        subtitle: 'Category B',
-                        items: [{
-                            text: 'Item A',
-                            link: '#'
+                            text: '⏩',
+                            link: '/food/list?foodCategory1=Asian&foodCategory2=Dumplings'
                         }]
                     }
                 ]
             },
             {
-                title: 'A fourth Item',
+                title: 'Fried Food',
                 subcategories: [{
-                        subtitle: 'Category A',
+                        subtitle: 'Fried Chicken',
                         items: [{
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
+                                text: '⏩',
+                                link: '/food/list?foodCategory1=Fried%20Food&foodCategory2=Fried%20Chicken'
                             }
                         ]
                     },
                     {
-                        subtitle: 'Category B',
+                        subtitle: 'Fries',
                         items: [{
-                                text: 'Item A',
-                                link: '#'
-                            },
-                            {
-                                text: 'Item A',
-                                link: '#'
+                                text: '⏩',
+                                link: '/food/list?foodCategory1=Fried%20Food&foodCategory2=Fries'
                             }
                         ]
                     },
+                    {
+                        subtitle: 'Fried fish',
+                        items: [{
+                            text: '⏩',
+                            link: '/food/list?foodCategory1=Fried%20Food&foodCategory2=Fried%20fish'
+                        }]
+                    }
+                ]
+            },
+            {
+                title: 'Drink',
+                subcategories: [{
+                        subtitle: 'Soup',
+                        items: [{
+                                text: '⏩',
+                                link: '/food/list?foodCategory1=Drink&foodCategory2=Soup'
+                            }
+                        ]
+                    },
+                    {
+                        subtitle: 'Juice',
+                        items: [{
+                                text: '⏩',
+                                link: '/food/list?foodCategory1=Drink&foodCategory2=Juice'
+                            }
+                        ]
+                    },{
+                        subtitle: 'Liquor',
+                        items: [{
+                            text: '⏩',
+                            link: '/food/list?foodCategory1=Drink&foodCategory2=Liquor'
+                        }
+                        ]
+                    }
                 ]
             },
         ]

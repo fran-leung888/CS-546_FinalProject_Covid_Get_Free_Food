@@ -90,7 +90,7 @@ const exportedMethods = {
 
   },
 
-  async createMerchantSeed(username, password,restaurantName,file,address,description,phone) {
+  async createMerchantSeed(_id,username, password,restaurantName,file,address,description,phone) {
 
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
@@ -148,6 +148,7 @@ const exportedMethods = {
     }else{
 
       const newUserInfo = {
+        _id: ObjectId(_id),
         username: username,
         password: hashedPassword,
         type: "merchant",

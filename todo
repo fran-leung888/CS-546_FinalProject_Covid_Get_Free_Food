@@ -1,6 +1,40 @@
 有些get url 写了没用 触发可能会报错
 
 
+静态主页跳 id没写死
+ 二级菜单http://localhost:3000/food/list?foodCategory1=Fast%20Food&foodCategory2=Burgers
+ 饭店id http://localhost:3000/merchant/detail/6274c234e62dd781da6fa2e7
+ foodid http://localhost:3000/food/detail/6274c234e62dd781da6fa2eb
+  功能 wu
+
+测试：
+wang
+food list
+不选二级菜单时 more likes first是否有效
+在二级菜单下 more likes first是否有效
+选过一个二级菜单后 再选回all 表现是否正常
+
+创建商家
+几个字段合不合法 username不能重复
+
+
+liang
+在食物详情页里 没登陆 不能评论/喜欢/order
+order时 order数量不合法会怎么样 超过库存会怎么样 order成功后库存是否减少了  是否成功出现在order history了
+likes 点完了 食物的likes数是否增加了 该食物是否在my likes里出现
+likes 取消了 食物的likes数是否减少了 该食物是否在my likes里消失了
+
+
+商家list
+商家详情
+
+sun
+上传食物
+编辑食物 编辑后还能不能正常预定 正常喜欢 还在不在过去喜欢过的人的list里
+
+
+
+
 
 
 
