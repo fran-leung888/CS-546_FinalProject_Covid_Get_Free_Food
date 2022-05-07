@@ -224,7 +224,6 @@ router.post("/comment/:id", async (req, res) => {
 
 
 
-//todo 缺少食物的主人才可以编辑的验证
 router.post("/edit/:id", async (req, res) => {
 
     try {

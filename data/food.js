@@ -71,7 +71,7 @@ const exportedMethods = {
         if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
             throw 'stock must be a positive int or 0';
         }
-        setObj.stock=stock
+        setObj.stock=parseInt(stock)
 
 
 
