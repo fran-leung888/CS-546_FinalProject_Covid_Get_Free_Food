@@ -34,9 +34,13 @@ const constructorMethod = (app) => {
     });
   });
 
-  app.get('/posts', (req, res) => {
-    res.render("posts/index");
+  app.use("*", (_, res) => {
+    res.status(404).json({ error: "Not found" });
   });
+
+
+
+
 
   // app.get('/foodList/:id', async(req, res) => {
   //   const itemsArray = [await foodData.getFoodByName(req.params.id)];

@@ -90,7 +90,7 @@ const exportedMethods = {
 
   },
 
-  async createMerchantSeed(username, password,restaurantName,file,address,description,phone) {
+  async createMerchantSeed(_id,username, password,restaurantName,file,address,description,phone) {
 
     if (!username) throw 'You must provide a user name';
     if (typeof username !== 'string') throw 'User name must be a string';
@@ -148,6 +148,7 @@ const exportedMethods = {
     }else{
 
       const newUserInfo = {
+        _id: ObjectId(_id),
         username: username,
         password: hashedPassword,
         type: "merchant",
@@ -357,7 +358,6 @@ const exportedMethods = {
     await foodCollection.updateOne({_id:ObjectId(foodId)},{$inc:{likes:1}})
 
 
-    console.log("updatedInfo",updatedInfo);
 
     if (updatedInfo.modifiedCount === 0) {
       throw 'could not update band successfully';
@@ -375,13 +375,19 @@ const exportedMethods = {
     if (typeof name !== 'string') throw 'Name must be a string';
 
     if (!price) throw 'You must provide a price';
-    //todo 数字检测
+    if (!   (/^\+?[1-9]\d*$/.test(price))     ) {
+      throw 'price must be a positive int';
+    }
 
     if (!quantity) throw 'You must provide a quantity';
-    //todo 数字检测
+    if (!   (/^\+?[1-9]\d*$/.test(quantity))     ) {
+      throw 'quantity must be a positive int';
+    }
 
     if (!total) throw 'You must provide a total';
-    //todo 数字检测
+    if (!   (/^\+?[1-9]\d*$/.test(total))     ) {
+      throw 'total must be a positive int';
+    }
 
     if (!image) throw 'You must provide a image';
     if (typeof image !== 'string') throw 'Image name must be a string';
@@ -396,7 +402,7 @@ const exportedMethods = {
         orderId: uuid(),
         name: name,
         price: price,
-        quantity: quantity,
+        quantity: parseInt(quantity),
         total: total,
         image: image,
         // 2021-10-24 16:21:23 (yyyy-mm-dd hh:mm:ss)

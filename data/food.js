@@ -71,7 +71,7 @@ const exportedMethods = {
         if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
             throw 'stock must be a positive int or 0';
         }
-        setObj.stock=stock
+        setObj.stock=parseInt(stock)
 
 
 
@@ -102,7 +102,6 @@ const exportedMethods = {
         });
 
         if (!food) {
-            //todo 外面没catch
             throw "no right to do this"
         } else {
             const res = await foodCollection1.updateOne({
@@ -118,6 +117,10 @@ const exportedMethods = {
 
     async createComment(foodId, userId, userName, commentContent) {
 
+        if (!commentContent) throw 'You must provide a commentContent';
+        if (typeof commentContent !== 'string') throw 'commentContent must be a string';
+        if (commentContent.trim() === '') throw 'commentContent all empty spaces are not valid';
+        if (commentContent.length < 4) throw 'commentContent must longer than 4 characters'
 
         let time = formatDate(new Date());
 
@@ -149,7 +152,55 @@ const exportedMethods = {
 
 
     },
+    async addFoodSeed(foodId,foodName, foodPrice, foodDes, filename, foodCategory1, foodCategory2, merchantId, stock) {
 
+        if (!foodName) throw 'You must provide a foodName';
+        if (typeof foodName !== 'string') throw 'foodName must be a string';
+        if (foodName.trim() === '') throw 'foodName all empty spaces are not valid';
+        if (foodName.length < 4) throw 'foodName must longer than 4 characters'
+
+
+        if (!   (/^\+?[1-9]\d*$/.test(foodPrice))     ) {
+            throw 'foodPrice must be a positive int';
+        }
+
+        if (!foodDes) throw 'You must provide a foodDes';
+        if (typeof foodDes !== 'string') throw 'foodDes must be a string';
+        if (foodDes.trim() === '') throw 'foodDes all empty spaces are not valid';
+        if (foodDes.length < 4) throw 'foodDes must longer than 4 characters'
+
+        if (!filename) throw 'must upload a food image';
+
+        if (!foodCategory1) throw 'You must provide a foodCategory1';
+        if (!foodCategory2) throw 'You must provide a foodCategory2';
+
+
+        if (!   (/^\+?(0|[1-9]\d*)$/.test(stock))     ) {
+            throw 'stock must be a positive int or 0';
+        }
+
+
+        let newItem = {
+            _id: ObjectId(foodId),
+            foodName: foodName,
+            foodPrice: parseInt(foodPrice),
+            foodDes: foodDes,
+            filename:"public/uploads/"+filename,
+            foodCategory1: foodCategory1,
+            foodCategory2: foodCategory2,
+            merchantId: merchantId,
+            stock: parseInt(stock)
+        }
+
+        const merchantCollection = await foodCollection();
+
+        const insert = await merchantCollection.insertOne(newItem)
+        //console.log(insert);
+
+        //console.log(insert.insertedId);
+        return this.getFood(insert.insertedId.toString())
+
+    },
     async addFood(foodName, foodPrice, foodDes, filename, foodCategory1, foodCategory2, merchantId, stock) {
 
         if (!foodName) throw 'You must provide a foodName';
@@ -247,7 +298,6 @@ const exportedMethods = {
 
     async orderFood(foodId, userId, amount) {
 
-        //todo <=0则不可以订了
         const foodCollection1 = await foodCollection();
 
         foodId = ObjectId(foodId);
@@ -257,13 +307,15 @@ const exportedMethods = {
         //通过foodid 查到food详情
         const curFood = await foodCollection1.findOne({_id: foodId})
 
+        if (!curFood) {
+            throw "no food found";
+        }
+
         if (amount<1) {
-            //todo 外面没有try catch
             throw "check your amount";
         }
         if (curFood.stock < amount) {
-            //todo 外面没有try catch
-            throw "no stock";
+            throw "stock less than your amount";
         }
         await userData.createOrder(userId, curFood.foodName, curFood.foodPrice, amount, curFood.foodPrice * amount, curFood.filename)
 

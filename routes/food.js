@@ -128,6 +128,14 @@ router.get('/detail/:id', async (req, res) => {
             }
         }
 
+        if(req.session.msg){
+            let msg=req.session.msg
+            //通过session传递消息 显示一次后就销毁
+            req.session.msg=null;
+            return res.render("posts/foodDetail",{msg:msg,foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
+                ,foodDes:food.foodDes,filename:food.filename,stock:food.stock,comments:food.comment,liked:food.liked});
+        }
+
 
 
         res.render("posts/foodDetail",{foodId:food._id.toString(),foodName:food.foodName,foodPrice:food.foodPrice
@@ -144,16 +152,22 @@ router.get('/detail/:id', async (req, res) => {
 
 router.get('/order/:id/:amount', async (req, res) => {
 
-    //todo 没登陆不能点
-    if (!req.session.user) {
-        return res.redirect("/login");
+    console.log(1);
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
 
+        }
+
+        const food = await foodData.orderFood(req.params.id,req.session.user.id,req.params.amount);
+
+        res.redirect("/user/history")
+    }catch (e) {
+
+        req.session.msg=e.toString()
+        res.redirect('back');
     }
 
-    const food = await foodData.orderFood(req.params.id,req.session.user.id,req.params.amount);
-
-    res.redirect("/user/history")
-    //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
 
 
 
@@ -162,16 +176,21 @@ router.get('/order/:id/:amount', async (req, res) => {
 
 router.get('/deleteComment/:id', async (req, res) => {
 
-    let commentId=req.params.id
-    //todo 没登陆不能删除
-    if (!req.session.user) {
-        return res.redirect("/login");
-    }
-    //todo 查一下id主人是不是你 不是你不让删
-    const food = await foodData.deleteComment(commentId,req.session.user.id);
+    try {
+        let commentId=req.params.id
+        if (!req.session.user) {
+            return res.redirect("/login");
+        }
+        const food = await foodData.deleteComment(commentId,req.session.user.id);
 
-    res.redirect('back');
-    //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+        res.redirect('back');
+        //res.render("posts/foodDetail",{foodName:food.foodName,foodPrice:food.foodPrice,foodDes:food.foodDes,filename:food.filename,stock:food.stock});
+    }catch (e) {
+        req.session.msg=e.toString()
+        res.redirect('back');
+
+    }
+
 
 
 
@@ -180,18 +199,24 @@ router.get('/deleteComment/:id', async (req, res) => {
 
 router.post("/comment/:id", async (req, res) => {
 
-    if (!req.session.user) {
-        return res.redirect("/login");
+    try {
+        if (!req.session.user) {
+            return res.redirect("/login");
+
+        }
+
+
+
+        await foodData.createComment(req.params.id,req.session.user.id,req.session.user.username,req.body.commentContent);
+
+
+        res.redirect("/food/Detail/"+req.params.id.toString());
+    }catch (e) {
+        req.session.msg=e.toString()
+        res.redirect("/food/Detail/"+req.params.id.toString());
 
     }
 
-
-
-    //todo 这里没有返回值 应该没事
-    await foodData.createComment(req.params.id,req.session.user.id,req.session.user.username,req.body.commentContent);
-
-
-    res.redirect("/food/Detail/"+req.params.id.toString());
 
 
 
@@ -199,7 +224,6 @@ router.post("/comment/:id", async (req, res) => {
 
 
 
-//todo 缺少食物的主人才可以编辑的验证
 router.post("/edit/:id", async (req, res) => {
 
     try {

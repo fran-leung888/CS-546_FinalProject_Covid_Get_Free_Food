@@ -11,21 +11,24 @@ const saltRounds = 10;
 router.get('/user', async (req, res) => {
 
 
-    //todo 已经登录就不能再进入了
+    try {
+        if(req.session.user){
+            return res.redirect("/")
+        }
 
-    if(req.session.user){
+        //如果刚post过再redirect回来就会显示msg
+        if(req.session.signUpUserMsg){
+            let msg=req.session.signUpUserMsg
+            //通过session传递消息 显示一次后就销毁
+            req.session.signUpUserMsg=null;
+            return res.render('users/signupUser',{msg:msg});
+        }
+
+        res.render('users/signupUser');
+    }catch (e) {
         return res.redirect("/")
     }
 
-    //如果刚post过再redirect回来就会显示msg
-    if(req.session.signUpUserMsg){
-        let msg=req.session.signUpUserMsg
-        //通过session传递消息 显示一次后就销毁
-        req.session.signUpUserMsg=null;
-        return res.render('users/signupUser',{msg:msg});
-    }
-
-    res.render('users/signupUser');
 
 
 
@@ -35,21 +38,24 @@ router.get('/user', async (req, res) => {
 router.get('/merchant', async (req, res) => {
 
 
-    //todo 已经登录就不能再进入了
+    try {
+        if(req.session.user){
+            return res.redirect("/")
+        }
 
-    if(req.session.user){
+        //如果刚post过再redirect回来就会显示msg
+        if(req.session.signUpMerchantMsg){
+            let msg=req.session.signUpMerchantMsg
+            //通过session传递消息 显示一次后就销毁
+            req.session.signUpMerchantMsg=null;
+            return res.render('users/signupMerchant',{msg:msg});
+        }
+
+        res.render('users/signupMerchant');
+    }catch (e) {
         return res.redirect("/")
     }
 
-    //如果刚post过再redirect回来就会显示msg
-    if(req.session.signUpMerchantMsg){
-        let msg=req.session.signUpMerchantMsg
-        //通过session传递消息 显示一次后就销毁
-        req.session.signUpMerchantMsg=null;
-        return res.render('users/signupMerchant',{msg:msg});
-    }
-
-    res.render('users/signupMerchant');
 
 
 
