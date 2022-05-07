@@ -14,4 +14,7 @@
 * 3.Seed the database with command such as "node seed"
 * 4.Use "npm start" to start the application
 * 5.Use browser to access the app at http://localhost:3000/
+## 5Test Account
 
+Test customer (user, password)
+Test Merchant (merchant1, password)
