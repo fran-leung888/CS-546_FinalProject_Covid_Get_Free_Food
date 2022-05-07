@@ -1,13 +1,8 @@
-所有get/:id  如果id不存在都得跳 所有router里保证有一个try catch
 
 
 
-所有post会出错的地方 catch里redirect到这里 并把e存在session里 现在有三个地方做到了 登陆 注册user 注册merchant
-可以把所有错误统一为一个session名 req.session.错误
 
 
-ObjectId()需要try router外面还有没有外层了？
 
-所有post和get都应该被try catch包裹着
 
-img src={{}} 没东西时会有奇怪的中断
+
