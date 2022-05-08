@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-5">
             <form method="post" enctype="multipart/form-data">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Food name</span>
@@ -34,7 +34,7 @@
                 </div>
                 {{!-- <input type="text" class="form-control" name="foodCategory1">
                 <input type="text" class="form-control" name="foodCategory2"> --}}
-                <div class="row">
+                <div class="row mb-3 d-flex justify-content-between">
                     <div class="col-auto">
                         <select id="category-selector" class="form-select" name="foodCategory1">
                             <option selected value="" disabled>Select Cateory</option>
@@ -52,6 +52,12 @@
                             <option selected value="" disabled>Select Sub-cateory</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-text">.00</span>
                 </div>
 
                 <input hidden
