@@ -202,6 +202,7 @@
 
         $("#foodCategory1").html($($this.parent().parent().prev()[0]).find("span")[0].innerText)
         $("#foodCategory2").html($this[0].innerText)
+        gotoFoodDetail()
     });
 
     $(".level1em").click(function () {
@@ -305,7 +306,8 @@
         return url
     };
 
-    $('#foodSearchButton').click(function () {
+    function gotoFoodDetail() {
+        console.log("foodCategory2 clicked")
 
         let key = $("#foodSearchInput").val()
         let foodCategory1 = $("#foodCategory1").html()
@@ -331,7 +333,6 @@
         window.location.href = url
 
 
-    });
-
+    }
 
 </script>
