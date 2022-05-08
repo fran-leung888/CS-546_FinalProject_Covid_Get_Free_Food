@@ -3479,3 +3479,9 @@ ol {
 #phone{
 	font-weight: 550;
 }
+
+.err-message-alert {
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
