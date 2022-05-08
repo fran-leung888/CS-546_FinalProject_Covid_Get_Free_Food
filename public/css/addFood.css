@@ -1,0 +1,13 @@
+#img-preview {
+	border: 2px #ccc solid;
+	border-radius: 5px;
+	width: 300px;
+	height: 300px;
+	cursor: pointer;
+}
+
+#img-preview .bi.bi-plus {
+	font-size: 10rem;
+	color: #ccc;
+	align-self: center;
+}

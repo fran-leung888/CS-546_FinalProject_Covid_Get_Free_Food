@@ -1,8 +1,5 @@
-<link rel="stylesheet" type="text/css" href="/public/css/foodDetail.css">
-
-
-
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css" href="/public/css/addFood.css">
 
 <div class="container" style="width: 30%;margin-left: 50%">
 
@@ -84,6 +81,29 @@
 </div>
 {{/if}}
 
+<div class="container">
+    <div class="row">
+        <div class="col-4 justify-content-center d-flex">
+            <div id="img-preview" class="d-flex justify-content-center">
+                <i class="bi bi-plus"></i>
+                <div class="text-center align-self-center">
+                    <img class="img-fluid" src="" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <form method="post" enctype="multipart/form-data">
+                <input hidden
+                    name="imageForMulter"
+                    accept="image/*"
+                    type="file"
+                    id="select-image"
+                    class="form-control">
+            </form>
+        </div>
+    </div>
+</div>
+
     <section class="product-details spad" style="padding-top: 0">
         <div class="container">
             <div class="row">
@@ -116,7 +136,7 @@
                             <li><b>stock</b> <input type="text" name="stock" /></li>
                         </ul>
 
-                        <button type="submit">submit</button>
+                        <button type="submit" class="btn btn-primary">submit</button>
 
                     </div>
                 </form>
@@ -209,33 +229,20 @@
 
 <script type="text/javascript">
 
-    var img = document.getElementById("viewImg");
-    function uploadImg(fileDom) {
-        //取到file文件的本地路径，就是你电脑上的存储路径
-        console.log(fileDom.value);
+    $('#img-preview').on('click', () => {
+        $('#select-image').click();
+    });
 
-        // 获取图片数据对象
-        var file = fileDom.files[0];
-
-        // 获取图片名字
-        console.log(file.name);
-
-        // 获取图片文件大小,单位为byte
-        console.log(file.size);
-
+    $('#select-image').on('change', uploadImg)
+    
+    function uploadImg(fileChangeEvent) {
+        var file = fileChangeEvent.target.files[0];
         var reader = new FileReader();
         reader.readAsDataURL(file);
-
-        //确保文件成功获取，base64数据量比较大
         reader.onload = function (event) {
-            console.log(96);
-            var e = event || window.event
-            var img = document.getElementById("viewImg");
-            img.src = e.target.result;
-            let user = sessionStorage.getItem('user')
-
-
-            //或者 img.src = this.result; 因为e.target == this
+            $('#img-preview .bi.bi-plus').hide();
+            var e = event || window.event;
+            $('#img-preview img').attr('src', e.target.result);
         }
     }
 
