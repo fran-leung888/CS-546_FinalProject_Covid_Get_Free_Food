@@ -70,51 +70,6 @@
     </div>
 </div>
 
-
-<div class="bootstrap-iso">
-
-    <section class="product-details spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6">
-                    <div class="product__details__pic">
-                        <div class="product__details__pic__item">
-                            <img id="viewImg" src=/{{filename}}>
-                        </div>
-                    </div>
-                </div>
-                <form class="col-lg-6 col-md-6" method="post" enctype="multipart/form-data">
-                    <div class="product__details__text">
-                        <h3 style="display: inline">Food name: </h3> <input type="text" value="{{foodName}}" name="foodName" />
-
-
-                        <div class="product__details__price">$<input type="text" value={{foodPrice}} name="foodPrice" /></div>
-                        <p><textarea cols="50" name="foodDes" rows="10">{{foodDes}}</textarea>
-                            </p>
-
-                        <div class="form-group">
-                            <label for="photo">Photo:</label>
-                            <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
-                        </div>
-
-                        <ul>
-                            <li><b>Stock:</b> <input type="text" value={{stock}} name="stock" /></li>
-                        </ul>
-
-                        <button type="submit">submit</button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-
-</div>
-
-
-
-
 <script type="text/javascript">
     $('#img-preview').on('click', () => {
         $('#select-image').click();
