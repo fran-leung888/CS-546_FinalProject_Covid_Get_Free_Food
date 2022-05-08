@@ -19,3 +19,7 @@
     font-style: italic;
 }
 
+.card-img {
+    height: 250px;
+    overflow: hidden;
+}

@@ -4,7 +4,9 @@
     <a class="foodItemLink" href="/food/detail/{{_id}}">
         <div class="card shadow-sm">
 
-            <img height="300px" src="/{{filename}}">
+            <div class="card-img d-flex justify-content-center">
+                <img src="/{{filename}}" class="img-fluid align-middle">
+            </div>
 
             <div class="card-body">
                 <p class="card-text foodName">{{foodName}}</p>
