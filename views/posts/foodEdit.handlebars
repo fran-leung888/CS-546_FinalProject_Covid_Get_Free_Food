@@ -11,6 +11,16 @@
 <!--    <div style="width: 800px;height: 500px;">1</div>-->
 
 <!--</div>-->
+
+{{#if msg}}
+<div class="container position-absolute err-message-alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{msg}}
+        <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+{{/if}}
+
 <div class="bootstrap-iso">
 
     <section class="product-details spad">
@@ -18,18 +28,9 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
-
                         <div class="product__details__pic__item">
-
-
-                            <div class="text-center">
-                                <h3 class="text-danger">{{msg}}</h3>
-                            </div>
                             <img id="viewImg" src=/{{filename}}>
-
                         </div>
-
-
                     </div>
                 </div>
                 <form class="col-lg-6 col-md-6" method="post" enctype="multipart/form-data">
