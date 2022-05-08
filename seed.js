@@ -273,6 +273,19 @@ async function main() {
         .catch((err) => console.log(err))
 
 
+    /**
+     *  create some comments
+     *
+     *
+     */
+
+    const food1Comment1 = await foods.createComment( food1._id.toString(),user1,"user1","gooooooooooooooooooooooooood")
+        .catch((err) => console.log(err))
+
+
+    const food1Comment2 = await foods.createComment( food1._id.toString(),user2,"user2","????????????????????????")
+        .catch((err) => console.log(err))
+
 
 
     await connection.closeConnection()
