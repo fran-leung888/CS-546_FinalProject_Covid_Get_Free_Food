@@ -11,8 +11,8 @@ router.post('/addLike', async (req, res) => {
 
     try {
         if (req.session.user) {
-            let foodId = req.body.foodId;
-            let userId = req.session.user.id;
+            let foodId = xss(req.body.foodId);
+            let userId = xss(req.session.user.id);
 
             if (await userData.createLikes(foodId, userId)) {
                 return res.status(200).send("red");
