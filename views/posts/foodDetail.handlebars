@@ -54,8 +54,9 @@
                 <div class="card shadow-0 border" style="background-color: #f0f2f5;">
                     <div class="card-body p-4">
                         <form class="form-outline mb-4" method="post" action="/food/comment/{{foodId}}">
-                            <input type="text" id="addANote" class="form-control" name="commentContent"
-                                   placeholder="Type comment..."/>
+                            <div class="input-group">
+                                <textarea class="form-control" id="addANote" name="commentContent" aria-label="With textarea" placeholder="Type comment..."></textarea>
+                            </div>
                             <button class="btn btn-secondary mt-2" type="submit">comment</button>
                         </form>
                         {{#each comments}}
