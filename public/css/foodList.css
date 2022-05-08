@@ -1,8 +1,16 @@
+.foodItemLink {
+    text-decoration-line: none !important;
+    color: #333;
+}
+
+.foodItemLink:hover {
+    color: orange;
+}
+
 .foodDes{
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    
+    text-overflow: ellipsis;    
 }
 
 .foodName{
