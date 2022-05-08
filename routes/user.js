@@ -54,11 +54,22 @@ router.get('/history', async (req, res) => {
 
         }
         const user = await userData.getUserById(req.session.user.id);
+
+        if (user.order) {
+            user.order.sort((a, b) => {
+                try {
+                    return new Date(b.time).getTime() - new Date(a.time).getTime();
+                } catch (e) {
+                    console.log(e);
+                    return 0;
+                }
+            });
+        }
+        
         res.render("posts/userHistory", {user: user});
     }catch (e) {
         return res.redirect("/food/list")
     }
-
 
 
 });
