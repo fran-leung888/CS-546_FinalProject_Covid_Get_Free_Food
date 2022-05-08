@@ -17,6 +17,9 @@
     font-weight: 1000;
     font-size: 20px;
     font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-img {
