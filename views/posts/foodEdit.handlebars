@@ -1,19 +1,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <link rel="stylesheet" type="text/css" href="/public/css/addFood.css">
 
-<!--<link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">-->
-
-
-
-
-<!--<div style=" margin:0 20%;border: 1px solid">-->
-
-<!--    <div style="width: 800px;height: 500px;">1</div>-->
-
-<!--</div>-->
-
 {{#if msg}}
-<div class="container position-absolute err-message-alert">
+<div class="container position-absolute err-message-alert" style="z-index: 999;">
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{msg}}
         <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="alert"></button>
