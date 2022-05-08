@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="/public/css/foodDetail.css">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css" href="/public/css/addFood.css">
 
 <!--<link rel="stylesheet" href="/public/css/elegant-icons.css" type="text/css">-->
 
@@ -20,6 +20,56 @@
     </div>
 </div>
 {{/if}}
+
+<div class="container mt-3">
+    <div class="d-flex justify-content-center">
+        <div class="col-8 d-flex">
+            <div class="col-4 me-2 justify-content-center d-flex">
+                <div id="img-preview" class="d-flex justify-content-center">
+                    <div class="text-center align-self-center">
+                        <img class="img-fluid" src="/{{filename}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-8 ms-2">
+            <form method="post" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Food Name</span>
+                    <input type="text" class="form-control" name="foodName" value="{{foodName}}">
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <input name="foodPrice" type="text" value="{{foodPrice}}" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <span class="input-group-text">.00</span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Description</span>
+                    <textarea class="form-control" name="foodDes" aria-label="With textarea">{{foodDes}}</textarea>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Stock</span>
+                    <input name="stock" type="number" min="1" class="form-control" value="{{stock}}">
+                </div>
+
+                <input hidden
+                    name="imageForMulter"
+                    accept="image/*"
+                    type="file"
+                    id="select-image"
+                    class="form-control">
+                
+                <div class="text-end">
+                    <button class="btn btn-success mt-4" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="bootstrap-iso">
 
@@ -47,10 +97,6 @@
                             <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
                         </div>
 
-
-
-
-
                         <ul>
                             <li><b>Stock:</b> <input type="text" value={{stock}} name="stock" /></li>
                         </ul>
@@ -59,9 +105,6 @@
 
                     </div>
                 </form>
-
-
-
             </div>
         </div>
     </section>
