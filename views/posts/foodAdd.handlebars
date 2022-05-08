@@ -75,6 +75,15 @@
 
 <!--</div>-->
 
+{{#if msg}}
+<div class="container position-absolute err-message-alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{msg}}
+        <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+{{/if}}
+
     <section class="product-details spad" style="padding-top: 0">
         <div class="container">
             <div class="row">
@@ -110,12 +119,6 @@
                             <label for="photo">Photo</label>
                             <input type="file" accept="image/*" name="imageForMulter" id="photo" onchange="uploadImg(this)">
                         </div>
-
-
-
-
-
-
 
                         <ul>
                             <li><b>stock</b> <input type="text" name="stock" /></li>
@@ -207,11 +210,9 @@
         }
 
     }
-
     /* ============ small devices .end// ============ */
 
 </style>
-
 
 
 <script type="text/javascript">
@@ -246,8 +247,6 @@
         }
     }
 
-
-
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
@@ -271,8 +270,6 @@
 </script>
 
 <script type="text/javascript">
-
-
 
     $(".level2em").click(function () {
 
@@ -302,9 +299,6 @@
         });
     })
 
-
-
-
     document.addEventListener("DOMContentLoaded", function () {
 
 
@@ -320,12 +314,6 @@
                 e.stopPropagation();
             });
         })
-
-
-
-
-
-
 
         // make it as accordion for smaller screens
         if (window.innerWidth < 992) {
