@@ -64,7 +64,7 @@
                                 <div class="card-body">
                                     {{#if this.isMine}}
                                     <div class="text-end float-end">
-                                        <button class="deleteButton btn btn-sm btn-danger" type="button">
+                                        <button class="deleteButton btn btn-sm btn-danger" type="button" data-comment-id="{{this.commentId}}">
                                             <i class="bi bi-trash"></i>
                                             Delete
                                         </button>
@@ -151,12 +151,8 @@
 
 
     $(".deleteButton").click(function (event) {
-
-        let commentId=$(this).prev()[0].innerHTML
-        let href = "/food/deleteComment/" + commentId
-
+        let href = "/food/deleteComment/" + $(this).data('comment-id');
         window.location.href = href;
-
     });
 
     $("#likeButton").click(function (event) {
