@@ -116,38 +116,20 @@
 
 
 <script type="text/javascript">
-
-    var img = document.getElementById("viewImg");
-    function uploadImg(fileDom) {
-        //取到file文件的本地路径，就是你电脑上的存储路径
-        console.log(fileDom.value);
-
-        // 获取图片数据对象
-        var file = fileDom.files[0];
-
-        // 获取图片名字
-        console.log(file.name);
-
-        // 获取图片文件大小,单位为byte
-        console.log(file.size);
-
+    $('#img-preview').on('click', () => {
+        $('#select-image').click();
+    });
+    $('#select-image').on('change', uploadImg)
+    function uploadImg(fileChangeEvent) {
+        var file = fileChangeEvent.target.files[0];
         var reader = new FileReader();
         reader.readAsDataURL(file);
-
-        //确保文件成功获取，base64数据量比较大
         reader.onload = function (event) {
-            console.log(96);
-            var e = event || window.event
-            var img = document.getElementById("viewImg");
-            img.src = e.target.result;
-            let user = sessionStorage.getItem('user')
-
-
-            //或者 img.src = this.result; 因为e.target == this
+            $('#img-preview .bi.bi-plus').hide();
+            var e = event || window.event;
+            $('#img-preview img').attr('src', e.target.result);
         }
     }
-
-
 
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
