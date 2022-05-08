@@ -36,7 +36,7 @@
                 <input type="text" class="form-control" name="foodCategory2"> --}}
                 <div class="row">
                     <div class="col-auto">
-                        <select class="form-select" aria-label="Default select example" name="foodCategory1">
+                        <select id="category-selector" class="form-select" name="foodCategory1">
                             <option selected value="" disabled>Select Cateory</option>
                             <option value="Fast Food">Fast Food</option>
                             <option value="Asian">Asian</option>
@@ -48,12 +48,8 @@
                         <i class="bi bi-chevron-right align-self-center"></i>
                     </div>
                     <div class="col-auto">
-                        <select class="form-select" aria-label="Default select example" name="foodCategory1">
+                        <select id="subcategory-selector" disabled class="form-select" name="foodCategory2">
                             <option selected value="" disabled>Select Sub-cateory</option>
-                            <option value="Fast Food">Fast Food</option>
-                            <option value="Asian">Asian</option>
-                            <option value="Fried Food">Fried Food</option>
-                            <option value="Drink">Drink</option>
                         </select>
                     </div>
                 </div>
@@ -294,6 +290,31 @@
         $button.parent().find('input').val(newVal);
     });
 
+    $('#category-selector').on('change', (event) => {
+        console.log(event.target.value);
+        const categories = {
+            "Fast Food": ['Burgers', 'Pizza', 'Sandwiches'],
+            "Asian": ['Sushi', 'Noodle', 'Dumplings'],
+            "Fried Food": ['Fried Chicken', 'Fries', 'Fried fish',],
+            "Drink": ['Soup', 'Juice', 'Liquor'],
+        };
+
+        $('#subcategory-selector').attr('disabled', false)
+            .html('')
+            .append($('<option>').attr('value', '')
+                .attr('disabled', true)
+                .text('Select Sub-cateory')
+                .attr('selected', true)
+            );
+        
+        for (let sub of categories[event.target.value]) {
+            $('#subcategory-selector')
+                .append($('<option>')
+                    .attr('value', sub)
+                    .text(sub)
+                )
+        }
+    });
 
 </script>
 
